@@ -4,7 +4,7 @@ on:
     branches:
     - main
     paths:
-    - algorithmic-adventures/**
+    - algo-view/**
 
 jobs:
   deploy-book:
@@ -29,18 +29,18 @@ jobs:
       # Build the book
       - name: Build the book
         run: |
-          jupyter-book build algorithmic-adventures
+          jupyter-book build algo-view
 
       # Upload the book's HTML as an artifact
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: "algorithmic-adventures/_build/html"
+          path: "algo-view/_build/html"
 
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v3.0
         with:
-          publish-dir: 'algorithmic-adventures/_build/html'
+          publish-dir: 'algo-view/_build/html'
           production-branch: main
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: "Deploy from GitHub Actions"

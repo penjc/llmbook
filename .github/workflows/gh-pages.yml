@@ -26,16 +26,16 @@ jobs:
       # Build the book
       - name: Build the book
         run: |
-          jupyter-book build algorithmic-adventures
+          jupyter-book build algo-view
 
       # Upload the book's HTML as an artifact
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: "algorithmic-adventures/_build/html"
+          path: "algo-view/_build/html"
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3.6.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./algorithmic-adventures/_build/html
+          publish_dir: ./algo-view/_build/html
