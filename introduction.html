@@ -1,0 +1,675 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>1. Introduction &#8212; Large Language Models</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/drawio.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script src="https://wavedrom.com/skins/default.js"></script>
+    <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="https://cdn.jsdelivr.net/gh/bonartm/quizdown-js@latest/public/build/quizdown.js"></script>
+    <script>quizdown.init({"quizdown_js": "https://cdn.jsdelivr.net/gh/bonartm/quizdown-js@latest/public/build/quizdown.js"});</script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2. Large Language Models Basic" href="basic/basic.html" />
+    <link rel="prev" title="Learn LLM together, for free" href="intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/llm-logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Large Language Models</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  LLM Intro
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   1. Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="basic/basic.html">
+   2. Large Language Models Basic
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="basic/attention.html">
+     2.1. Coding Attention Mechanisms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="basic/transformer.html">
+     2.2. Transformer
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Assignments
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="assignments/README.html">
+   3. Self-paced assignments
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="assignments/transformer-architecture.html">
+     3.3. Complete the transformer architecture
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/penjc/algo-view/main?urlpath=lab/tree/algo-view/introduction.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/penjc/algo-view/blob/main/algo-view/introduction.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/penjc/algo-view"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/penjc/algo-view/issues/new?title=Issue%20on%20page%20%2Fintroduction.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/penjc/algo-view/edit/main/algo-view/introduction.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/introduction.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-are-large-language-models-llms">
+   1.1. What are large language models (LLMs)?
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#narrow-sense">
+     1.1.1. Narrow sense
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#broad-sense">
+     1.1.2. Broad Sense
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-do-llms-work">
+   1.2. How do LLMs Work?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#architecture-of-llm">
+   1.3. Architecture of LLM
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#constructing-llms-a-process-overview">
+   1.4. Constructing LLMs: A Process Overview
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Introduction</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-are-large-language-models-llms">
+   1.1. What are large language models (LLMs)?
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#narrow-sense">
+     1.1.1. Narrow sense
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#broad-sense">
+     1.1.2. Broad Sense
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-do-llms-work">
+   1.2. How do LLMs Work?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#architecture-of-llm">
+   1.3. Architecture of LLM
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#constructing-llms-a-process-overview">
+   1.4. Constructing LLMs: A Process Overview
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction">
+<h1><span class="section-number">1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
+<section id="what-are-large-language-models-llms">
+<h2><span class="section-number">1.1. </span>What are large language models (LLMs)?<a class="headerlink" href="#what-are-large-language-models-llms" title="Permalink to this headline">#</a></h2>
+<p>Large Language Models (LLMs) are advanced artificial intelligence systems that have been trained on vast amounts of text data to understand and generate human-like language. These models are typically based on deep learning architectures, such as transformer neural networks, and are capable of performing a wide range of natural language processing tasks.</p>
+<p>Key characteristics of large language models include:</p>
+<ol class="simple">
+<li><p><strong>Scale</strong>: LLMs are trained on massive datasets containing billions or even trillions of words. This extensive training corpus allows them to capture a broad understanding of language patterns and nuances.</p></li>
+<li><p><strong>Complexity</strong>: These models are often deep neural networks with numerous layers and parameters, allowing them to learn intricate relationships within language data.</p></li>
+<li><p><strong>Versatility</strong>: LLMs can be fine-tuned for various natural language processing tasks, including text generation, translation, summarization, sentiment analysis, question answering, and more.</p></li>
+<li><p><strong>Generative Capabilities</strong>: One of the notable features of LLMs is their ability to generate coherent and contextually relevant text. Given a prompt or context, they can produce human-like responses or complete passages of text.</p></li>
+<li><p><strong>Adaptability</strong>: LLMs can adapt to different domains or styles of language through fine-tuning or conditioning on specific data.</p></li>
+<li><p><strong>Resource Intensiveness</strong>: Training and using large language models require significant computational resources, including powerful hardware and substantial amounts of data.</p></li>
+<li><p><strong>Ethical and Societal Considerations</strong>: The development and deployment of LLMs raise ethical concerns related to biases in the training data, potential misuse for spreading misinformation, and the societal impacts of automated content generation.</p></li>
+</ol>
+<section id="narrow-sense">
+<h3><span class="section-number">1.1.1. </span>Narrow sense<a class="headerlink" href="#narrow-sense" title="Permalink to this headline">#</a></h3>
+<p>In the narrow sense, a large language model is described as a probabilistic model that assigns a probability to every finite sequence, whether it’s grammatical or not. This perspective emphasizes the probabilistic nature of language models, indicating that they can assign a likelihood to any sequence of tokens, regardless of whether it conforms to grammatical rules or not. This perspective highlights the fundamental nature of language models as probabilistic models that capture the statistical regularities of natural language.</p>
+<figure class="align-default" id="id1">
+<img alt="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/implicit-order.png" src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/implicit-order.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 1.1 </span><span class="caption-text">Implicit Order</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="broad-sense">
+<h3><span class="section-number">1.1.2. </span>Broad Sense<a class="headerlink" href="#broad-sense" title="Permalink to this headline">#</a></h3>
+<p>In the broad sense, large language models are categorized into different architectural types based on their structure and components:</p>
+<ul class="simple">
+<li><p><strong>Decoder-only models:</strong> These models, such as GPT (Generative Pre-trained Transformer), OPT (OpenAI’s Pre-trained Transformer), LLaMA, and PaLM, primarily consist of decoder layers. Decoder-only models are designed for tasks like text generation, where the model generates output tokens autoregressively based on preceding tokens. GPT-X is a notable example of a decoder-only model.</p></li>
+<li><p><strong>Encoder-only models:</strong> Models like BERT (Bidirectional Encoder Representations from Transformers), RoBERTa, and ELECTRA are categorized as encoder-only models. These models focus on capturing contextual representations of input tokens without autoregressive generation. They are often used for tasks like text classification, where bidirectional context is essential.</p></li>
+<li><p><strong>Encoder-decoder models:</strong> Architectures like T5 (Text-To-Text Transfer Transformer) and BART (Bidirectional and Auto-Regressive Transformers) include both encoder and decoder components. These models are versatile and can handle various tasks, including text generation, text summarization, translation, and more. They combine the strengths of both encoder and decoder architectures, enabling them to perform both generation and comprehension tasks.</p></li>
+</ul>
+<p>These models have demonstrated impressive capabilities in understanding and generating natural language, leading to their widespread adoption across various industries and applications.</p>
+<figure class="align-default" id="id2">
+<img alt="https://raw.githubusercontent.com/Mooler0410/LLMsPracticalGuide/main/imgs/tree.jpg" src="https://raw.githubusercontent.com/Mooler0410/LLMsPracticalGuide/main/imgs/tree.jpg" />
+<figcaption>
+<p><span class="caption-number">Fig. 1.2 </span><span class="caption-text">An Evolutionary Tree of Modern LLMs</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="how-do-llms-work">
+<h2><span class="section-number">1.2. </span>How do LLMs Work?<a class="headerlink" href="#how-do-llms-work" title="Permalink to this headline">#</a></h2>
+<p>Large Language Models (LLMs) function on the foundational principles of deep learning, harnessing neural network architectures to analyze and comprehend human languages.</p>
+<p>Trained on extensive datasets using self-supervised learning techniques, LLMs excel at recognizing intricate patterns and relationships within diverse language data. These models are structured with multiple layers, incorporating feedforward layers, embedding layers, and attention layers. Utilizing attention mechanisms such as self-attention, LLMs assess the significance of individual tokens within a sequence. This process enables the model to grasp intricate dependencies and relationships among words, phrases, and sentences, thus facilitating its ability to process and understand natural language effectively.</p>
+</section>
+<section id="architecture-of-llm">
+<h2><span class="section-number">1.3. </span>Architecture of LLM<a class="headerlink" href="#architecture-of-llm" title="Permalink to this headline">#</a></h2>
+<p>A Large Language Model’s (LLM) architecture is a pivotal element shaped by various considerations, including the model’s intended objectives, available computational resources, and the nature of language processing tasks it is designed to tackle. The overall architecture of an LLM typically comprises multiple layers, encompassing feedforward layers, embedding layers, and attention layers. These layers work in tandem to process input text and generate predictions.</p>
+<p>Several key components significantly influence the architecture of Large Language Models:</p>
+<ol class="simple">
+<li><p><strong>Model Size and Parameter Count</strong>: The size of the model and the number of parameters it encompasses play a crucial role in determining its architectural design. Larger models with more parameters often have enhanced capacity to capture intricate language patterns and nuances.</p></li>
+<li><p><strong>Input Representations</strong>: The representation of input text, such as tokenization and embedding methods, directly impacts the architecture of the LLM. Effective input representations facilitate the model’s ability to understand and process textual data accurately.</p></li>
+<li><p><strong>Self-Attention Mechanisms</strong>: Many LLM architectures leverage self-attention mechanisms, such as the transformer architecture, to capture long-range dependencies within input sequences. Self-attention enables the model to weigh the importance of different tokens in a sequence, facilitating robust language understanding.</p></li>
+<li><p><strong>Training Objectives</strong>: The specific objectives of LLM training, including pre-training and fine-tuning tasks, influence architectural choices. Different training objectives may require adjustments to the model’s architecture to optimize performance on targeted tasks.</p></li>
+<li><p><strong>Computational Efficiency</strong>: Efficiency considerations, such as computational resources and inference speed, impact architectural decisions. Architectures that balance model complexity with computational efficiency are preferred, especially in practical applications where real-time processing is essential.</p></li>
+<li><p><strong>Decoding and Output Generation</strong>: Architectural design also encompasses decoding mechanisms for generating output text. Techniques for output generation, such as beam search or nucleus sampling, influence the overall architecture and performance of the LLM.</p></li>
+</ol>
+<figure class="align-default" id="id3">
+<img alt="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/scaling-laws.png" src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/scaling-laws.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 1.3 </span><span class="caption-text">Scaling Laws of LLMs</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="constructing-llms-a-process-overview">
+<h2><span class="section-number">1.4. </span>Constructing LLMs: A Process Overview<a class="headerlink" href="#constructing-llms-a-process-overview" title="Permalink to this headline">#</a></h2>
+<p>Building large-scale language models involves a multi-stage process, consisting of pre-training, supervised fine-tuning, reward shaping, and reinforcement learning.</p>
+<ol class="simple">
+<li><p><strong>Pre-training</strong>: The initial phase involves training the language model on vast amounts of unlabeled text data using self-supervised learning techniques. During pre-training, the model learns to understand the structure and semantics of language by predicting missing words in sentences, predicting the next word in a sequence, or performing other language modeling tasks. This phase aims to equip the model with a broad understanding of language patterns and nuances.</p></li>
+<li><p><strong>Supervised Fine-Tuning</strong>: Following pre-training, the model undergoes supervised fine-tuning on specific tasks or domains. Fine-tuning adjusts the model’s parameters to better fit the target task using labeled data. This phase involves training the model with annotated examples, allowing it to specialize in tasks such as text classification, sentiment analysis, or question answering. Supervised fine-tuning enhances the model’s performance on task-specific objectives and improves its ability to generalize to new data.</p></li>
+<li><p><strong>Reward Shaping</strong>: In the reward shaping stage, the model is further refined through reinforcement learning techniques. Reward shaping involves defining a reward function that guides the model’s behavior towards desired outcomes. By providing feedback in the form of rewards or penalties, the model learns to optimize its actions to maximize cumulative rewards over time. Reward shaping helps improve the model’s decision-making capabilities and adaptability to dynamic environments.</p></li>
+<li><p><strong>Reinforcement Learning</strong>: The final phase of model construction involves reinforcement learning, where the model interacts with its environment and learns through trial and error. Reinforcement learning algorithms enable the model to explore different actions and strategies, gradually improving its performance through experience. By receiving feedback based on the outcomes of its actions, the model iteratively adjusts its behavior to achieve optimal results. Reinforcement learning enhances the model’s ability to handle complex tasks and adapt to changing circumstances.</p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "penjc/algo-view",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Learn LLM together, for free</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="basic/basic.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Large Language Models Basic</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By penjc<br/>
+  
+      &copy; Copyright 2024.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
