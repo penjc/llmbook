@@ -12,6 +12,13 @@ parts:
     sections:
     - file: basic/attention
     - file: basic/transformer
+    - file: basic/language-modelling
+- caption: Pre-trained Model
+  numbered: True
+  chapters:
+  - file:  pretrained-model/implementing-a-GPT-model
+    sections:
+    - file: pretrained-model/pretraining-on-unlabeled-data
 - caption: Assignments
   numbered: True
   maxdepth: 1

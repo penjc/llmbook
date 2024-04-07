@@ -48,3 +48,4 @@ git+https://github.com/bonartm/sphinxcontrib-quizdown.git
 tqdm
 fastai
 transformers
+tiktoken
