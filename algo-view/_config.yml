@@ -10,15 +10,17 @@ title                       : Large Language Models  # The title of the book. Wi
 author                      : penjc  # The author of the book
 copyright                   : "2024"  # Copyright year to be placed in the footer
 logo                        : logo_llm.png  # A path to the book logo
+only_build_toc_files: true
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
-  execute_notebooks: force
   exclude_patterns:
     - 'assignments/*'
     - 'assignments/**/*'
     - 'basic/transformer.ipynb'
+    - 'basic/language-modelling.ipynb'
+    - 'pretrained-model/pretraining-on-unlabeled-data.ipynb'
 
 parse:
   myst_enable_extensions:
