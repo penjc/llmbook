@@ -3,7 +3,19 @@
 
 format: jb-book
 root: intro
-chapters:
-- file: markdown
-- file: notebooks
-- file: markdown-notebooks
+parts:
+- caption: LLM Intro
+  numbered: True
+  chapters:
+  - file: introduction
+  - file: basic/basic
+    sections:
+    - file: basic/attention
+    - file: basic/transformer
+- caption: Assignments
+  numbered: True
+  maxdepth: 1
+  chapters:
+  - file: assignments/README
+    sections:
+    - file: assignments/transformer-architecture
