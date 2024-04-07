@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Learn LLM together, for free &#8212; Large Language Models</title>
+    <title>Introduction &#8212; Large Language Models</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -60,7 +60,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1. Introduction" href="introduction.html" />
+    <link rel="next" title="1. Large Language Models Basic" href="basic/basic.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -101,7 +101,7 @@ const thebe_selector_output = ".output, .cell_output"
         
       
       
-      <img src="_static/llm-logo.png" class="logo" alt="logo">
+      <img src="_static/logo_llm.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Large Language Models</h1>
@@ -119,31 +119,41 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="introduction.html">
-   1. Introduction
+  <a class="reference internal" href="basic/basic.html">
+   1. Large Language Models Basic
   </a>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="basic/basic.html">
-   2. Large Language Models Basic
+ <li class="toctree-l1">
+  <a class="reference internal" href="basic/attention.html">
+   2. Coding Attention Mechanisms
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="basic/attention.html">
-     2.1. Coding Attention Mechanisms
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="basic/transformer.html">
-     2.2. Transformer
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="basic/transformer.html">
+   3. Transformer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="basic/language-modelling.html">
+   4. Transformers for Language Modelling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Pre-trained Model
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="pretrained-model/implementing-a-GPT-model.html">
+   5. Implementing a GPT model from Scratch To Generate Text
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pretrained-model/pretraining-on-unlabeled-data.html">
+   6. Pretraining on Unlabeled Data
+  </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
@@ -154,17 +164,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="assignments/README.html">
-   3. Self-paced assignments
+   7. Self-paced assignments
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="assignments/transformer-architecture.html">
-     3.3. Complete the transformer architecture
+     7.3. Complete the transformer architecture
     </a>
    </li>
   </ul>
@@ -220,6 +230,71 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/penjc/algo-view/main?urlpath=lab/tree/algo-view/intro.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/penjc/algo-view/blob/main/algo-view/intro.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -276,7 +351,7 @@ title="Open an issue"
       </li>
       
       <li>
-        <a href="https://github.com/penjc/algo-view/edit/main/algo-view/intro.md"
+        <a href="https://github.com/penjc/algo-view/edit/main/algo-view/intro.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -304,7 +379,7 @@ title="Edit this page"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/intro.md"
+        <a href="_sources/intro.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -315,7 +390,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.md</span>
+<span class="headerbtn__text-container">.ipynb</span>
 </a>
 
       </li>
@@ -341,23 +416,114 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-are-large-language-models-llms">
+   What are large language models (LLMs)?
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#narrow-sense">
+     Narrow sense
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#broad-sense">
+     Broad Sense
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-do-llms-work">
+   How do LLMs Work?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#architecture-of-llm">
+   Architecture of LLM
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#constructing-llms-a-process-overview">
+   Constructing LLMs: A Process Overview
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Learn LLM together, for free</h1>
+                <h1>Introduction</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-are-large-language-models-llms">
+   What are large language models (LLMs)?
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#narrow-sense">
+     Narrow sense
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#broad-sense">
+     Broad Sense
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-do-llms-work">
+   How do LLMs Work?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#architecture-of-llm">
+   Architecture of LLM
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#constructing-llms-a-process-overview">
+   Constructing LLMs: A Process Overview
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -365,17 +531,84 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
-<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 sd-flex-row-reverse docutils">
-<div class="sd-col sd-d-flex-column sd-col-3 sd-col-xs-3 sd-col-sm-3 sd-col-md-3 sd-col-lg-3 sd-m-auto docutils">
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
+<section id="what-are-large-language-models-llms">
+<h2>What are large language models (LLMs)?<a class="headerlink" href="#what-are-large-language-models-llms" title="Permalink to this headline">#</a></h2>
+<p>Large Language Models (LLMs) are advanced artificial intelligence systems that have been trained on vast amounts of text data to understand and generate human-like language. These models are typically based on deep learning architectures, such as transformer neural networks, and are capable of performing a wide range of natural language processing tasks.</p>
+<p>Key characteristics of large language models include:</p>
+<ol class="simple">
+<li><p><strong>Scale</strong>: LLMs are trained on massive datasets containing billions or even trillions of words. This extensive training corpus allows them to capture a broad understanding of language patterns and nuances.</p></li>
+<li><p><strong>Complexity</strong>: These models are often deep neural networks with numerous layers and parameters, allowing them to learn intricate relationships within language data.</p></li>
+<li><p><strong>Versatility</strong>: LLMs can be fine-tuned for various natural language processing tasks, including text generation, translation, summarization, sentiment analysis, question answering, and more.</p></li>
+<li><p><strong>Generative Capabilities</strong>: One of the notable features of LLMs is their ability to generate coherent and contextually relevant text. Given a prompt or context, they can produce human-like responses or complete passages of text.</p></li>
+<li><p><strong>Adaptability</strong>: LLMs can adapt to different domains or styles of language through fine-tuning or conditioning on specific data.</p></li>
+<li><p><strong>Resource Intensiveness</strong>: Training and using large language models require significant computational resources, including powerful hardware and substantial amounts of data.</p></li>
+<li><p><strong>Ethical and Societal Considerations</strong>: The development and deployment of LLMs raise ethical concerns related to biases in the training data, potential misuse for spreading misinformation, and the societal impacts of automated content generation.</p></li>
+</ol>
+<section id="narrow-sense">
+<h3>Narrow sense<a class="headerlink" href="#narrow-sense" title="Permalink to this headline">#</a></h3>
+<p>In the narrow sense, a large language model is described as a probabilistic model that assigns a probability to every finite sequence, whether it’s grammatical or not. This perspective emphasizes the probabilistic nature of language models, indicating that they can assign a likelihood to any sequence of tokens, regardless of whether it conforms to grammatical rules or not. This perspective highlights the fundamental nature of language models as probabilistic models that capture the statistical regularities of natural language.</p>
+<figure class="align-default" id="id1">
+<img alt="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/implicit-order.png" src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/implicit-order.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Implicit Order</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="broad-sense">
+<h3>Broad Sense<a class="headerlink" href="#broad-sense" title="Permalink to this headline">#</a></h3>
+<p>In the broad sense, large language models are categorized into different architectural types based on their structure and components:</p>
+<ul class="simple">
+<li><p><strong>Decoder-only models:</strong> These models, such as GPT (Generative Pre-trained Transformer), OPT (OpenAI’s Pre-trained Transformer), LLaMA, and PaLM, primarily consist of decoder layers. Decoder-only models are designed for tasks like text generation, where the model generates output tokens autoregressively based on preceding tokens. GPT-X is a notable example of a decoder-only model.</p></li>
+<li><p><strong>Encoder-only models:</strong> Models like BERT (Bidirectional Encoder Representations from Transformers), RoBERTa, and ELECTRA are categorized as encoder-only models. These models focus on capturing contextual representations of input tokens without autoregressive generation. They are often used for tasks like text classification, where bidirectional context is essential.</p></li>
+<li><p><strong>Encoder-decoder models:</strong> Architectures like T5 (Text-To-Text Transfer Transformer) and BART (Bidirectional and Auto-Regressive Transformers) include both encoder and decoder components. These models are versatile and can handle various tasks, including text generation, text summarization, translation, and more. They combine the strengths of both encoder and decoder architectures, enabling them to perform both generation and comprehension tasks.</p></li>
+</ul>
+<p>These models have demonstrated impressive capabilities in understanding and generating natural language, leading to their widespread adoption across various industries and applications.</p>
+<figure class="align-default" id="id2">
+<img alt="https://raw.githubusercontent.com/Mooler0410/LLMsPracticalGuide/main/imgs/tree.jpg" src="https://raw.githubusercontent.com/Mooler0410/LLMsPracticalGuide/main/imgs/tree.jpg" />
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">An Evolutionary Tree of Modern LLMs</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="how-do-llms-work">
+<h2>How do LLMs Work?<a class="headerlink" href="#how-do-llms-work" title="Permalink to this headline">#</a></h2>
+<p>Large Language Models (LLMs) function on the foundational principles of deep learning, harnessing neural network architectures to analyze and comprehend human languages.</p>
+<p>Trained on extensive datasets using self-supervised learning techniques, LLMs excel at recognizing intricate patterns and relationships within diverse language data. These models are structured with multiple layers, incorporating feedforward layers, embedding layers, and attention layers. Utilizing attention mechanisms such as self-attention, LLMs assess the significance of individual tokens within a sequence. This process enables the model to grasp intricate dependencies and relationships among words, phrases, and sentences, thus facilitating its ability to process and understand natural language effectively.</p>
+</section>
+<section id="architecture-of-llm">
+<h2>Architecture of LLM<a class="headerlink" href="#architecture-of-llm" title="Permalink to this headline">#</a></h2>
+<p>A Large Language Model’s (LLM) architecture is a pivotal element shaped by various considerations, including the model’s intended objectives, available computational resources, and the nature of language processing tasks it is designed to tackle. The overall architecture of an LLM typically comprises multiple layers, encompassing feedforward layers, embedding layers, and attention layers. These layers work in tandem to process input text and generate predictions.</p>
+<p>Several key components significantly influence the architecture of Large Language Models:</p>
+<ol class="simple">
+<li><p><strong>Model Size and Parameter Count</strong>: The size of the model and the number of parameters it encompasses play a crucial role in determining its architectural design. Larger models with more parameters often have enhanced capacity to capture intricate language patterns and nuances.</p></li>
+<li><p><strong>Input Representations</strong>: The representation of input text, such as tokenization and embedding methods, directly impacts the architecture of the LLM. Effective input representations facilitate the model’s ability to understand and process textual data accurately.</p></li>
+<li><p><strong>Self-Attention Mechanisms</strong>: Many LLM architectures leverage self-attention mechanisms, such as the transformer architecture, to capture long-range dependencies within input sequences. Self-attention enables the model to weigh the importance of different tokens in a sequence, facilitating robust language understanding.</p></li>
+<li><p><strong>Training Objectives</strong>: The specific objectives of LLM training, including pre-training and fine-tuning tasks, influence architectural choices. Different training objectives may require adjustments to the model’s architecture to optimize performance on targeted tasks.</p></li>
+<li><p><strong>Computational Efficiency</strong>: Efficiency considerations, such as computational resources and inference speed, impact architectural decisions. Architectures that balance model complexity with computational efficiency are preferred, especially in practical applications where real-time processing is essential.</p></li>
+<li><p><strong>Decoding and Output Generation</strong>: Architectural design also encompasses decoding mechanisms for generating output text. Techniques for output generation, such as beam search or nucleus sampling, influence the overall architecture and performance of the LLM.</p></li>
+</ol>
+<figure class="align-default" id="id3">
+<img alt="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/scaling-laws.png" src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/scaling-laws.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Scaling Laws of LLMs</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="constructing-llms-a-process-overview">
+<h2>Constructing LLMs: A Process Overview<a class="headerlink" href="#constructing-llms-a-process-overview" title="Permalink to this headline">#</a></h2>
+<p>Building large-scale language models involves a multi-stage process, consisting of pre-training, supervised fine-tuning, reward shaping, and reinforcement learning.</p>
+<ol class="simple">
+<li><p><strong>Pre-training</strong>: The initial phase involves training the language model on vast amounts of unlabeled text data using self-supervised learning techniques. During pre-training, the model learns to understand the structure and semantics of language by predicting missing words in sentences, predicting the next word in a sequence, or performing other language modeling tasks. This phase aims to equip the model with a broad understanding of language patterns and nuances.</p></li>
+<li><p><strong>Supervised Fine-Tuning</strong>: Following pre-training, the model undergoes supervised fine-tuning on specific tasks or domains. Fine-tuning adjusts the model’s parameters to better fit the target task using labeled data. This phase involves training the model with annotated examples, allowing it to specialize in tasks such as text classification, sentiment analysis, or question answering. Supervised fine-tuning enhances the model’s performance on task-specific objectives and improves its ability to generalize to new data.</p></li>
+<li><p><strong>Reward Shaping</strong>: In the reward shaping stage, the model is further refined through reinforcement learning techniques. Reward shaping involves defining a reward function that guides the model’s behavior towards desired outcomes. By providing feedback in the form of rewards or penalties, the model learns to optimize its actions to maximize cumulative rewards over time. Reward shaping helps improve the model’s decision-making capabilities and adaptability to dynamic environments.</p></li>
+<li><p><strong>Reinforcement Learning</strong>: The final phase of model construction involves reinforcement learning, where the model interacts with its environment and learns through trial and error. Reinforcement learning algorithms enable the model to explore different actions and strategies, gradually improving its performance through experience. By receiving feedback based on the outcomes of its actions, the model iteratively adjusts its behavior to achieve optimal results. Reinforcement learning enhances the model’s ability to handle complex tasks and adapt to changing circumstances.</p></li>
+</ol>
+</section>
+<div class="toctree-wrapper compound">
 </div>
-<div class="sd-col sd-d-flex-column sd-col-12 sd-col-xs-12 sd-col-sm-12 sd-col-md-12 sd-col-lg-12 sd-fs-3 docutils">
-<p>An interactive and visual Large Language Models book - with code and assignment</p>
-</div>
-</div>
-</div>
-<section class="tex2jax_ignore mathjax_ignore" id="learn-llm-together-for-free">
-<h1>Learn LLM together, for free<a class="headerlink" href="#learn-llm-together-for-free" title="Permalink to this headline">#</a></h1>
 <div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
@@ -415,10 +648,10 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="introduction.html" title="next page">
+    <a class='right-next' id="next-link" href="basic/basic.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Introduction</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Large Language Models Basic</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>2.1. Coding Attention Mechanisms &#8212; Large Language Models</title>
+    <title>2. Coding Attention Mechanisms &#8212; Large Language Models</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -62,8 +62,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2.2. Transformer" href="transformer.html" />
-    <link rel="prev" title="2. Large Language Models Basic" href="basic.html" />
+    <link rel="next" title="3. Transformer" href="transformer.html" />
+    <link rel="prev" title="1. Large Language Models Basic" href="basic.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -104,7 +104,7 @@ const thebe_selector_output = ".output, .cell_output"
         
       
       
-      <img src="../_static/llm-logo.png" class="logo" alt="logo">
+      <img src="../_static/logo_llm.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Large Language Models</h1>
@@ -122,31 +122,41 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../introduction.html">
-   1. Introduction
+  <a class="reference internal" href="basic.html">
+   1. Large Language Models Basic
   </a>
  </li>
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="basic.html">
-   2. Large Language Models Basic
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   2. Coding Attention Mechanisms
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     2.1. Coding Attention Mechanisms
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="transformer.html">
-     2.2. Transformer
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="transformer.html">
+   3. Transformer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="language-modelling.html">
+   4. Transformers for Language Modelling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Pre-trained Model
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pretrained-model/implementing-a-GPT-model.html">
+   5. Implementing a GPT model from Scratch To Generate Text
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pretrained-model/pretraining-on-unlabeled-data.html">
+   6. Pretraining on Unlabeled Data
+  </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
@@ -157,17 +167,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../assignments/README.html">
-   3. Self-paced assignments
+   7. Self-paced assignments
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../assignments/transformer-architecture.html">
-     3.3. Complete the transformer architecture
+     7.3. Complete the transformer architecture
     </a>
    </li>
   </ul>
@@ -433,32 +443,32 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-problem-with-modeling-long-sequences">
-   2.1.1. The problem with modeling long sequences
+   2.1. The problem with modeling long sequences
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#capturing-data-dependencies-with-attention-mechanisms">
-   2.1.2. Capturing data dependencies with attention mechanisms
+   2.2. Capturing data dependencies with attention mechanisms
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#attending-to-different-parts-of-the-input-with-self-attention">
-   2.1.3. Attending to different parts of the input with self-attention
+   2.3. Attending to different parts of the input with self-attention
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#a-simple-self-attention-mechanism-without-trainable-weights">
-     2.1.3.1. A simple self-attention mechanism without trainable weights
+     2.3.1. A simple self-attention mechanism without trainable weights
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#computing-attention-weights-for-all-input-tokens">
-     2.1.3.2. Computing attention weights for all input tokens
+     2.3.2. Computing attention weights for all input tokens
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#generalize-to-all-input-sequence-tokens">
-       2.1.3.2.1. Generalize to all input sequence tokens:
+       2.3.2.1. Generalize to all input sequence tokens:
       </a>
      </li>
     </ul>
@@ -467,63 +477,63 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#implementing-self-attention-with-trainable-weights">
-   2.1.4. Implementing self-attention with trainable weights
+   2.4. Implementing self-attention with trainable weights
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#computing-the-attention-weights-step-by-step">
-     2.1.4.1. Computing the attention weights step by step
+     2.4.1. Computing the attention weights step by step
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#implementing-a-compact-selfattention-class">
-     2.1.4.2. Implementing a compact SelfAttention class
+     2.4.2. Implementing a compact SelfAttention class
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#hiding-future-words-with-causal-attention">
-   2.1.5. Hiding future words with causal attention
+   2.5. Hiding future words with causal attention
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#applying-a-causal-attention-mask">
-     2.1.5.1. Applying a causal attention mask
+     2.5.1. Applying a causal attention mask
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#masking-additional-attention-weights-with-dropout">
-     2.1.5.2. Masking additional attention weights with dropout
+     2.5.2. Masking additional attention weights with dropout
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#implementing-a-compact-causal-self-attention-class">
-     2.1.5.3. Implementing a compact causal self-attention class
+     2.5.3. Implementing a compact causal self-attention class
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#extending-single-head-attention-to-multi-head-attention">
-   2.1.6. Extending single-head attention to multi-head attention
+   2.6. Extending single-head attention to multi-head attention
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#stacking-multiple-single-head-attention-layers">
-     2.1.6.1. Stacking multiple single-head attention layers
+     2.6.1. Stacking multiple single-head attention layers
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#implementing-multi-head-attention-with-weight-splits">
-     2.1.6.2. Implementing multi-head attention with weight splits
+     2.6.2. Implementing multi-head attention with weight splits
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#acknowledgments">
-   2.1.7. Acknowledgments
+   2.7. Acknowledgments
   </a>
  </li>
 </ul>
@@ -547,32 +557,32 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-problem-with-modeling-long-sequences">
-   2.1.1. The problem with modeling long sequences
+   2.1. The problem with modeling long sequences
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#capturing-data-dependencies-with-attention-mechanisms">
-   2.1.2. Capturing data dependencies with attention mechanisms
+   2.2. Capturing data dependencies with attention mechanisms
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#attending-to-different-parts-of-the-input-with-self-attention">
-   2.1.3. Attending to different parts of the input with self-attention
+   2.3. Attending to different parts of the input with self-attention
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#a-simple-self-attention-mechanism-without-trainable-weights">
-     2.1.3.1. A simple self-attention mechanism without trainable weights
+     2.3.1. A simple self-attention mechanism without trainable weights
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#computing-attention-weights-for-all-input-tokens">
-     2.1.3.2. Computing attention weights for all input tokens
+     2.3.2. Computing attention weights for all input tokens
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#generalize-to-all-input-sequence-tokens">
-       2.1.3.2.1. Generalize to all input sequence tokens:
+       2.3.2.1. Generalize to all input sequence tokens:
       </a>
      </li>
     </ul>
@@ -581,63 +591,63 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#implementing-self-attention-with-trainable-weights">
-   2.1.4. Implementing self-attention with trainable weights
+   2.4. Implementing self-attention with trainable weights
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#computing-the-attention-weights-step-by-step">
-     2.1.4.1. Computing the attention weights step by step
+     2.4.1. Computing the attention weights step by step
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#implementing-a-compact-selfattention-class">
-     2.1.4.2. Implementing a compact SelfAttention class
+     2.4.2. Implementing a compact SelfAttention class
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#hiding-future-words-with-causal-attention">
-   2.1.5. Hiding future words with causal attention
+   2.5. Hiding future words with causal attention
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#applying-a-causal-attention-mask">
-     2.1.5.1. Applying a causal attention mask
+     2.5.1. Applying a causal attention mask
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#masking-additional-attention-weights-with-dropout">
-     2.1.5.2. Masking additional attention weights with dropout
+     2.5.2. Masking additional attention weights with dropout
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#implementing-a-compact-causal-self-attention-class">
-     2.1.5.3. Implementing a compact causal self-attention class
+     2.5.3. Implementing a compact causal self-attention class
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#extending-single-head-attention-to-multi-head-attention">
-   2.1.6. Extending single-head attention to multi-head attention
+   2.6. Extending single-head attention to multi-head attention
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#stacking-multiple-single-head-attention-layers">
-     2.1.6.1. Stacking multiple single-head attention layers
+     2.6.1. Stacking multiple single-head attention layers
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#implementing-multi-head-attention-with-weight-splits">
-     2.1.6.2. Implementing multi-head attention with weight splits
+     2.6.2. Implementing multi-head attention with weight splits
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#acknowledgments">
-   2.1.7. Acknowledgments
+   2.7. Acknowledgments
   </a>
  </li>
 </ul>
@@ -651,7 +661,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="coding-attention-mechanisms">
-<h1><span class="section-number">2.1. </span>Coding Attention Mechanisms<a class="headerlink" href="#coding-attention-mechanisms" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">2. </span>Coding Attention Mechanisms<a class="headerlink" href="#coding-attention-mechanisms" title="Permalink to this headline">#</a></h1>
 <p>Packages that are being used in this notebook:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -671,7 +681,7 @@ title="Print to PDF"
 <li><p>This section covers attention mechanisms, the engine of LLMs:</p></li>
 </ul>
 <img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/01.webp" width="500px"><img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/02.webp" width="600px"><section id="the-problem-with-modeling-long-sequences">
-<h2><span class="section-number">2.1.1. </span>The problem with modeling long sequences<a class="headerlink" href="#the-problem-with-modeling-long-sequences" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.1. </span>The problem with modeling long sequences<a class="headerlink" href="#the-problem-with-modeling-long-sequences" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>Translating a text word by word isn’t feasible due to the differences in grammatical structures between the source and target languages:</p></li>
 </ul>
@@ -681,7 +691,7 @@ title="Print to PDF"
 </ul>
 <img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/04.webp" width="500px"></section>
 <section id="capturing-data-dependencies-with-attention-mechanisms">
-<h2><span class="section-number">2.1.2. </span>Capturing data dependencies with attention mechanisms<a class="headerlink" href="#capturing-data-dependencies-with-attention-mechanisms" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.2. </span>Capturing data dependencies with attention mechanisms<a class="headerlink" href="#capturing-data-dependencies-with-attention-mechanisms" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>Through an attention mechanism, the text-generating decoder segment of the network is capable of selectively accessing all input tokens, implying that certain input tokens hold more significance than others in the generation of a specific output token:</p></li>
 </ul>
@@ -690,9 +700,9 @@ title="Print to PDF"
 </ul>
 <img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/06.webp" width="300px"></section>
 <section id="attending-to-different-parts-of-the-input-with-self-attention">
-<h2><span class="section-number">2.1.3. </span>Attending to different parts of the input with self-attention<a class="headerlink" href="#attending-to-different-parts-of-the-input-with-self-attention" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.3. </span>Attending to different parts of the input with self-attention<a class="headerlink" href="#attending-to-different-parts-of-the-input-with-self-attention" title="Permalink to this headline">#</a></h2>
 <section id="a-simple-self-attention-mechanism-without-trainable-weights">
-<h3><span class="section-number">2.1.3.1. </span>A simple self-attention mechanism without trainable weights<a class="headerlink" href="#a-simple-self-attention-mechanism-without-trainable-weights" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.3.1. </span>A simple self-attention mechanism without trainable weights<a class="headerlink" href="#a-simple-self-attention-mechanism-without-trainable-weights" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>This section explains a very simplified variant of self-attention, which does not contain any trainable weights</p></li>
 <li><p>This is purely for illustration purposes and NOT the attention mechanism that is used in transformers</p></li>
@@ -898,9 +908,9 @@ Sum: tensor(1.)
 </div>
 </section>
 <section id="computing-attention-weights-for-all-input-tokens">
-<h3><span class="section-number">2.1.3.2. </span>Computing attention weights for all input tokens<a class="headerlink" href="#computing-attention-weights-for-all-input-tokens" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.3.2. </span>Computing attention weights for all input tokens<a class="headerlink" href="#computing-attention-weights-for-all-input-tokens" title="Permalink to this headline">#</a></h3>
 <section id="generalize-to-all-input-sequence-tokens">
-<h4><span class="section-number">2.1.3.2.1. </span>Generalize to all input sequence tokens:<a class="headerlink" href="#generalize-to-all-input-sequence-tokens" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">2.3.2.1. </span>Generalize to all input sequence tokens:<a class="headerlink" href="#generalize-to-all-input-sequence-tokens" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>Above, we computed the attention weights and context vector for input 2 (as illustrated in the highlighted row in the figure below)</p></li>
 <li><p>Next, we are generalizing this computation to compute all attention weights and context vectors</p></li>
@@ -1036,12 +1046,12 @@ All row sums: tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000])
 </section>
 </section>
 <section id="implementing-self-attention-with-trainable-weights">
-<h2><span class="section-number">2.1.4. </span>Implementing self-attention with trainable weights<a class="headerlink" href="#implementing-self-attention-with-trainable-weights" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.4. </span>Implementing self-attention with trainable weights<a class="headerlink" href="#implementing-self-attention-with-trainable-weights" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>A conceptual framework illustrating how the self-attention mechanism developed in this section integrates into the overall narrative and structure of this book and chapter</p></li>
 </ul>
 <img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/13.webp" width="400px"><section id="computing-the-attention-weights-step-by-step">
-<h3><span class="section-number">2.1.4.1. </span>Computing the attention weights step by step<a class="headerlink" href="#computing-the-attention-weights-step-by-step" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.4.1. </span>Computing the attention weights step by step<a class="headerlink" href="#computing-the-attention-weights-step-by-step" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>In this section, we are implementing the self-attention mechanism that is used in the original transformer architecture, the GPT models, and most other popular LLMs</p></li>
 <li><p>This self-attention mechanism is also called “scaled dot-product attention”</p></li>
@@ -1203,7 +1213,7 @@ values.shape: torch.Size([6, 2])
 </div>
 </section>
 <section id="implementing-a-compact-selfattention-class">
-<h3><span class="section-number">2.1.4.2. </span>Implementing a compact SelfAttention class<a class="headerlink" href="#implementing-a-compact-selfattention-class" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.4.2. </span>Implementing a compact SelfAttention class<a class="headerlink" href="#implementing-a-compact-selfattention-class" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>Putting it all together, we can implement the self-attention mechanism as follows:</p></li>
 </ul>
@@ -1297,10 +1307,10 @@ values.shape: torch.Size([6, 2])
 </section>
 </section>
 <section id="hiding-future-words-with-causal-attention">
-<h2><span class="section-number">2.1.5. </span>Hiding future words with causal attention<a class="headerlink" href="#hiding-future-words-with-causal-attention" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.5. </span>Hiding future words with causal attention<a class="headerlink" href="#hiding-future-words-with-causal-attention" title="Permalink to this headline">#</a></h2>
 <p>n causal attention, the attention weights above the diagonal are masked, ensuring that for any given input, the LLM is unable to utilize future tokens while calculating the context vectors with the attention weight</p>
 <img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/19.webp" width="400px"><section id="applying-a-causal-attention-mask">
-<h3><span class="section-number">2.1.5.1. </span>Applying a causal attention mask<a class="headerlink" href="#applying-a-causal-attention-mask" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.5.1. </span>Applying a causal attention mask<a class="headerlink" href="#applying-a-causal-attention-mask" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>In this section, we are converting the previous self-attention mechanism into a causal self-attention mechanism</p></li>
 <li><p>Causal self-attention ensures that the model’s prediction for a certain position in a sequence is only dependent on the known outputs at previous positions, not on future positions</p></li>
@@ -1455,7 +1465,7 @@ values.shape: torch.Size([6, 2])
 </div>
 </section>
 <section id="masking-additional-attention-weights-with-dropout">
-<h3><span class="section-number">2.1.5.2. </span>Masking additional attention weights with dropout<a class="headerlink" href="#masking-additional-attention-weights-with-dropout" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.5.2. </span>Masking additional attention weights with dropout<a class="headerlink" href="#masking-additional-attention-weights-with-dropout" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>In addition, we also apply dropout to reduce overfitting during training</p></li>
 <li><p>Dropout can be applied in several places:</p>
@@ -1515,7 +1525,7 @@ values.shape: torch.Size([6, 2])
 </ul>
 </section>
 <section id="implementing-a-compact-causal-self-attention-class">
-<h3><span class="section-number">2.1.5.3. </span>Implementing a compact causal self-attention class<a class="headerlink" href="#implementing-a-compact-causal-self-attention-class" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.5.3. </span>Implementing a compact causal self-attention class<a class="headerlink" href="#implementing-a-compact-causal-self-attention-class" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>Now, we are ready to implement a working implementation of self-attention, including the causal and dropout masks</p></li>
 <li><p>One more thing is to implement the code to handle batches consisting of more than one input so that our <code class="docutils literal notranslate"><span class="pre">CausalAttention</span></code> class supports the batch outputs produced by the data loader we implemented in chapter 2</p></li>
@@ -1599,9 +1609,9 @@ context_vecs.shape: torch.Size([2, 6, 2])
 <img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/23.webp" width="500px"></section>
 </section>
 <section id="extending-single-head-attention-to-multi-head-attention">
-<h2><span class="section-number">2.1.6. </span>Extending single-head attention to multi-head attention<a class="headerlink" href="#extending-single-head-attention-to-multi-head-attention" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.6. </span>Extending single-head attention to multi-head attention<a class="headerlink" href="#extending-single-head-attention-to-multi-head-attention" title="Permalink to this headline">#</a></h2>
 <section id="stacking-multiple-single-head-attention-layers">
-<h3><span class="section-number">2.1.6.1. </span>Stacking multiple single-head attention layers<a class="headerlink" href="#stacking-multiple-single-head-attention-layers" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.6.1. </span>Stacking multiple single-head attention layers<a class="headerlink" href="#stacking-multiple-single-head-attention-layers" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>Below is a summary of the self-attention implemented previously (causal and dropout masks not shown for simplicity)</p></li>
 <li><p>This is also called single-head attention:</p></li>
@@ -1666,7 +1676,7 @@ context_vecs.shape: torch.Size([2, 6, 4])
 </ul>
 </section>
 <section id="implementing-multi-head-attention-with-weight-splits">
-<h3><span class="section-number">2.1.6.2. </span>Implementing multi-head attention with weight splits<a class="headerlink" href="#implementing-multi-head-attention-with-weight-splits" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.6.2. </span>Implementing multi-head attention with weight splits<a class="headerlink" href="#implementing-multi-head-attention-with-weight-splits" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>While the above is an intuitive and fully functional implementation of multi-head attention (wrapping the single-head attention <code class="docutils literal notranslate"><span class="pre">CausalAttention</span></code> implementation from earlier), we can write a stand-alone class called <code class="docutils literal notranslate"><span class="pre">MultiHeadAttention</span></code> to achieve the same</p></li>
 <li><p>We don’t concatenate single attention heads for this stand-alone <code class="docutils literal notranslate"><span class="pre">MultiHeadAttention</span></code> class</p></li>
@@ -1817,10 +1827,7 @@ context_vecs.shape: torch.Size([2, 6, 2])
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First head:
- 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[1.3208, 1.1631, 1.2879],
+ tensor([[1.3208, 1.1631, 1.2879],
         [1.1631, 2.2150, 1.8424],
         [1.2879, 1.8424, 2.0402]])
 
@@ -1835,7 +1842,7 @@ Second head:
 </section>
 </section>
 <section id="acknowledgments">
-<h2><span class="section-number">2.1.7. </span>Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.7. </span>Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permalink to this headline">#</a></h2>
 <p>Thanks to <a class="reference external" href="https://github.com/rasbt">Sebastian Raschka</a> for creating the open-source course <a class="reference external" href="https://github.com/rasbt/LLMs-from-scratch">LLMs-from-scratch
 </a>. It inspires the majority of the content in this chapter.</p>
 </section>
@@ -1878,13 +1885,13 @@ Second head:
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">2. </span>Large Language Models Basic</p>
+            <p class="prev-next-title"><span class="section-number">1. </span>Large Language Models Basic</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="transformer.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">2.2. </span>Transformer</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Transformer</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

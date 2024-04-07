@@ -105,7 +105,7 @@ const thebe_selector_output = ".output, .cell_output"
         
       
       
-      <img src="_static/llm-logo.png" class="logo" alt="logo">
+      <img src="_static/logo_llm.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Large Language Models</h1>
@@ -123,31 +123,41 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="introduction.html">
-   1. Introduction
+  <a class="reference internal" href="basic/basic.html">
+   1. Large Language Models Basic
   </a>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="basic/basic.html">
-   2. Large Language Models Basic
+ <li class="toctree-l1">
+  <a class="reference internal" href="basic/attention.html">
+   2. Coding Attention Mechanisms
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="basic/attention.html">
-     2.1. Coding Attention Mechanisms
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="basic/transformer.html">
-     2.2. Transformer
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="basic/transformer.html">
+   3. Transformer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="basic/language-modelling.html">
+   4. Transformers for Language Modelling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Pre-trained Model
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="pretrained-model/implementing-a-GPT-model.html">
+   5. Implementing a GPT model from Scratch To Generate Text
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pretrained-model/pretraining-on-unlabeled-data.html">
+   6. Pretraining on Unlabeled Data
+  </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
@@ -158,17 +168,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="assignments/README.html">
-   3. Self-paced assignments
+   7. Self-paced assignments
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="assignments/transformer-architecture.html">
-     3.3. Complete the transformer architecture
+     7.3. Complete the transformer architecture
     </a>
    </li>
   </ul>

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>2.2. Transformer &#8212; Large Language Models</title>
+    <title>3. Transformer &#8212; Large Language Models</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -62,8 +62,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3. Self-paced assignments" href="../assignments/README.html" />
-    <link rel="prev" title="2.1. Coding Attention Mechanisms" href="attention.html" />
+    <link rel="next" title="4. Transformers for Language Modelling" href="language-modelling.html" />
+    <link rel="prev" title="2. Coding Attention Mechanisms" href="attention.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -104,7 +104,7 @@ const thebe_selector_output = ".output, .cell_output"
         
       
       
-      <img src="../_static/llm-logo.png" class="logo" alt="logo">
+      <img src="../_static/logo_llm.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Large Language Models</h1>
@@ -122,31 +122,41 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../introduction.html">
-   1. Introduction
+  <a class="reference internal" href="basic.html">
+   1. Large Language Models Basic
   </a>
  </li>
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="basic.html">
-   2. Large Language Models Basic
+ <li class="toctree-l1">
+  <a class="reference internal" href="attention.html">
+   2. Coding Attention Mechanisms
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2">
-    <a class="reference internal" href="attention.html">
-     2.1. Coding Attention Mechanisms
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     2.2. Transformer
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   3. Transformer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="language-modelling.html">
+   4. Transformers for Language Modelling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Pre-trained Model
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pretrained-model/implementing-a-GPT-model.html">
+   5. Implementing a GPT model from Scratch To Generate Text
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pretrained-model/pretraining-on-unlabeled-data.html">
+   6. Pretraining on Unlabeled Data
+  </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
@@ -157,17 +167,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../assignments/README.html">
-   3. Self-paced assignments
+   7. Self-paced assignments
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../assignments/transformer-architecture.html">
-     3.3. Complete the transformer architecture
+     7.3. Complete the transformer architecture
     </a>
    </li>
   </ul>
@@ -433,73 +443,73 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-transformer-architecture">
-   2.2.1. The Transformer architecture
+   3.1. The Transformer architecture
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#transformer-encoder">
-     2.2.1.1. Transformer Encoder
+     3.1.1. Transformer Encoder
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#positional-encoding">
-     2.2.1.2. Positional encoding
+     3.1.2. Positional encoding
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#learning-rate-warm-up">
-     2.2.1.3. Learning rate warm-up
+     3.1.3. Learning rate warm-up
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#pytorch-lightning-module">
-     2.2.1.4. PyTorch Lightning Module
+     3.1.4. PyTorch Lightning Module
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#experiments">
-   2.2.2. Experiments
+   3.2. Experiments
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#sequence-to-sequence">
-     2.2.2.1. Sequence to Sequence
+     3.2.1. Sequence to Sequence
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#set-anomaly-detection">
-     2.2.2.2. Set Anomaly Detection
+     3.2.2. Set Anomaly Detection
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#conclusion">
-   2.2.3. Conclusion
+   3.3. Conclusion
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#your-turn">
-   2.2.4. Your turn! 🚀
+   3.4. Your turn! 🚀
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#self-study">
-   2.2.5. Self study
+   3.5. Self study
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#research-trend">
-     2.2.5.1. Research trend
+     3.5.1. Research trend
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#acknowledgments">
-   2.2.6. Acknowledgments
+   3.6. Acknowledgments
   </a>
  </li>
 </ul>
@@ -523,73 +533,73 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-transformer-architecture">
-   2.2.1. The Transformer architecture
+   3.1. The Transformer architecture
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#transformer-encoder">
-     2.2.1.1. Transformer Encoder
+     3.1.1. Transformer Encoder
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#positional-encoding">
-     2.2.1.2. Positional encoding
+     3.1.2. Positional encoding
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#learning-rate-warm-up">
-     2.2.1.3. Learning rate warm-up
+     3.1.3. Learning rate warm-up
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#pytorch-lightning-module">
-     2.2.1.4. PyTorch Lightning Module
+     3.1.4. PyTorch Lightning Module
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#experiments">
-   2.2.2. Experiments
+   3.2. Experiments
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#sequence-to-sequence">
-     2.2.2.1. Sequence to Sequence
+     3.2.1. Sequence to Sequence
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#set-anomaly-detection">
-     2.2.2.2. Set Anomaly Detection
+     3.2.2. Set Anomaly Detection
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#conclusion">
-   2.2.3. Conclusion
+   3.3. Conclusion
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#your-turn">
-   2.2.4. Your turn! 🚀
+   3.4. Your turn! 🚀
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#self-study">
-   2.2.5. Self study
+   3.5. Self study
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#research-trend">
-     2.2.5.1. Research trend
+     3.5.1. Research trend
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#acknowledgments">
-   2.2.6. Acknowledgments
+   3.6. Acknowledgments
   </a>
  </li>
 </ul>
@@ -603,7 +613,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="transformer">
-<h1><span class="section-number">2.2. </span>Transformer<a class="headerlink" href="#transformer" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">3. </span>Transformer<a class="headerlink" href="#transformer" title="Permalink to this headline">#</a></h1>
 <p>In this tutorial, we will discuss one of the most impactful architectures of the last 2 years: the Transformer model. Since the paper <a class="reference external" href="https://arxiv.org/abs/1706.03762">Attention Is All You Need</a> by Vaswani et al. had been published in 2017, the Transformer architecture has continued to beat benchmarks in many domains, most importantly in Natural Language Processing. Transformers with an incredible amount of parameters can generate long, convincing <a class="reference external" href="https://www.theguardian.com/commentisfree/2020/sep/08/robot-wrote-this-article-gpt-3">essays</a>, and opened up new application fields of AI. As the hype of the Transformer architecture seems not to come to an end in the next years, it is important to understand how it works, and have implemented it yourself, which we will do in this notebook. We focus here on what makes the Transformer and self-attention so powerful in general.</p>
 <p>Below, we import the standard libraries.</p>
 <div class="cell docutils container">
@@ -702,10 +712,10 @@ title="Print to PDF"
 </div>
 </div>
 <section id="the-transformer-architecture">
-<h2><span class="section-number">2.2.1. </span>The Transformer architecture<a class="headerlink" href="#the-transformer-architecture" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.1. </span>The Transformer architecture<a class="headerlink" href="#the-transformer-architecture" title="Permalink to this headline">#</a></h2>
 <p>In the first part of this notebook, we will implement the Transformer architecture by hand. As the architecture is so popular, there already exists a Pytorch module <code class="docutils literal notranslate"><span class="pre">nn.Transformer</span></code> (<a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Transformer.html">documentation</a>) and a <a class="reference external" href="https://pytorch.org/tutorials/beginner/transformer_tutorial.html">tutorial</a> on how to use it for next token prediction. However, we will implement it here ourselves, to get through to the smallest details.</p>
 <section id="transformer-encoder">
-<h3><span class="section-number">2.2.1.1. </span>Transformer Encoder<a class="headerlink" href="#transformer-encoder" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.1.1. </span>Transformer Encoder<a class="headerlink" href="#transformer-encoder" title="Permalink to this headline">#</a></h3>
 <p>Next, we will look at how to apply the multi-head attention block inside the Transformer architecture. Originally, the Transformer model was designed for machine translation. Hence, it got an encoder-decoder structure where the encoder takes as input the sentence in the original language and generates an attention-based representation. On the other hand, the decoder attends over the encoded information and generates the translated sentence in an autoregressive manner, as in a standard RNN. While this structure is extremely useful for Sequence-to-Sequence tasks with the necessity of autoregressive decoding, we will focus here on the encoder part. Many advances in NLP have been made using pure encoder-based Transformer models (if interested, models include the <a class="reference external" href="https://arxiv.org/abs/1810.04805">BERT</a>-family, the <a class="reference external" href="https://arxiv.org/abs/2010.11929">Vision Transformer</a>, and more), and in our tutorial, we will also mainly focus on the encoder part. If you have understood the encoder architecture, the decoder is a very small step to implement as well. The full Transformer architecture looks as follows (figure credit - <a class="reference external" href="https://arxiv.org/abs/1706.03762">Vaswani et al., 2017</a>).:</p>
 <figure class="align-default">
 <img alt="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/transformer_architecture.svg" src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/transformer_architecture.svg" /></figure>
@@ -798,7 +808,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="positional-encoding">
-<h3><span class="section-number">2.2.1.2. </span>Positional encoding<a class="headerlink" href="#positional-encoding" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.1.2. </span>Positional encoding<a class="headerlink" href="#positional-encoding" title="Permalink to this headline">#</a></h3>
 <p>We have discussed before that the Multi-Head Attention block is permutation-equivariant, and cannot distinguish whether an input comes before another one in the sequence or not. In tasks like language understanding, however, the position is important for interpreting the input words. The position information can therefore be added via the input features. We could learn a embedding for every possible position, but this would not generalize to a dynamical input sequence length. Hence, the better option is to use feature patterns that the network can identify from the features and potentially generalize to larger sequences. The specific pattern chosen by Vaswani et al. are sine and cosine functions of different frequencies, as follows:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -889,7 +899,7 @@ PE_{(pos,i)} = \begin{cases}
 <p>As we can see, the patterns between the hidden dimension <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(2\)</span> only differ in the starting angle. The wavelength is <span class="math notranslate nohighlight">\(2\pi\)</span>, hence the repetition after position <span class="math notranslate nohighlight">\(6\)</span>. The hidden dimensions <span class="math notranslate nohighlight">\(2\)</span> and <span class="math notranslate nohighlight">\(3\)</span> have about twice the wavelength.</p>
 </section>
 <section id="learning-rate-warm-up">
-<h3><span class="section-number">2.2.1.3. </span>Learning rate warm-up<a class="headerlink" href="#learning-rate-warm-up" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.1.3. </span>Learning rate warm-up<a class="headerlink" href="#learning-rate-warm-up" title="Permalink to this headline">#</a></h3>
 <p>One commonly used technique for training a Transformer is learning rate warm-up. This means that we gradually increase the learning rate from 0 on to our originally specified learning rate in the first few iterations. Thus, we slowly start learning instead of taking very large steps from the beginning. In fact, training a deep Transformer without learning rate warm-up can make the model diverge and achieve a much worse performance on training and testing. Take for instance the following plot by <a class="reference external" href="https://arxiv.org/pdf/1908.03265.pdf">Liu et al. (2019)</a> comparing Adam-vanilla (i.e. Adam without warm-up) vs Adam with a warm-up:</p>
 <figure class="align-default">
 <img alt="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/warmup_loss_plot.svg" src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/warmup_loss_plot.svg" /></figure>
@@ -943,7 +953,7 @@ PE_{(pos,i)} = \begin{cases}
 <p>In the first 100 iterations, we increase the learning rate factor from 0 to 1, whereas for all later iterations, we decay it using the cosine wave. Pre-implementations of this scheduler can be found in the popular NLP Transformer library <a class="reference external" href="https://huggingface.co/transformers/main_classes/optimizer_schedules.html?highlight=cosine#transformers.get_cosine_schedule_with_warmup">huggingface</a>.</p>
 </section>
 <section id="pytorch-lightning-module">
-<h3><span class="section-number">2.2.1.4. </span>PyTorch Lightning Module<a class="headerlink" href="#pytorch-lightning-module" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.1.4. </span>PyTorch Lightning Module<a class="headerlink" href="#pytorch-lightning-module" title="Permalink to this headline">#</a></h3>
 <p>Finally, we can embed the Transformer architecture into a PyTorch lightning module. From Tutorial 5, you know that PyTorch Lightning simplifies our training and test code, as well as structures the code nicely in separate functions. We will implement a template for a classifier based on the Transformer encoder. Thereby, we have a prediction output per sequence element. If we would need a classifier over the whole sequence, the common approach is to add an additional <code class="docutils literal notranslate"><span class="pre">[CLS]</span></code> token to the sequence, representing the classifier token. However, here we focus on tasks where we have an output per element.</p>
 <p>Additionally to the Transformer architecture, we add a small input network (maps input dimensions to model dimensions), the positional encoding, and an output network (transforms output encodings to predictions). We also add the learning rate scheduler, which takes a step each iteration instead of once per epoch. This is needed for the warmup and the smooth cosine decay. The training, validation, and test step is left empty for now and will be filled for our task-specific models.</p>
 <div class="cell docutils container">
@@ -1042,10 +1052,10 @@ PE_{(pos,i)} = \begin{cases}
 </section>
 </section>
 <section id="experiments">
-<h2><span class="section-number">2.2.2. </span>Experiments<a class="headerlink" href="#experiments" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.2. </span>Experiments<a class="headerlink" href="#experiments" title="Permalink to this headline">#</a></h2>
 <p>After having finished the implementation of the Transformer architecture, we can start experimenting and apply it to various tasks. In this notebook, we will focus on two tasks: parallel Sequence-to-Sequence, and set anomaly detection. The two tasks focus on different properties of the Transformer architecture, and we go through them below.</p>
 <section id="sequence-to-sequence">
-<h3><span class="section-number">2.2.2.1. </span>Sequence to Sequence<a class="headerlink" href="#sequence-to-sequence" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.2.1. </span>Sequence to Sequence<a class="headerlink" href="#sequence-to-sequence" title="Permalink to this headline">#</a></h3>
 <p>A Sequence-to-Sequence task represents a task where the input <em>and</em> the output is a sequence, not necessarily of the same length. Popular tasks in this domain include machine translation and summarization. For this, we usually have a Transformer encoder for interpreting the input sequence, and a decoder for generating the output in an autoregressive manner. Here, however, we will go back to a much simpler example task and use only the encoder. Given a sequence of <span class="math notranslate nohighlight">\(N\)</span> numbers between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(M\)</span>, the task is to reverse the input sequence. In Numpy notation, if our input is <span class="math notranslate nohighlight">\(x\)</span>, the output should be <span class="math notranslate nohighlight">\(x\)</span>[::-1]. Although this task sounds very simple, RNNs can have issues with such because the task requires long-term dependencies. Transformers are built to support such, and hence, we expect it to perform very well.</p>
 <p>First, let’s create a dataset class below.</p>
 <div class="cell docutils container">
@@ -1338,7 +1348,7 @@ Test accuracy: 100.00%
 <p>The model has learned to attend to the token that is on the flipped index of itself. Hence, it actually does what we intended it to do. We see that it however also pays some attention to values close to the flipped index. This is because the model doesn’t need the perfect, hard attention to solve this problem, but is fine with this approximate, noisy attention map. The close-by indices are caused by the similarity of the positional encoding, which we also intended with the positional encoding.</p>
 </section>
 <section id="set-anomaly-detection">
-<h3><span class="section-number">2.2.2.2. </span>Set Anomaly Detection<a class="headerlink" href="#set-anomaly-detection" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.2.2. </span>Set Anomaly Detection<a class="headerlink" href="#set-anomaly-detection" title="Permalink to this headline">#</a></h3>
 <p>Besides sequences, sets are another data structure that is relevant for many applications. In contrast to sequences, elements are unordered in a set. RNNs can only be applied on sets by assuming an order in the data, which however biases the model towards a non-existing order in the data. <a class="reference external" href="https://arxiv.org/abs/1511.06391">Vinyals et al. (2015)</a> and other papers have shown that the assumed order can have a significant impact on the model’s performance, and hence, we should try to not use RNNs on sets. Ideally, our model should be permutation-equivariant/invariant such that the output is the same no matter how we sort the elements in a set.</p>
 <p>Transformers offer the perfect architecture for this as the Multi-Head Attention is permutation-equivariant, and thus, outputs the same values no matter in what order we enter the inputs (inputs and outputs are permuted equally). The task we are looking at for sets is <em>Set Anomaly Detection</em> which means that we try to find the element(s) in a set that does not fit the others. In the research community, the common application of anomaly detection is performed on a set of images, where <span class="math notranslate nohighlight">\(N-1\)</span> images belong to the same category/have the same high-level features while one belongs to another category. Note that category does not necessarily have to relate to a class in a standard classification problem, but could be the combination of multiple features. For instance, on a face dataset, this could be people with glasses, male, beard, etc. An example of distinguishing different animals can be seen below. The first four images show foxes, while the last represents a different animal. We want to recognize that the last image shows a different animal, but it is not relevant which class of animal it is.</p>
 <figure class="align-default">
@@ -1806,15 +1816,15 @@ Image 9: 8.63%
 </section>
 </section>
 <section id="conclusion">
-<h2><span class="section-number">2.2.3. </span>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.3. </span>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h2>
 <p>In this tutorial, we took a closer look at the Multi-Head Attention layer which uses a scaled dot product between queries and keys to find correlations and similarities between input elements. The Transformer architecture is based on the Multi-Head Attention layer and applies multiple of them in a ResNet-like block. The Transformer is a very important, recent architecture that can be applied to many tasks and datasets. Although it is best known for its success in NLP, there is so much more to it. We have seen its application on sequence-to-sequence tasks and set anomaly detection. Its property of being permutation-equivariant if we do not provide any positional encodings, allows it to generalize to many settings. Hence, it is important to know the architecture, but also its possible issues such as the gradient problem during the first iterations solved by learning rate warm-up.</p>
 </section>
 <section id="your-turn">
-<h2><span class="section-number">2.2.4. </span>Your turn! 🚀<a class="headerlink" href="#your-turn" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.4. </span>Your turn! 🚀<a class="headerlink" href="#your-turn" title="Permalink to this headline">#</a></h2>
 <p>You can practice your cnn skills by following the assignment <a class="reference internal" href="../assignments/transformer-architecture.html"><span class="doc std std-doc">complete the transformer architecture</span></a>.</p>
 </section>
 <section id="self-study">
-<h2><span class="section-number">2.2.5. </span>Self study<a class="headerlink" href="#self-study" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.5. </span>Self study<a class="headerlink" href="#self-study" title="Permalink to this headline">#</a></h2>
 <p>You can refer to those YouTube videos for further study:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html">Transformer: A Novel Neural Network Architecture for Language Understanding (Jakob Uszkoreit, 2017)</a> - The original Google blog post about the Transformer paper, focusing on the application in machine translation.</p></li>
@@ -1824,7 +1834,7 @@ Image 9: 8.63%
 <li><p><a class="reference external" href="https://lilianweng.github.io/lil-log/2020/04/07/the-transformer-family.html">The Transformer family (Lilian Weng, 2020)</a> - A very detailed blog post reviewing more variants of Transformers besides the original one.</p></li>
 </ul>
 <section id="research-trend">
-<h3><span class="section-number">2.2.5.1. </span>Research trend<a class="headerlink" href="#research-trend" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.5.1. </span>Research trend<a class="headerlink" href="#research-trend" title="Permalink to this headline">#</a></h3>
 <p>Attention is all you need; Attentional Neural Network Models | Łukasz Kaiser | Masterclass:</p>
 <div class="yt-container">
    <iframe src="https://www.youtube.com/embed/rBCqOTEfxvg" title="Attention is all you need; Attentional Neural Network Models | Łukasz Kaiser | Masterclass" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -1835,7 +1845,7 @@ Image 9: 8.63%
 </div></section>
 </section>
 <section id="acknowledgments">
-<h2><span class="section-number">2.2.6. </span>Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.6. </span>Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permalink to this headline">#</a></h2>
 <p>Thanks to <a class="reference external" href="https://github.com/phlippe">Phillip Lippe</a> for creating the open-source course <a class="reference external" href="https://github.com/phlippe/uvadlc_notebooks">UvA DL Notebooks</a>. It inspires the majority of the content in this chapter.</p>
 </section>
 </section>
@@ -1877,13 +1887,13 @@ Image 9: 8.63%
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">2.1. </span>Coding Attention Mechanisms</p>
+            <p class="prev-next-title"><span class="section-number">2. </span>Coding Attention Mechanisms</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../assignments/README.html" title="next page">
+    <a class='right-next' id="next-link" href="language-modelling.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">3. </span>Self-paced assignments</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Transformers for Language Modelling</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

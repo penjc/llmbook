@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>2. Large Language Models Basic &#8212; Large Language Models</title>
+    <title>1. Large Language Models Basic &#8212; Large Language Models</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -60,8 +60,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2.1. Coding Attention Mechanisms" href="attention.html" />
-    <link rel="prev" title="1. Introduction" href="../introduction.html" />
+    <link rel="next" title="2. Coding Attention Mechanisms" href="attention.html" />
+    <link rel="prev" title="Introduction" href="../intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -102,7 +102,7 @@ const thebe_selector_output = ".output, .cell_output"
         
       
       
-      <img src="../_static/llm-logo.png" class="logo" alt="logo">
+      <img src="../_static/logo_llm.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Large Language Models</h1>
@@ -119,32 +119,42 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../introduction.html">
-   1. Introduction
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   1. Large Language Models Basic
   </a>
  </li>
- <li class="toctree-l1 current active has-children">
-  <a class="current reference internal" href="#">
-   2. Large Language Models Basic
+ <li class="toctree-l1">
+  <a class="reference internal" href="attention.html">
+   2. Coding Attention Mechanisms
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="attention.html">
-     2.1. Coding Attention Mechanisms
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="transformer.html">
-     2.2. Transformer
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="transformer.html">
+   3. Transformer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="language-modelling.html">
+   4. Transformers for Language Modelling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Pre-trained Model
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pretrained-model/implementing-a-GPT-model.html">
+   5. Implementing a GPT model from Scratch To Generate Text
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pretrained-model/pretraining-on-unlabeled-data.html">
+   6. Pretraining on Unlabeled Data
+  </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
@@ -155,17 +165,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../assignments/README.html">
-   3. Self-paced assignments
+   7. Self-paced assignments
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../assignments/transformer-architecture.html">
-     3.3. Complete the transformer architecture
+     7.3. Complete the transformer architecture
     </a>
    </li>
   </ul>
@@ -432,17 +442,11 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="large-language-models-basic">
-<h1><span class="section-number">2. </span>Large Language Models Basic<a class="headerlink" href="#large-language-models-basic" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">1. </span>Large Language Models Basic<a class="headerlink" href="#large-language-models-basic" title="Permalink to this headline">#</a></h1>
 <p>In these sections, we will explore the attention mechanism, which allows models to focus on specific parts of the input during processing. We will study the Transformer model architecture, which serves as the cornerstone for many state-of-the-art language models, and how it has fundamentally transformed the field of Natural Language Processing (NLP). Additionally, we will introduce generative pre-trained language models like GPT, delve into the network structures of large language models, optimization techniques for attention mechanisms, and practical applications stemming from these foundations.</p>
 <figure class="align-default">
 <img alt="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/llm.png" src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/llm.png" />
 </figure>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="attention.html">2.1. Coding Attention Mechanisms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="transformer.html">2.2. Transformer</a></li>
-</ul>
-</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -478,17 +482,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../introduction.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../intro.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">1. </span>Introduction</p>
+            <p class="prev-next-title">Introduction</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="attention.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">2.1. </span>Coding Attention Mechanisms</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Coding Attention Mechanisms</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
