@@ -1,11 +1,7 @@
 name: Build and Deploy to gh-pages
 on:
   push:
-    branches:
-    - todo
   pull_request:
-    branches:
-    - todo
 jobs:
   deploy-book:
     runs-on: ubuntu-latest
