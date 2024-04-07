@@ -9,7 +9,7 @@
 title                       : Large Language Models  # The title of the book. Will be placed in the left navbar.
 author                      : penjc  # The author of the book
 copyright                   : "2024"  # Copyright year to be placed in the footer
-logo                        : llm-logo.png  # A path to the book logo
+logo                        : logo_llm.png  # A path to the book logo
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
