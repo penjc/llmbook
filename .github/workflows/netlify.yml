@@ -3,8 +3,8 @@ on:
   push:
     branches:
     - main
-    paths:
-    - algo-view/**
+    # paths:
+    # - algo-view/**
 
 jobs:
   deploy-book:
@@ -29,7 +29,9 @@ jobs:
       # Build the book
       - name: Build the book
         run: |
-          jupyter-book build algo-view
+          cd algo-view
+          jupyter-book clean -a .  
+          jupyter-book build --all -W --keep-going .   
 
       # Upload the book's HTML as an artifact
       - name: Upload artifact
