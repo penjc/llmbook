@@ -58,6 +58,10 @@ html:
   use_edit_page_button: true
   use_issues_button: true
   use_repository_button: true
+  comments:
+#    hypothesis: true
+    utterances:
+      repo: "https://github.com/penjc/algo-view"
 
 launch_buttons:
   notebook_interface: "jupyterlab"
