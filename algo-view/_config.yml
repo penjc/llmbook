@@ -18,9 +18,8 @@ execute:
   exclude_patterns:
     - 'assignments/*'
     - 'assignments/**/*'
-    - 'basic/transformer.ipynb'
-    - 'basic/language-modelling.ipynb'
-    - 'pretrained-model/pretraining-on-unlabeled-data.ipynb'
+    - 'basic/*'
+    - 'pretrained-model/*'
 
 parse:
   myst_enable_extensions:

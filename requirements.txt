@@ -49,3 +49,4 @@ tqdm
 fastai
 transformers
 tiktoken
+ipytest
