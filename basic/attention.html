@@ -532,6 +532,16 @@ title="Print to PDF"
    </li>
   </ul>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#your-turn">
+   2.7. Your turn! 🚀
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#acknowledgments">
+   2.8. Acknowledgments
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -641,6 +651,16 @@ title="Print to PDF"
    </li>
   </ul>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#your-turn">
+   2.7. Your turn! 🚀
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#acknowledgments">
+   2.8. Acknowledgments
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -663,90 +683,54 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch version: 2.2.2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch version: 2.2.1
 </pre></div>
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>This section covers attention mechanisms, the engine of LLMs:</p></li>
-</ul>
-<img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/01.webp" width="500px"><img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/02.webp" width="600px"><section id="the-problem-with-modeling-long-sequences">
+<p>This section covers attention mechanisms, the engine of LLMs:</p>
+<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240408_024140.png" width="500px"><img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240408_024230.png" width="600px"><section id="the-problem-with-modeling-long-sequences">
 <h2><span class="section-number">2.1. </span>The problem with modeling long sequences<a class="headerlink" href="#the-problem-with-modeling-long-sequences" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>Translating a text word by word isn’t feasible due to the differences in grammatical structures between the source and target languages:</p></li>
-</ul>
-<img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/03.webp" width="400px"><ul class="simple">
-<li><p>Prior to the introduction of transformer models, encoder-decoder RNNs were commonly used for machine translation tasks</p></li>
-<li><p>In this setup, the encoder processes a sequence of tokens from the source language, using a hidden state—a kind of intermediate layer within the neural network—to generate a condensed representation of the entire input sequence:</p></li>
-</ul>
-<img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/04.webp" width="500px"></section>
+<p>Translating a text word by word isn’t feasible due to the differences in grammatical structures between the source and target languages:</p>
+<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240408_024257.png" width="400px"><p>Prior to the introduction of transformer models, encoder-decoder RNNs were commonly used for machine translation tasks
+In this setup, the encoder processes a sequence of tokens from the source language, using a hidden state—a kind of intermediate layer within the neural network—to generate a condensed representation of the entire input sequence:</p>
+<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240408_024327.png" width="500px"></section>
 <section id="capturing-data-dependencies-with-attention-mechanisms">
 <h2><span class="section-number">2.2. </span>Capturing data dependencies with attention mechanisms<a class="headerlink" href="#capturing-data-dependencies-with-attention-mechanisms" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>Through an attention mechanism, the text-generating decoder segment of the network is capable of selectively accessing all input tokens, implying that certain input tokens hold more significance than others in the generation of a specific output token:</p></li>
-</ul>
-<img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/05.webp" width="500px"><ul class="simple">
-<li><p>Self-attention in transformers is a technique designed to enhance input representations by enabling each position in a sequence to engage with and determine the relevance of every other position within the same sequence</p></li>
-</ul>
-<img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/06.webp" width="300px"></section>
+<p>Through an attention mechanism, the text-generating decoder segment of the network is capable of selectively accessing all input tokens, implying that certain input tokens hold more significance than others in the generation of a specific output token:</p>
+<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240408_024401.png" width="500px"><p>Self-attention in transformers is a technique designed to enhance input representations by enabling each position in a sequence to engage with and determine the relevance of every other position within the same sequence</p>
+<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240408_024419.png" width="300px"></section>
 <section id="attending-to-different-parts-of-the-input-with-self-attention">
 <h2><span class="section-number">2.3. </span>Attending to different parts of the input with self-attention<a class="headerlink" href="#attending-to-different-parts-of-the-input-with-self-attention" title="Permalink to this headline">#</a></h2>
 <section id="a-simple-self-attention-mechanism-without-trainable-weights">
 <h3><span class="section-number">2.3.1. </span>A simple self-attention mechanism without trainable weights<a class="headerlink" href="#a-simple-self-attention-mechanism-without-trainable-weights" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>This section explains a very simplified variant of self-attention, which does not contain any trainable weights</p></li>
-<li><p>This is purely for illustration purposes and NOT the attention mechanism that is used in transformers</p></li>
-<li><p>The next section, we will extend this simple attention mechanism to implement the real self-attention mechanism</p></li>
-<li><p>Suppose we are given an input sequence <span class="math notranslate nohighlight">\(x^{(1)}\)</span> to <span class="math notranslate nohighlight">\(x^{(T)}\)</span></p>
-<ul>
-<li><p>The input is a text (for example, a sentence like “Your journey starts with one step”) that has already been converted into token embeddings as described in chapter 2</p></li>
-<li><p>For instance, <span class="math notranslate nohighlight">\(x^{(1)}\)</span> is a d-dimensional vector representing the word “Your”, and so forth</p></li>
-</ul>
-</li>
-<li><p><strong>Goal:</strong> compute context vectors <span class="math notranslate nohighlight">\(z^{(i)}\)</span> for each input sequence element <span class="math notranslate nohighlight">\(x^{(i)}\)</span> in <span class="math notranslate nohighlight">\(x^{(1)}\)</span> to <span class="math notranslate nohighlight">\(x^{(T)}\)</span> (where <span class="math notranslate nohighlight">\(z\)</span> and <span class="math notranslate nohighlight">\(x\)</span> have the same dimension)</p>
-<ul>
-<li><p>A context vector <span class="math notranslate nohighlight">\(z^{(i)}\)</span> is a weighted sum over the inputs <span class="math notranslate nohighlight">\(x^{(1)}\)</span> to <span class="math notranslate nohighlight">\(x^{(T)}\)</span></p></li>
-<li><p>The context vector is “context”-specific to a certain input</p>
-<ul>
-<li><p>Instead of <span class="math notranslate nohighlight">\(x^{(i)}\)</span> as a placeholder for an arbitrary input token, let’s consider the second input, <span class="math notranslate nohighlight">\(x^{(2)}\)</span></p></li>
-<li><p>And to continue with a concrete example, instead of the placeholder <span class="math notranslate nohighlight">\(z^{(i)}\)</span>, we consider the second output context vector, <span class="math notranslate nohighlight">\(z^{(2)}\)</span></p></li>
-<li><p>The second context vector, <span class="math notranslate nohighlight">\(z^{(2)}\)</span>, is a weighted sum over all inputs <span class="math notranslate nohighlight">\(x^{(1)}\)</span> to <span class="math notranslate nohighlight">\(x^{(T)}\)</span> weighted with respect to the second input element, <span class="math notranslate nohighlight">\(x^{(2)}\)</span></p></li>
-<li><p>The attention weights are the weights that determine how much each of the input elements contributes to the weighted sum when computing <span class="math notranslate nohighlight">\(z^{(2)}\)</span></p></li>
-<li><p>In short, think of <span class="math notranslate nohighlight">\(z^{(2)}\)</span> as a modified version of <span class="math notranslate nohighlight">\(x^{(2)}\)</span> that also incorporates information about all other input elements that are relevant to a given task at hand</p></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/07.webp" width="400px"><ul class="simple">
-<li><p>By convention, the unnormalized attention weights are referred to as <strong>“attention scores”</strong> whereas the normalized attention scores, which sum to 1, are referred to as <strong>“attention weights”</strong></p></li>
-<li><p>The attention weights and context vector calculation are summarized in the figure below:</p></li>
-</ul>
-<ul class="simple">
-<li><p>The code below walks through the figure above step by step</p></li>
-</ul>
-<br>
-<ul class="simple">
-<li><p><strong>Step 1:</strong> compute unnormalized attention scores <span class="math notranslate nohighlight">\(\omega\)</span></p></li>
-<li><p>Suppose we use the second input token as the query, that is, <span class="math notranslate nohighlight">\(q^{(2)} = x^{(2)}\)</span>, we compute the unnormalized attention scores via dot products:</p>
-<ul>
-<li><p><span class="math notranslate nohighlight">\(\omega_{21} = x^{(1)} q^{(2)\top}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\omega_{22} = x^{(2)} q^{(2)\top}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\omega_{23} = x^{(3)} q^{(2)\top}\)</span></p></li>
-<li><p>…</p></li>
-<li><p><span class="math notranslate nohighlight">\(\omega_{2T} = x^{(T)} q^{(2)\top}\)</span></p></li>
-</ul>
-</li>
-<li><p>Above, <span class="math notranslate nohighlight">\(\omega\)</span> is the Greek letter “omega” used to symbolize the unnormalized attention scores</p>
-<ul>
-<li><p>The subscript “21” in <span class="math notranslate nohighlight">\(\omega_{21}\)</span> means that input sequence element 2 was used as a query against input sequence element 1</p></li>
-</ul>
-</li>
-</ul>
-<ul class="simple">
-<li><p>Suppose we have the following input sentence that is already embedded in 3-dimensional vectors as described in chapter 3 (we use a very small embedding dimension here for illustration purposes, so that it fits onto the page without line breaks):</p></li>
-</ul>
+<p>This section explains a very simplified variant of self-attention, which does not contain any trainable weights
+This is purely for illustration purposes and NOT the attention mechanism that is used in transformers
+The next section, we will extend this simple attention mechanism to implement the real self-attention mechanism
+Suppose we are given an input sequence <span class="math notranslate nohighlight">\(x^{(1)}\)</span> to <span class="math notranslate nohighlight">\(x^{(T)}\)</span>
+The input is a text (for example, a sentence like “Your journey starts with one step”) that has already been converted into token embeddings as described in chapter 2
+For instance, <span class="math notranslate nohighlight">\(x^{(1)}\)</span> is a d-dimensional vector representing the word “Your”, and so forth
+<strong>Goal:</strong> compute context vectors <span class="math notranslate nohighlight">\(z^{(i)}\)</span> for each input sequence element <span class="math notranslate nohighlight">\(x^{(i)}\)</span> in <span class="math notranslate nohighlight">\(x^{(1)}\)</span> to <span class="math notranslate nohighlight">\(x^{(T)}\)</span> (where <span class="math notranslate nohighlight">\(z\)</span> and <span class="math notranslate nohighlight">\(x\)</span> have the same dimension)
+A context vector <span class="math notranslate nohighlight">\(z^{(i)}\)</span> is a weighted sum over the inputs <span class="math notranslate nohighlight">\(x^{(1)}\)</span> to <span class="math notranslate nohighlight">\(x^{(T)}\)</span>
+The context vector is “context”-specific to a certain input
+Instead of <span class="math notranslate nohighlight">\(x^{(i)}\)</span> as a placeholder for an arbitrary input token, let’s consider the second input, <span class="math notranslate nohighlight">\(x^{(2)}\)</span>
+And to continue with a concrete example, instead of the placeholder <span class="math notranslate nohighlight">\(z^{(i)}\)</span>, we consider the second output context vector, <span class="math notranslate nohighlight">\(z^{(2)}\)</span>
+The second context vector, <span class="math notranslate nohighlight">\(z^{(2)}\)</span>, is a weighted sum over all inputs <span class="math notranslate nohighlight">\(x^{(1)}\)</span> to <span class="math notranslate nohighlight">\(x^{(T)}\)</span> weighted with respect to the second input element, <span class="math notranslate nohighlight">\(x^{(2)}\)</span>
+The attention weights are the weights that determine how much each of the input elements contributes to the weighted sum when computing <span class="math notranslate nohighlight">\(z^{(2)}\)</span>
+In short, think of <span class="math notranslate nohighlight">\(z^{(2)}\)</span> as a modified version of <span class="math notranslate nohighlight">\(x^{(2)}\)</span> that also incorporates information about all other input elements that are relevant to a given task at hand</p>
+<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240408_024437.png" width="400px"><p>By convention, the unnormalized attention weights are referred to as <strong>“attention scores”</strong> whereas the normalized attention scores, which sum to 1, are referred to as <strong>“attention weights”</strong></p>
+<p>The attention weights and context vector calculation are summarized in the figure below:</p>
+<p>The code below walks through the figure above step by step</p>
+<p><strong>Step 1:</strong> compute unnormalized attention scores <span class="math notranslate nohighlight">\(\omega\)</span>
+Suppose we use the second input token as the query, that is, <span class="math notranslate nohighlight">\(q^{(2)} = x^{(2)}\)</span>, we compute the unnormalized attention scores via dot products:
+<span class="math notranslate nohighlight">\(\omega_{21} = x^{(1)} q^{(2)\top}\)</span>
+<span class="math notranslate nohighlight">\(\omega_{22} = x^{(2)} q^{(2)\top}\)</span>
+<span class="math notranslate nohighlight">\(\omega_{23} = x^{(3)} q^{(2)\top}\)</span>
+…
+<span class="math notranslate nohighlight">\(\omega_{2T} = x^{(T)} q^{(2)\top}\)</span>
+Above, <span class="math notranslate nohighlight">\(\omega\)</span> is the Greek letter “omega” used to symbolize the unnormalized attention scores
+The subscript “21” in <span class="math notranslate nohighlight">\(\omega_{21}\)</span> means that input sequence element 2 was used as a query against input sequence element 1</p>
+<p>Suppose we have the following input sentence that is already embedded in 3-dimensional vectors as described in chapter 3 (we use a very small embedding dimension here for illustration purposes, so that it fits onto the page without line breaks):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
@@ -763,16 +747,12 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>The primary objective of this section is to demonstrate how the context vector <span class="math notranslate nohighlight">\(z^{(2)}\)</span>
-is calculated using the second input sequence, <span class="math notranslate nohighlight">\(x^{(2)}\)</span>, as a query</p></li>
-<li><p>The figure depicts the initial step in this process, which involves calculating the attention scores ω between <span class="math notranslate nohighlight">\(x^{(2)}\)</span>
-and all other input elements through a dot product operation.</p></li>
-</ul>
-<img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/08.webp" width="400px"><ul class="simple">
-<li><p>We use input sequence element 2, <span class="math notranslate nohighlight">\(x^{(2)}\)</span>, as an example to compute context vector <span class="math notranslate nohighlight">\(z^{(2)}\)</span>; later in this section, we will generalize this to compute all context vectors.</p></li>
-<li><p>The first step is to compute the unnormalized attention scores by computing the dot product between the query <span class="math notranslate nohighlight">\(x^{(2)}\)</span> and all other input tokens:</p></li>
-</ul>
+<p>The primary objective of this section is to demonstrate how the context vector <span class="math notranslate nohighlight">\(z^{(2)}\)</span>
+is calculated using the second input sequence, <span class="math notranslate nohighlight">\(x^{(2)}\)</span>, as a query</p>
+<p>The figure depicts the initial step in this process, which involves calculating the attention scores ω between <span class="math notranslate nohighlight">\(x^{(2)}\)</span>
+and all other input elements through a dot product operation.</p>
+<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240408_024454.png" width="400px"><p>We use input sequence element 2, <span class="math notranslate nohighlight">\(x^{(2)}\)</span>, as an example to compute context vector <span class="math notranslate nohighlight">\(z^{(2)}\)</span>; later in this section, we will generalize this to compute all context vectors.
+The first step is to compute the unnormalized attention scores by computing the dot product between the query <span class="math notranslate nohighlight">\(x^{(2)}\)</span> and all other input tokens:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># 2nd input token is the query</span>
@@ -791,9 +771,7 @@ and all other input elements through a dot product operation.</p></li>
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>Side note: a dot product is essentially a shorthand for multiplying two vectors elements-wise and summing the resulting products:</p></li>
-</ul>
+<p>Side note: a dot product is essentially a shorthand for multiplying two vectors elements-wise and summing the resulting products:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="mf">0.</span>
@@ -813,11 +791,9 @@ tensor(0.9544)
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p><strong>Step 2:</strong> normalize the unnormalized attention scores (“omegas”, <span class="math notranslate nohighlight">\(\omega\)</span>) so that they sum up to 1</p></li>
-<li><p>Here is a simple way to normalize the unnormalized attention scores to sum up to 1 (a convention, useful for interpretation, and important for training stability):</p></li>
-</ul>
-<img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/09.webp" width="500px"><div class="cell docutils container">
+<p><strong>Step 2:</strong> normalize the unnormalized attention scores (“omegas”, <span class="math notranslate nohighlight">\(\omega\)</span>) so that they sum up to 1
+Here is a simple way to normalize the unnormalized attention scores to sum up to 1 (a convention, useful for interpretation, and important for training stability):</p>
+<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240408_024513.png" width="500px"><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">attn_weights_2_tmp</span> <span class="o">=</span> <span class="n">attn_scores_2</span> <span class="o">/</span> <span class="n">attn_scores_2</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 
@@ -833,10 +809,8 @@ Sum: tensor(1.0000)
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>However, in practice, using the softmax function for normalization, which is better at handling extreme values and has more desirable gradient properties during training, is common and recommended.</p></li>
-<li><p>Here’s a naive implementation of a softmax function for scaling, which also normalizes the vector elements such that they sum up to 1:</p></li>
-</ul>
+<p>However, in practice, using the softmax function for normalization, which is better at handling extreme values and has more desirable gradient properties during training, is common and recommended.
+Here’s a naive implementation of a softmax function for scaling, which also normalizes the vector elements such that they sum up to 1:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">softmax_naive</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
@@ -856,10 +830,8 @@ Sum: tensor(1.)
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>The naive implementation above can suffer from numerical instability issues for large or small input values due to overflow and underflow issues</p></li>
-<li><p>Hence, in practice, it’s recommended to use the PyTorch implementation of softmax instead, which has been highly optimized for performance:</p></li>
-</ul>
+<p>The naive implementation above can suffer from numerical instability issues for large or small input values due to overflow and underflow issues
+Hence, in practice, it’s recommended to use the PyTorch implementation of softmax instead, which has been highly optimized for performance:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">attn_weights_2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">attn_scores_2</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -876,10 +848,8 @@ Sum: tensor(1.)
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p><strong>Step 3</strong>: compute the context vector <span class="math notranslate nohighlight">\(z^{(2)}\)</span> by multiplying the embedded input tokens, <span class="math notranslate nohighlight">\(x^{(i)}\)</span> with the attention weights and sum the resulting vectors:</p></li>
-</ul>
-<img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/10.webp" width="500px"><div class="cell docutils container">
+<p><strong>Step 3</strong>: compute the context vector <span class="math notranslate nohighlight">\(z^{(2)}\)</span> by multiplying the embedded input tokens, <span class="math notranslate nohighlight">\(x^{(i)}\)</span> with the attention weights and sum the resulting vectors:</p>
+<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240408_024530.png" width="500px"><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># 2nd input token is the query</span>
 
@@ -902,17 +872,11 @@ Sum: tensor(1.)
 <h3><span class="section-number">2.3.2. </span>Computing attention weights for all input tokens<a class="headerlink" href="#computing-attention-weights-for-all-input-tokens" title="Permalink to this headline">#</a></h3>
 <section id="generalize-to-all-input-sequence-tokens">
 <h4><span class="section-number">2.3.2.1. </span>Generalize to all input sequence tokens:<a class="headerlink" href="#generalize-to-all-input-sequence-tokens" title="Permalink to this headline">#</a></h4>
-<ul class="simple">
-<li><p>Above, we computed the attention weights and context vector for input 2 (as illustrated in the highlighted row in the figure below)</p></li>
-<li><p>Next, we are generalizing this computation to compute all attention weights and context vectors</p></li>
-</ul>
-<img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/11.webp" width="400px"><ul class="simple">
-<li><p>In self-attention, the process starts with the calculation of attention scores, which are subsequently normalized to derive attention weights that total 1</p></li>
-<li><p>These attention weights are then utilized to generate the context vectors through a weighted summation of the inputs</p></li>
-</ul>
-<img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/12.webp" width="400px"><ul class="simple">
-<li><p>Apply previous <strong>step 1</strong> to all pairwise elements to compute the unnormalized attention score matrix:</p></li>
-</ul>
+<p>Above, we computed the attention weights and context vector for input 2 (as illustrated in the highlighted row in the figure below)
+Next, we are generalizing this computation to compute all attention weights and context vectors</p>
+<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240408_024546.png" width="400px"><p>In self-attention, the process starts with the calculation of attention scores, which are subsequently normalized to derive attention weights that total 1
+These attention weights are then utilized to generate the context vectors through a weighted summation of the inputs</p>
+<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240408_024602.png" width="400px"><p>Apply previous <strong>step 1</strong> to all pairwise elements to compute the unnormalized attention score matrix:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">attn_scores</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
@@ -936,9 +900,7 @@ Sum: tensor(1.)
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>We can achieve the same as above more efficiently via matrix multiplication:</p></li>
-</ul>
+<p>We can achieve the same as above more efficiently via matrix multiplication:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">attn_scores</span> <span class="o">=</span> <span class="n">inputs</span> <span class="o">@</span> <span class="n">inputs</span><span class="o">.</span><span class="n">T</span>
@@ -957,9 +919,7 @@ Sum: tensor(1.)
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>Similar to <strong>step 2</strong> previously, we normalize each row so that the values in each row sum to 1:</p></li>
-</ul>
+<p>Similar to <strong>step 2</strong> previously, we normalize each row so that the values in each row sum to 1:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">attn_weights</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">attn_scores</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -978,9 +938,7 @@ Sum: tensor(1.)
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>Quick verification that the values in each row indeed sum to 1:</p></li>
-</ul>
+<p>Quick verification that the values in each row indeed sum to 1:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">row_2_sum</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="mf">0.1385</span><span class="p">,</span> <span class="mf">0.2379</span><span class="p">,</span> <span class="mf">0.2333</span><span class="p">,</span> <span class="mf">0.1240</span><span class="p">,</span> <span class="mf">0.1082</span><span class="p">,</span> <span class="mf">0.1581</span><span class="p">])</span>
@@ -997,9 +955,7 @@ All row sums: tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000])
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>Apply previous <strong>step 3</strong> to compute all context vectors:</p></li>
-</ul>
+<p>Apply previous <strong>step 3</strong> to compute all context vectors:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_context_vecs</span> <span class="o">=</span> <span class="n">attn_weights</span> <span class="o">@</span> <span class="n">inputs</span>
@@ -1018,9 +974,7 @@ All row sums: tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000])
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>As a sanity check, the previously computed context vector <span class="math notranslate nohighlight">\(z^{(2)} = [0.4419, 0.6515, 0.5683]\)</span> can be found in the 2nd row in above:</p></li>
-</ul>
+<p>As a sanity check, the previously computed context vector <span class="math notranslate nohighlight">\(z^{(2)} = [0.4419, 0.6515, 0.5683]\)</span> can be found in the 2nd row in above:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Previous 2nd context vector:&quot;</span><span class="p">,</span> <span class="n">context_vec_2</span><span class="p">)</span>
@@ -1038,41 +992,24 @@ All row sums: tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000])
 </section>
 <section id="implementing-self-attention-with-trainable-weights">
 <h2><span class="section-number">2.4. </span>Implementing self-attention with trainable weights<a class="headerlink" href="#implementing-self-attention-with-trainable-weights" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>A conceptual framework illustrating how the self-attention mechanism developed in this section integrates into the overall narrative and structure of this book and chapter</p></li>
-</ul>
-<img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/13.webp" width="400px"><section id="computing-the-attention-weights-step-by-step">
+<p>A conceptual framework illustrating how the self-attention mechanism developed in this section integrates into the overall narrative and structure of this book and chapter</p>
+<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240408_024618.png" width="400px"><section id="computing-the-attention-weights-step-by-step">
 <h3><span class="section-number">2.4.1. </span>Computing the attention weights step by step<a class="headerlink" href="#computing-the-attention-weights-step-by-step" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>In this section, we are implementing the self-attention mechanism that is used in the original transformer architecture, the GPT models, and most other popular LLMs</p></li>
-<li><p>This self-attention mechanism is also called “scaled dot-product attention”</p></li>
-<li><p>The overall idea is similar to before:</p>
-<ul>
-<li><p>We want to compute context vectors as weighted sums over the input vectors specific to a certain input element</p></li>
-<li><p>For the above, we need attention weights</p></li>
-</ul>
-</li>
-<li><p>As you will see, there are only slight differences compared to the basic attention mechanism introduced earlier:</p>
-<ul>
-<li><p>The most notable difference is the introduction of weight matrices that are updated during model training</p></li>
-<li><p>These trainable weight matrices are crucial so that the model (specifically, the attention module inside the model) can learn to produce “good” context vectors</p></li>
-</ul>
-</li>
-</ul>
-<img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/14.webp" width="600px"><ul class="simple">
-<li><p>Implementing the self-attention mechanism step by step, we will start by introducing the three training weight matrices <span class="math notranslate nohighlight">\(W_q\)</span>, <span class="math notranslate nohighlight">\(W_k\)</span>, and <span class="math notranslate nohighlight">\(W_v\)</span></p></li>
-<li><p>These three matrices are used to project the embedded input tokens, <span class="math notranslate nohighlight">\(x^{(i)}\)</span>, into query, key, and value vectors via matrix multiplication:</p>
-<ul>
-<li><p>Query vector: <span class="math notranslate nohighlight">\(q^{(i)} = W_q \,x^{(i)}\)</span></p></li>
-<li><p>Key vector: <span class="math notranslate nohighlight">\(k^{(i)} = W_k \,x^{(i)}\)</span></p></li>
-<li><p>Value vector: <span class="math notranslate nohighlight">\(v^{(i)} = W_v \,x^{(i)}\)</span></p></li>
-</ul>
-</li>
-</ul>
-<ul class="simple">
-<li><p>The embedding dimensions of the input <span class="math notranslate nohighlight">\(x\)</span> and the query vector <span class="math notranslate nohighlight">\(q\)</span> can be the same or different, depending on the model’s design and specific implementation</p></li>
-<li><p>In GPT models, the input and output dimensions are usually the same, but for illustration purposes, to better follow the computation, we choose different input and output dimensions here:</p></li>
-</ul>
+<p>In this section, we are implementing the self-attention mechanism that is used in the original transformer architecture, the GPT models, and most other popular LLMs
+This self-attention mechanism is also called “scaled dot-product attention”
+The overall idea is similar to before:
+We want to compute context vectors as weighted sums over the input vectors specific to a certain input element
+For the above, we need attention weights
+As you will see, there are only slight differences compared to the basic attention mechanism introduced earlier:
+The most notable difference is the introduction of weight matrices that are updated during model training
+These trainable weight matrices are crucial so that the model (specifically, the attention module inside the model) can learn to produce “good” context vectors</p>
+<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240408_024633.png" width="600px"><p>Implementing the self-attention mechanism step by step, we will start by introducing the three training weight matrices <span class="math notranslate nohighlight">\(W_q\)</span>, <span class="math notranslate nohighlight">\(W_k\)</span>, and <span class="math notranslate nohighlight">\(W_v\)</span>
+These three matrices are used to project the embedded input tokens, <span class="math notranslate nohighlight">\(x^{(i)}\)</span>, into query, key, and value vectors via matrix multiplication:</p>
+<p>Query vector: <span class="math notranslate nohighlight">\(q^{(i)} = W_q \,x^{(i)}\)</span>
+Key vector: <span class="math notranslate nohighlight">\(k^{(i)} = W_k \,x^{(i)}\)</span>
+Value vector: <span class="math notranslate nohighlight">\(v^{(i)} = W_v \,x^{(i)}\)</span></p>
+<p>The embedding dimensions of the input <span class="math notranslate nohighlight">\(x\)</span> and the query vector <span class="math notranslate nohighlight">\(q\)</span> can be the same or different, depending on the model’s design and specific implementation
+In GPT models, the input and output dimensions are usually the same, but for illustration purposes, to better follow the computation, we choose different input and output dimensions here:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_2</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># second input element</span>
@@ -1082,9 +1019,7 @@ All row sums: tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000])
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>Below, we initialize the three weight matrices; note that we are setting <code class="docutils literal notranslate"><span class="pre">requires_grad=False</span></code> to reduce clutter in the outputs for illustration purposes, but if we were to use the weight matrices for model training, we would set <code class="docutils literal notranslate"><span class="pre">requires_grad=True</span></code> to update these matrices during model training</p></li>
-</ul>
+<p>Below, we initialize the three weight matrices; note that we are setting <code class="docutils literal notranslate"><span class="pre">requires_grad=False</span></code> to reduce clutter in the outputs for illustration purposes, but if we were to use the weight matrices for model training, we would set <code class="docutils literal notranslate"><span class="pre">requires_grad=True</span></code> to update these matrices during model training</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
@@ -1096,9 +1031,7 @@ All row sums: tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000])
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>Next we compute the query, key, and value vectors:</p></li>
-</ul>
+<p>Next we compute the query, key, and value vectors:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query_2</span> <span class="o">=</span> <span class="n">x_2</span> <span class="o">@</span> <span class="n">W_query</span> <span class="c1"># _2 because it&#39;s with respect to the 2nd input element</span>
@@ -1115,9 +1048,7 @@ All row sums: tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000])
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>As we can see below, we successfully projected the 6 input tokens from a 3D onto a 2D embedding space:</p></li>
-</ul>
+<p>As we can see below, we successfully projected the 6 input tokens from a 3D onto a 2D embedding space:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">keys</span> <span class="o">=</span> <span class="n">inputs</span> <span class="o">@</span> <span class="n">W_key</span> 
@@ -1135,10 +1066,8 @@ values.shape: torch.Size([6, 2])
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>In the next step, <strong>step 2</strong>, we compute the unnormalized attention scores by computing the dot product between the query and each key vector:</p></li>
-</ul>
-<img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/15.webp" width="600px"><div class="cell docutils container">
+<p>In the next step, <strong>step 2</strong>, we compute the unnormalized attention scores by computing the dot product between the query and each key vector:</p>
+<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240408_024647.png" width="600px"><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">keys_2</span> <span class="o">=</span> <span class="n">keys</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># Python starts index at 0</span>
 <span class="n">attn_score_22</span> <span class="o">=</span> <span class="n">query_2</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">keys_2</span><span class="p">)</span>
@@ -1152,9 +1081,7 @@ values.shape: torch.Size([6, 2])
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>Since we have 6 inputs, we have 6 attention scores for the given query vector:</p></li>
-</ul>
+<p>Since we have 6 inputs, we have 6 attention scores for the given query vector:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">attn_scores_2</span> <span class="o">=</span> <span class="n">query_2</span> <span class="o">@</span> <span class="n">keys</span><span class="o">.</span><span class="n">T</span> <span class="c1"># All attention scores for given query</span>
@@ -1168,10 +1095,8 @@ values.shape: torch.Size([6, 2])
 </div>
 </div>
 </div>
-<img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/16.webp" width="600px"><ul class="simple">
-<li><p>Next, in <strong>step 3</strong>, we compute the attention weights (normalized attention scores that sum up to 1) using the softmax function we used earlier</p></li>
-<li><p>The difference to earlier is that we now scale the attention scores by dividing them by the square root of the embedding dimension, <span class="math notranslate nohighlight">\(\sqrt{d_k}\)</span> (i.e., <code class="docutils literal notranslate"><span class="pre">d_k**0.5</span></code>):</p></li>
-</ul>
+<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240408_024703.png" width="600px"><p>Next, in <strong>step 3</strong>, we compute the attention weights (normalized attention scores that sum up to 1) using the softmax function we used earlier
+The difference to earlier is that we now scale the attention scores by dividing them by the square root of the embedding dimension, <span class="math notranslate nohighlight">\(\sqrt{d_k}\)</span> (i.e., <code class="docutils literal notranslate"><span class="pre">d_k**0.5</span></code>):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d_k</span> <span class="o">=</span> <span class="n">keys</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -1186,9 +1111,7 @@ values.shape: torch.Size([6, 2])
 </div>
 </div>
 </div>
-<img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/17.webp" width="600px"><ul class="simple">
-<li><p>In <strong>step 4</strong>, we now compute the context vector for input query vector 2:</p></li>
-</ul>
+<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240408_024717.png" width="600px"><p>In <strong>step 4</strong>, we now compute the context vector for input query vector 2:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">context_vec_2</span> <span class="o">=</span> <span class="n">attn_weights_2</span> <span class="o">@</span> <span class="n">values</span>
@@ -1205,9 +1128,7 @@ values.shape: torch.Size([6, 2])
 </section>
 <section id="implementing-a-compact-selfattention-class">
 <h3><span class="section-number">2.4.2. </span>Implementing a compact SelfAttention class<a class="headerlink" href="#implementing-a-compact-selfattention-class" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>Putting it all together, we can implement the self-attention mechanism as follows:</p></li>
-</ul>
+<p>Putting it all together, we can implement the self-attention mechanism as follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
@@ -1249,10 +1170,8 @@ values.shape: torch.Size([6, 2])
 </div>
 </div>
 </div>
-<img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/18.webp" width="400px"><ul class="simple">
-<li><p>We can streamline the implementation above using PyTorch’s Linear layers, which are equivalent to a matrix multiplication if we disable the bias units</p></li>
-<li><p>Another big advantage of using <code class="docutils literal notranslate"><span class="pre">nn.Linear</span></code> over our manual <code class="docutils literal notranslate"><span class="pre">nn.Parameter(torch.rand(...)</span></code> approach is that <code class="docutils literal notranslate"><span class="pre">nn.Linear</span></code> has a preferred weight initialization scheme, which leads to more stable model training</p></li>
-</ul>
+<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240408_024732.png" width="400px"><p>We can streamline the implementation above using PyTorch’s Linear layers, which are equivalent to a matrix multiplication if we disable the bias units
+Another big advantage of using <code class="docutils literal notranslate"><span class="pre">nn.Linear</span></code> over our manual <code class="docutils literal notranslate"><span class="pre">nn.Parameter(torch.rand(...)</span></code> approach is that <code class="docutils literal notranslate"><span class="pre">nn.Linear</span></code> has a preferred weight initialization scheme, which leads to more stable model training</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SelfAttention_v2</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
@@ -1292,25 +1211,19 @@ values.shape: torch.Size([6, 2])
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>Note that <code class="docutils literal notranslate"><span class="pre">SelfAttention_v1</span></code> and <code class="docutils literal notranslate"><span class="pre">SelfAttention_v2</span></code> give different outputs because they use different initial weights for the weight matrices</p></li>
-</ul>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">SelfAttention_v1</span></code> and <code class="docutils literal notranslate"><span class="pre">SelfAttention_v2</span></code> give different outputs because they use different initial weights for the weight matrices</p>
 </section>
 </section>
 <section id="hiding-future-words-with-causal-attention">
 <h2><span class="section-number">2.5. </span>Hiding future words with causal attention<a class="headerlink" href="#hiding-future-words-with-causal-attention" title="Permalink to this headline">#</a></h2>
 <p>n causal attention, the attention weights above the diagonal are masked, ensuring that for any given input, the LLM is unable to utilize future tokens while calculating the context vectors with the attention weight</p>
-<img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/19.webp" width="400px"><section id="applying-a-causal-attention-mask">
+<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240408_024745.png" width="400px"><section id="applying-a-causal-attention-mask">
 <h3><span class="section-number">2.5.1. </span>Applying a causal attention mask<a class="headerlink" href="#applying-a-causal-attention-mask" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>In this section, we are converting the previous self-attention mechanism into a causal self-attention mechanism</p></li>
-<li><p>Causal self-attention ensures that the model’s prediction for a certain position in a sequence is only dependent on the known outputs at previous positions, not on future positions</p></li>
-<li><p>In simpler words, this ensures that each next word prediction should only depend on the preceding words</p></li>
-<li><p>To achieve this, for each given token, we mask out the future tokens (the ones that come after the current token in the input text):</p></li>
-</ul>
-<img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/20.webp" width="600px"><ul class="simple">
-<li><p>To illustrate and implement causal self-attention, let’s work with the attention scores and weights from the previous section:</p></li>
-</ul>
+<p>In this section, we are converting the previous self-attention mechanism into a causal self-attention mechanism
+Causal self-attention ensures that the model’s prediction for a certain position in a sequence is only dependent on the known outputs at previous positions, not on future positions
+In simpler words, this ensures that each next word prediction should only depend on the preceding words
+To achieve this, for each given token, we mask out the future tokens (the ones that come after the current token in the input text):</p>
+<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240408_024800.png" width="600px"><p>To illustrate and implement causal self-attention, let’s work with the attention scores and weights from the previous section:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reuse the query and key weight matrices of the</span>
@@ -1336,9 +1249,7 @@ values.shape: torch.Size([6, 2])
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>The simplest way to mask out future attention weights is by creating a mask via PyTorch’s tril function with elements below the main diagonal (including the diagonal itself) set to 1 and above the main diagonal set to 0:</p></li>
-</ul>
+<p>The simplest way to mask out future attention weights is by creating a mask via PyTorch’s tril function with elements below the main diagonal (including the diagonal itself) set to 1 and above the main diagonal set to 0:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">block_size</span> <span class="o">=</span> <span class="n">attn_scores</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -1358,9 +1269,7 @@ values.shape: torch.Size([6, 2])
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>Then, we can multiply the attention weights with this mask to zero out the attention scores above the diagonal:</p></li>
-</ul>
+<p>Then, we can multiply the attention weights with this mask to zero out the attention scores above the diagonal:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">masked_simple</span> <span class="o">=</span> <span class="n">attn_weights</span><span class="o">*</span><span class="n">mask_simple</span>
@@ -1380,14 +1289,10 @@ values.shape: torch.Size([6, 2])
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>However, if the mask were applied after softmax, like above, it would disrupt the probability distribution created by softmax</p></li>
-<li><p>Softmax ensures that all output values sum to 1</p></li>
-<li><p>Masking after softmax would require re-normalizing the outputs to sum to 1 again, which complicates the process and might lead to unintended effects</p></li>
-</ul>
-<ul class="simple">
-<li><p>To make sure that the rows sum to 1, we can normalize the attention weights as follows:</p></li>
-</ul>
+<p>However, if the mask were applied after softmax, like above, it would disrupt the probability distribution created by softmax
+Softmax ensures that all output values sum to 1
+Masking after softmax would require re-normalizing the outputs to sum to 1 again, which complicates the process and might lead to unintended effects</p>
+<p>To make sure that the rows sum to 1, we can normalize the attention weights as follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">row_sums</span> <span class="o">=</span> <span class="n">masked_simple</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1408,11 +1313,9 @@ values.shape: torch.Size([6, 2])
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>While we are technically done with coding the causal attention mechanism now, let’s briefly look at a more efficient approach to achieve the same as above</p></li>
-<li><p>So, instead of zeroing out attention weights above the diagonal and renormalizing the results, we can mask the unnormalized attention scores above the diagonal with negative infinity before they enter the softmax function:</p></li>
-</ul>
-<img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/21.webp" width="450px"><div class="cell docutils container">
+<p>While we are technically done with coding the causal attention mechanism now, let’s briefly look at a more efficient approach to achieve the same as above
+So, instead of zeroing out attention weights above the diagonal and renormalizing the results, we can mask the unnormalized attention scores above the diagonal with negative infinity before they enter the softmax function:</p>
+<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240408_024816.png" width="450px"><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">block_size</span><span class="p">,</span> <span class="n">block_size</span><span class="p">),</span> <span class="n">diagonal</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">masked</span> <span class="o">=</span> <span class="n">attn_scores</span><span class="o">.</span><span class="n">masked_fill</span><span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">bool</span><span class="p">(),</span> <span class="o">-</span><span class="n">torch</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
@@ -1432,9 +1335,7 @@ values.shape: torch.Size([6, 2])
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>As we can see below, now the attention weights in each row correctly sum to 1 again:</p></li>
-</ul>
+<p>As we can see below, now the attention weights in each row correctly sum to 1 again:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">attn_weights</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">masked</span> <span class="o">/</span> <span class="n">keys</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -1457,20 +1358,13 @@ values.shape: torch.Size([6, 2])
 </section>
 <section id="masking-additional-attention-weights-with-dropout">
 <h3><span class="section-number">2.5.2. </span>Masking additional attention weights with dropout<a class="headerlink" href="#masking-additional-attention-weights-with-dropout" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>In addition, we also apply dropout to reduce overfitting during training</p></li>
-<li><p>Dropout can be applied in several places:</p>
-<ul>
-<li><p>for example, after computing the attention weights;</p></li>
-<li><p>or after multiplying the attention weights with the value vectors</p></li>
-</ul>
-</li>
-<li><p>Here, we will apply the dropout mask after computing the attention weights because it’s more common</p></li>
-<li><p>Furthermore, in this specific example, we use a dropout rate of 50%, which means randomly masking out half of the attention weights. (When we train the GPT model later, we will use a lower dropout rate, such as 0.1 or 0.2</p></li>
-</ul>
-<img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/22.webp" width="400px"><ul class="simple">
-<li><p>If we apply a dropout rate of 0.5 (50%), the non-dropped values will be scaled accordingly by a factor of 1/0.5 = 2.</p></li>
-</ul>
+<p>In addition, we also apply dropout to reduce overfitting during training
+Dropout can be applied in several places:
+for example, after computing the attention weights;
+or after multiplying the attention weights with the value vectors
+Here, we will apply the dropout mask after computing the attention weights because it’s more common</p>
+<p>Furthermore, in this specific example, we use a dropout rate of 50%, which means randomly masking out half of the attention weights. (When we train the GPT model later, we will use a lower dropout rate, such as 0.1 or 0.2</p>
+<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240408_024832.png" width="400px"><p>If we apply a dropout rate of 0.5 (50%), the non-dropped values will be scaled accordingly by a factor of 1/0.5 = 2.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
@@ -1482,12 +1376,12 @@ values.shape: torch.Size([6, 2])
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[2., 2., 2., 2., 2., 2.],
-        [0., 2., 0., 0., 0., 0.],
-        [0., 0., 2., 0., 2., 0.],
-        [2., 2., 0., 0., 0., 2.],
-        [2., 0., 0., 0., 0., 2.],
-        [0., 2., 0., 0., 0., 0.]])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[2., 2., 0., 2., 2., 0.],
+        [0., 0., 0., 2., 0., 2.],
+        [2., 2., 2., 2., 0., 2.],
+        [0., 2., 2., 0., 0., 2.],
+        [0., 2., 0., 2., 0., 2.],
+        [0., 2., 2., 2., 2., 0.]])
 </pre></div>
 </div>
 </div>
@@ -1501,27 +1395,23 @@ values.shape: torch.Size([6, 2])
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[2.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000],
-        [0.0000, 0.8966, 0.0000, 0.0000, 0.0000, 0.0000],
-        [0.0000, 0.0000, 0.6206, 0.0000, 0.0000, 0.0000],
-        [0.5517, 0.4921, 0.0000, 0.0000, 0.0000, 0.0000],
-        [0.4350, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000],
-        [0.0000, 0.3327, 0.0000, 0.0000, 0.0000, 0.0000]],
+        [0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000],
+        [0.7599, 0.6194, 0.6206, 0.0000, 0.0000, 0.0000],
+        [0.0000, 0.4921, 0.4925, 0.0000, 0.0000, 0.0000],
+        [0.0000, 0.3966, 0.0000, 0.3775, 0.0000, 0.0000],
+        [0.0000, 0.3327, 0.3331, 0.3084, 0.3331, 0.0000]],
        grad_fn=&lt;MulBackward0&gt;)
 </pre></div>
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>Note that the resulting dropout outputs may look different depending on your operating system; you can read more about this inconsistency <a class="reference external" href="https://github.com/pytorch/pytorch/issues/121595">here on the PyTorch issue tracker</a></p></li>
-</ul>
+<p>Note that the resulting dropout outputs may look different depending on your operating system; you can read more about this inconsistency <a class="reference external" href="https://github.com/pytorch/pytorch/issues/121595">here on the PyTorch issue tracker</a></p>
 </section>
 <section id="implementing-a-compact-causal-self-attention-class">
 <h3><span class="section-number">2.5.3. </span>Implementing a compact causal self-attention class<a class="headerlink" href="#implementing-a-compact-causal-self-attention-class" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>Now, we are ready to implement a working implementation of self-attention, including the causal and dropout masks</p></li>
-<li><p>One more thing is to implement the code to handle batches consisting of more than one input so that our <code class="docutils literal notranslate"><span class="pre">CausalAttention</span></code> class supports the batch outputs produced by the data loader we implemented in chapter 2</p></li>
-<li><p>For simplicity, to simulate such batch input, we duplicate the input text example:</p></li>
-</ul>
+<p>Now, we are ready to implement a working implementation of self-attention, including the causal and dropout masks
+One more thing is to implement the code to handle batches consisting of more than one input so that our <code class="docutils literal notranslate"><span class="pre">CausalAttention</span></code> class supports the batch outputs produced by the data loader we implemented in chapter 2
+For simplicity, to simulate such batch input, we duplicate the input text example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">((</span><span class="n">inputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -1594,27 +1484,19 @@ context_vecs.shape: torch.Size([2, 6, 2])
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>Note that dropout is only applied during training, not during inference</p></li>
-</ul>
-<img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/23.webp" width="500px"></section>
+<p>Note that dropout is only applied during training, not during inference</p>
+<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240408_024847.png" width="500px"></section>
 </section>
 <section id="extending-single-head-attention-to-multi-head-attention">
 <h2><span class="section-number">2.6. </span>Extending single-head attention to multi-head attention<a class="headerlink" href="#extending-single-head-attention-to-multi-head-attention" title="Permalink to this headline">#</a></h2>
 <section id="stacking-multiple-single-head-attention-layers">
 <h3><span class="section-number">2.6.1. </span>Stacking multiple single-head attention layers<a class="headerlink" href="#stacking-multiple-single-head-attention-layers" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>Below is a summary of the self-attention implemented previously (causal and dropout masks not shown for simplicity)</p></li>
-<li><p>This is also called single-head attention:</p></li>
-</ul>
-<img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/24.webp" width="400px">
-<ul class="simple">
-<li><p>We simply stack multiple single-head attention modules to obtain a multi-head attention module:</p></li>
-</ul>
-<img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/25.webp" width="400px">
-<ul class="simple">
-<li><p>The main idea behind multi-head attention is to run the attention mechanism multiple times (in parallel) with different, learned linear projections. This allows the model to jointly attend to information from different representation subspaces at different positions.</p></li>
-</ul>
+<p>Below is a summary of the self-attention implemented previously (causal and dropout masks not shown for simplicity)</p>
+<p>This is also called single-head attention:</p>
+<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240408_024916.png" width="400px">
+<p>We simply stack multiple single-head attention modules to obtain a multi-head attention module:</p>
+<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240408_024934.png" width="400px">
+<p>The main idea behind multi-head attention is to run the attention mechanism multiple times (in parallel) with different, learned linear projections. This allows the model to jointly attend to information from different representation subspaces at different positions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MultiHeadAttentionWrapper</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
@@ -1662,17 +1544,13 @@ context_vecs.shape: torch.Size([2, 6, 4])
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>In the implementation above, the embedding dimension is 4, because we <code class="docutils literal notranslate"><span class="pre">d_out=2</span></code> as the embedding dimension for the key, query, and value vectors as well as the context vector. And since we have 2 attention heads, we have the output embedding dimension 2*2=4</p></li>
-</ul>
+<p>In the implementation above, the embedding dimension is 4, because we <code class="docutils literal notranslate"><span class="pre">d_out=2</span></code> as the embedding dimension for the key, query, and value vectors as well as the context vector. And since we have 2 attention heads, we have the output embedding dimension 2*2=4</p>
 </section>
 <section id="implementing-multi-head-attention-with-weight-splits">
 <h3><span class="section-number">2.6.2. </span>Implementing multi-head attention with weight splits<a class="headerlink" href="#implementing-multi-head-attention-with-weight-splits" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>While the above is an intuitive and fully functional implementation of multi-head attention (wrapping the single-head attention <code class="docutils literal notranslate"><span class="pre">CausalAttention</span></code> implementation from earlier), we can write a stand-alone class called <code class="docutils literal notranslate"><span class="pre">MultiHeadAttention</span></code> to achieve the same</p></li>
-<li><p>We don’t concatenate single attention heads for this stand-alone <code class="docutils literal notranslate"><span class="pre">MultiHeadAttention</span></code> class</p></li>
-<li><p>Instead, we create single W_query, W_key, and W_value weight matrices and then split those into individual matrices for each attention head:</p></li>
-</ul>
+<p>While the above is an intuitive and fully functional implementation of multi-head attention (wrapping the single-head attention <code class="docutils literal notranslate"><span class="pre">CausalAttention</span></code> implementation from earlier), we can write a stand-alone class called <code class="docutils literal notranslate"><span class="pre">MultiHeadAttention</span></code> to achieve the same</p>
+<p>We don’t concatenate single attention heads for this stand-alone <code class="docutils literal notranslate"><span class="pre">MultiHeadAttention</span></code> class
+Instead, we create single W_query, W_key, and W_value weight matrices and then split those into individual matrices for each attention head:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MultiHeadAttention</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
@@ -1762,17 +1640,11 @@ context_vecs.shape: torch.Size([2, 6, 2])
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>Note that the above is essentially a rewritten version of <code class="docutils literal notranslate"><span class="pre">MultiHeadAttentionWrapper</span></code> that is more efficient</p></li>
-<li><p>The resulting output looks a bit different since the random weight initializations differ, but both are fully functional implementations that can be used in the GPT class we will implement in the upcoming chapters</p></li>
-<li><p>Note that in addition, we added a linear projection layer (<code class="docutils literal notranslate"><span class="pre">self.out_proj</span> </code>) to the <code class="docutils literal notranslate"><span class="pre">MultiHeadAttention</span></code> class above. This is simply a linear transformation that doesn’t change the dimensions. It’s a standard convention to use such a projection layer in LLM implementation, but it’s not strictly necessary (recent research has shown that it can be removed without affecting the modeling performance; see the further reading section at the end of this chapter)</p></li>
-</ul>
-<img src="https://sebastianraschka.com/images/LLMs-from-scratch-images/ch03_compressed/26.webp" width="400px"><ul class="simple">
-<li><p>Note that if you are interested in a compact and efficient implementation of the above, you can also consider the <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.MultiheadAttention.html"><code class="docutils literal notranslate"><span class="pre">torch.nn.MultiheadAttention</span></code></a> class in PyTorch</p></li>
-</ul>
-<ul class="simple">
-<li><p>Since the above implementation may look a bit complex at first glance, let’s look at what happens when executing <code class="docutils literal notranslate"><span class="pre">attn_scores</span> <span class="pre">=</span> <span class="pre">queries</span> <span class="pre">&#64;</span> <span class="pre">keys.transpose(2,</span> <span class="pre">3)</span></code>:</p></li>
-</ul>
+<p>Note that the above is essentially a rewritten version of <code class="docutils literal notranslate"><span class="pre">MultiHeadAttentionWrapper</span></code> that is more efficient
+The resulting output looks a bit different since the random weight initializations differ, but both are fully functional implementations that can be used in the GPT class we will implement in the upcoming chapters
+Note that in addition, we added a linear projection layer (<code class="docutils literal notranslate"><span class="pre">self.out_proj</span> </code>) to the <code class="docutils literal notranslate"><span class="pre">MultiHeadAttention</span></code> class above. This is simply a linear transformation that doesn’t change the dimensions. It’s a standard convention to use such a projection layer in LLM implementation, but it’s not strictly necessary (recent research has shown that it can be removed without affecting the modeling performance; see the further reading section at the end of this chapter)</p>
+<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240408_024953.png" width="400px"><p>Note that if you are interested in a compact and efficient implementation of the above, you can also consider the <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.MultiheadAttention.html"><code class="docutils literal notranslate"><span class="pre">torch.nn.MultiheadAttention</span></code></a> class in PyTorch</p>
+<p>Since the above implementation may look a bit complex at first glance, let’s look at what happens when executing <code class="docutils literal notranslate"><span class="pre">attn_scores</span> <span class="pre">=</span> <span class="pre">queries</span> <span class="pre">&#64;</span> <span class="pre">keys.transpose(2,</span> <span class="pre">3)</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># (b, num_heads, num_tokens, head_dim) = (1, 2, 3, 4)</span>
@@ -1800,10 +1672,8 @@ context_vecs.shape: torch.Size([2, 6, 2])
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>In this case, the matrix multiplication implementation in PyTorch will handle the 4-dimensional input tensor so that the matrix multiplication is carried out between the 2 last dimensions (num_tokens, head_dim) and then repeated for the individual heads</p></li>
-<li><p>For instance, the following becomes a more compact way to compute the matrix multiplication for each head separately:</p></li>
-</ul>
+<p>In this case, the matrix multiplication implementation in PyTorch will handle the 4-dimensional input tensor so that the matrix multiplication is carried out between the 2 last dimensions (num_tokens, head_dim) and then repeated for the individual heads</p>
+<p>For instance, the following becomes a more compact way to compute the matrix multiplication for each head separately:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first_head</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
@@ -1816,21 +1686,17 @@ context_vecs.shape: torch.Size([2, 6, 2])
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First head:
- tensor([[1.3208, 1.1631, 1.2879],
-        [1.1631, 2.2150, 1.8424],
-        [1.2879, 1.8424, 2.0402]])
-
-Second head:
- tensor([[0.4391, 0.7003, 0.5903],
-        [0.7003, 1.3737, 1.0620],
-        [0.5903, 1.0620, 0.9912]])
-</pre></div>
-</div>
-</div>
 </div>
 </section>
+</section>
+<section id="your-turn">
+<h2><span class="section-number">2.7. </span>Your turn! 🚀<a class="headerlink" href="#your-turn" title="Permalink to this headline">#</a></h2>
+<p>tbd</p>
+</section>
+<section id="acknowledgments">
+<h2><span class="section-number">2.8. </span>Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permalink to this headline">#</a></h2>
+<p>Thanks to <a class="reference external" href="https://github.com/rasbt">Sebastian Raschka</a> for creating the open-source course <a class="reference external" href="https://github.com/rasbt/LLMs-from-scratch">LLMs-from-scratch
+</a>. It inspires the majority of the content in this chapter.</p>
 </section>
 </section>
 
