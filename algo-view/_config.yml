@@ -52,7 +52,7 @@ repository:
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
 html:
-  favicon: "favicon.ico"
+  favicon: "favicon_llm.ico"
   home_page_in_navbar: false
   use_edit_page_button: true
   use_issues_button: true
@@ -70,7 +70,7 @@ launch_buttons:
   
 sphinx:
   config:
-    html_favicon: favicon.ico
+    html_favicon: favicon_llm.ico
   extra_extensions:
     - sphinxcontrib.mermaid
     - sphinxcontrib.wavedrom
