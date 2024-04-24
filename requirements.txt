@@ -50,3 +50,4 @@ fastai
 transformers
 tiktoken
 ipytest
+jedi
