@@ -1,13 +1,6 @@
-#######################################################################################
-# A default configuration that will be loaded for all jupyter books
-# See the documentation for help and more options: 
-# https://jupyterbook.org/customize/config.html
-
-#######################################################################################
 # Book settings
-# title                       : Algo view  # The title of the book. Will be placed in the left navbar.
 title                       : Large Language Models  # The title of the book. Will be placed in the left navbar.
-author                      : penjc  # The author of the book
+author                      : 彭健程  # The author of the book
 copyright                   : "2024"  # Copyright year to be placed in the footer
 logo                        : logo_llm.png  # A path to the book logo
 only_build_toc_files: true
@@ -45,7 +38,7 @@ bibtex_bibfiles:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/penjc/algo-view  # Online location of your book
+  url: https://github.com/penjc/llmbook  # Online location of your book
   path_to_book: algo-view  # Optional path to your book, relative to the repository root
   branch: main  # Which branch of the repository should be used when creating links (optional)
 
