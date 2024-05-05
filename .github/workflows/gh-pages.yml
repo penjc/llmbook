@@ -26,7 +26,7 @@ jobs:
       # Build the book
       - name: Build the book
         run: |
-          cd algo-view
+          cd llmbook
           jupyter-book clean -a .  
           jupyter-book build --all -W --keep-going .   
 
@@ -34,10 +34,10 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: "algo-view/_build/html"
+          path: "llmbook/_build/html"
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3.6.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./algo-view/_build/html
+          publish_dir: ./llmbook/_build/html
