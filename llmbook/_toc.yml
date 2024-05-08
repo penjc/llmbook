@@ -20,14 +20,16 @@ parts:
   numbered: True
   chapters:
     - file: finetuning/finetuning-for-text-classification
+    - file: finetuning/qlora-llm-instruct-fine-tuning-flan-t5-large
 - caption: Operation
   numbered: True
   chapters:
     - file: operation/chatwithPDF
+    - file: operation/ranked-predictions-with-bert
 - caption: Assignments
   numbered: True
   chapters:
   - file: assignments/README
-    sections:
-    - file: assignments/transformer-architecture
+  - file: assignments/transformer-architecture
+  - file: assignments/llama3-finetune
 
