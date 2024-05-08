@@ -16,6 +16,10 @@ parts:
   chapters:
   - file:  pretrained-model/implementing-a-GPT-model
   - file: pretrained-model/pretraining-on-unlabeled-data
+- caption: Finetuning
+  numbered: True
+  chapters:
+    - file: finetuning/finetuning-for-text-classification
 - caption: Assignments
   numbered: True
   maxdepth: 1

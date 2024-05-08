@@ -13,6 +13,7 @@ execute:
     - 'assignments/**/*'
     - 'basic/*'
     - 'pretrained-model/*'
+    - 'finetuning/*'
 
 parse:
   myst_enable_extensions:
