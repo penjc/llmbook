@@ -1,0 +1,1185 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>8. OpenAI API &amp; LangChain Chat with PDFs &#8212; Large Language Models</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/drawio.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script src="https://wavedrom.com/skins/default.js"></script>
+    <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="https://cdn.jsdelivr.net/gh/bonartm/quizdown-js@latest/public/build/quizdown.js"></script>
+    <script>quizdown.init({"quizdown_js": "https://cdn.jsdelivr.net/gh/bonartm/quizdown-js@latest/public/build/quizdown.js"});</script>
+    <link rel="shortcut icon" href="../_static/favicon_llm.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="9. Self-paced assignments" href="../assignments/README.html" />
+    <link rel="prev" title="7. Finetuning for Text Classification" href="../finetuning/finetuning-for-text-classification.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo_llm.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Large Language Models</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  LLM Intro
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../basic/basic.html">
+   1. Large Language Models Basic
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../basic/attention.html">
+   2. Coding Attention Mechanisms
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../basic/transformer.html">
+   3. Transformer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../basic/language-modelling.html">
+   4. Transformers for Language Modelling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Pre-trained Model
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pretrained-model/implementing-a-GPT-model.html">
+   5. Implementing a GPT model from Scratch To Generate Text
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pretrained-model/pretraining-on-unlabeled-data.html">
+   6. Pretraining on Unlabeled Data
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Finetuning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../finetuning/finetuning-for-text-classification.html">
+   7. Finetuning for Text Classification
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Operation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   8. OpenAI API &amp; LangChain Chat with PDFs
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Assignments
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../assignments/README.html">
+   9. Self-paced assignments
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../assignments/transformer-architecture.html">
+     9.3. Complete the transformer architecture
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/penjc/llmbook/main?urlpath=lab/tree/algo-view/operation/chatwithPDF.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/penjc/llmbook/blob/main/algo-view/operation/chatwithPDF.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/penjc/llmbook"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/penjc/llmbook/issues/new?title=Issue%20on%20page%20%2Foperation/chatwithPDF.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/penjc/llmbook/edit/main/algo-view/operation/chatwithPDF.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/operation/chatwithPDF.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#set-up">
+   8.1. Set up
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#openai-api-key">
+     8.1.1.
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       OpenAI_API_KEY
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#install-and-import-libraries">
+     8.1.2. Install and Import Libraries
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#openai-llm-apis">
+   8.2. OpenAI LLM APIs
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#openai-text-embedding">
+     8.2.1. OpenAI text embedding
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#openai-text-completion">
+     8.2.2. OpenAI text completion
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#openai-chatgpt">
+     8.2.3. OpenAI ChatGPT
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chat-with-pdf">
+   8.3. Chat with PDF
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tool-chaining-with-langchain">
+     8.3.1. Tool Chaining with LangChain
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parse-and-split-the-pdf">
+     8.3.2. Parse and Split the PDF
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#embedding-database">
+     8.3.3. Embedding Database
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#retrieval-chain">
+     8.3.4. Retrieval Chain
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#saving-function">
+     8.3.5. Saving function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#demo-q-a">
+     8.3.6. Demo: Q&amp;A
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>OpenAI API & LangChain Chat with PDFs</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#set-up">
+   8.1. Set up
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#openai-api-key">
+     8.1.1.
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       OpenAI_API_KEY
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#install-and-import-libraries">
+     8.1.2. Install and Import Libraries
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#openai-llm-apis">
+   8.2. OpenAI LLM APIs
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#openai-text-embedding">
+     8.2.1. OpenAI text embedding
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#openai-text-completion">
+     8.2.2. OpenAI text completion
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#openai-chatgpt">
+     8.2.3. OpenAI ChatGPT
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chat-with-pdf">
+   8.3. Chat with PDF
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tool-chaining-with-langchain">
+     8.3.1. Tool Chaining with LangChain
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parse-and-split-the-pdf">
+     8.3.2. Parse and Split the PDF
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#embedding-database">
+     8.3.3. Embedding Database
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#retrieval-chain">
+     8.3.4. Retrieval Chain
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#saving-function">
+     8.3.5. Saving function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#demo-q-a">
+     8.3.6. Demo: Q&amp;A
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="openai-api-langchain-chat-with-pdfs">
+<h1><span class="section-number">8. </span>OpenAI API &amp; LangChain Chat with PDFs<a class="headerlink" href="#openai-api-langchain-chat-with-pdfs" title="Permalink to this headline">#</a></h1>
+<p>In this tutorial I’d like to introduce you to the API to the LLMs, and in the end, we will build something useful for ourselves, a conversation agent that we can chat with about a certain paper.</p>
+<section id="set-up">
+<h2><span class="section-number">8.1. </span>Set up<a class="headerlink" href="#set-up" title="Permalink to this headline">#</a></h2>
+<section id="openai-api-key">
+<h3><span class="section-number">8.1.1. </span><code class="docutils literal notranslate"><span class="pre">OpenAI_API_KEY</span></code><a class="headerlink" href="#openai-api-key" title="Permalink to this headline">#</a></h3>
+<p>We also need the API key from Openai to get access to their models.</p>
+<p><a class="reference external" href="https://platform.openai.com/account/api-keys">https://platform.openai.com/account/api-keys</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="n">openai</span>
+<span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="n">langchain</span>
+<span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="n">pypdf</span>
+<span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="n">chromadb</span>
+<span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="n">tiktoken</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">openai</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="c1"># Openai API</span>
+<span class="n">openai</span><span class="o">.</span><span class="n">api_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="install-and-import-libraries">
+<h3><span class="section-number">8.1.2. </span>Install and Import Libraries<a class="headerlink" href="#install-and-import-libraries" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">openai</span>
+<span class="kn">import</span> <span class="nn">textwrap</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
+<span class="kn">import</span> <span class="nn">pickle</span> <span class="k">as</span> <span class="nn">pkl</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="openai-llm-apis">
+<h2><span class="section-number">8.2. </span>OpenAI LLM APIs<a class="headerlink" href="#openai-llm-apis" title="Permalink to this headline">#</a></h2>
+<p>Useful links for checking price and cost</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://openai.com/pricing">https://openai.com/pricing</a></p></li>
+<li><p><a class="reference external" href="https://platform.openai.com/account/usage">https://platform.openai.com/account/usage</a></p></li>
+</ul>
+<p>Sample text from <a class="reference external" href="https://arxiv.org/abs/2304.02643">https://arxiv.org/abs/2304.02643</a></p>
+<blockquote>
+<div><p>We introduce the Segment Anything (SA) project: a new task, model, and dataset for image segmentation. Using our efficient model in a data collection loop, we built the largest segmentation dataset to date (by far), with over 1 billion masks on 11M licensed and privacy respecting images. The model is designed and trained to be promptable, so it can transfer zero-shot to new image distributions and tasks. We evaluate its capabilities on numerous tasks and find that its zero-shot performance is impressive – often competitive with or even superior to prior fully supervised results. We are releasing the Segment Anything Model (SAM) and corresponding dataset (SA-1B) of 1B masks and 11M images at this https URL to foster research into foundation models for computer vision.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot; We introduce the Segment Anything (SA) project: a new task, model, and dataset for image segmentation. Using our efficient model in a data collection loop, we built the largest segmentation dataset to date (by far), with over 1 billion masks on 11M licensed and privacy respecting images. The model is designed and trained to be promptable, so it can transfer zero-shot to new image distributions and tasks. We evaluate its capabilities on numerous tasks and find that its zero-shot performance is impressive -- often competitive with or even superior to prior fully supervised results. We are releasing the Segment Anything Model (SAM) and corresponding dataset (SA-1B) of 1B masks and 11M images at this https URL to foster research into foundation models for computer vision. &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="openai-text-embedding">
+<h3><span class="section-number">8.2.1. </span>OpenAI text embedding<a class="headerlink" href="#openai-text-embedding" title="Permalink to this headline">#</a></h3>
+<p>OpenAI provides API to embed chunk of texts into a single vector. This vector embedding can be used to retrieve these text chunks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Embedding</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+  <span class="n">model</span><span class="o">=</span><span class="s2">&quot;text-embedding-ada-002&quot;</span><span class="p">,</span>
+  <span class="nb">input</span><span class="o">=</span><span class="n">text</span>
+<span class="p">)</span>
+
+<span class="n">embeddings</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;embedding&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="openai-text-completion">
+<h3><span class="section-number">8.2.2. </span>OpenAI text completion<a class="headerlink" href="#openai-text-completion" title="Permalink to this headline">#</a></h3>
+<p>This is the API for GPT3 models, so we can send prompts to them and let it complete the text. Note that, the task is just to complete the text, so it may not answer your question. To really do so, <strong>Prompt Engineering</strong> is important.</p>
+<p>See official examples in <a class="reference external" href="https://platform.openai.com/examples/default-chat">https://platform.openai.com/examples/default-chat</a></p>
+<p>Generally, for these prompts</p>
+<ul class="simple">
+<li><p>Prepending <em>system messages</em> before the question will condition the GPT model and make the answer more helpful.</p></li>
+<li><p>Adding one or a few examples of what type of output do you expect and what format that is will also help.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prompt</span> <span class="o">=</span> <span class="s2">&quot;I&#39;d like to continue generating a paper&#39;s introduction paragraph based on the abstract. </span><span class="se">\n\n</span><span class="s2">Abstract</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">text</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Main Text</span><span class="se">\n</span><span class="s2">Introduction</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+<span class="n">complete_resp</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+  <span class="c1"># model=&quot;text-davinci-003&quot;, # more powerful and expensive</span>
+  <span class="n">model</span><span class="o">=</span><span class="s2">&quot;text-curie:001&quot;</span><span class="p">,</span> <span class="c1"># cheaper</span>
+  <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+  <span class="n">max_tokens</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
+  <span class="n">temperature</span><span class="o">=</span><span class="mf">0.5</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Prompt it to answer questions</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pre_prompt</span> <span class="o">=</span> <span class="s2">&quot;I am a highly intelligent question answering bot. If you ask me a question that is rooted in truth, I will give you the answer. If you ask me a question that is nonsense, trickery, or has no clear answer, I will respond with </span><span class="se">\&quot;</span><span class="s2">Unknown</span><span class="se">\&quot;</span><span class="s2">.</span><span class="se">\n\n</span><span class="s2">Q: What is human life expectancy in the United States?</span><span class="se">\n</span><span class="s2">A: Human life expectancy in the United States is 78 years.</span><span class="se">\n\n</span><span class="s2">Q: Who was president of the United States in 1955?</span><span class="se">\n</span><span class="s2">A: Dwight D. Eisenhower was president of the United States in 1955.</span><span class="se">\n\n</span><span class="s2">Q: Which party did he belong to?</span><span class="se">\n</span><span class="s2">A: He belonged to the Republican Party.</span><span class="se">\n\n</span><span class="s2">Q: What is the square root of banana?</span><span class="se">\n</span><span class="s2">A: Unknown</span><span class="se">\n\n</span><span class="s2">Q: How does a telescope work?</span><span class="se">\n</span><span class="s2">A: Telescopes use lenses or mirrors to focus light and make objects appear closer.</span><span class="se">\n\n</span><span class="s2">Q: Where were the 1992 Olympics held?</span><span class="se">\n</span><span class="s2">A: The 1992 Olympics were held in Barcelona, Spain.</span><span class="se">\n\n</span><span class="s2">Q: How many squigs are in a bonk?</span><span class="se">\n</span><span class="s2">A: Unknown</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+<span class="n">question</span> <span class="o">=</span> <span class="s2">&quot;Q: When is the Eiffel Tower built?&quot;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+  <span class="n">model</span><span class="o">=</span><span class="s2">&quot;text-davinci-003&quot;</span><span class="p">,</span>
+  <span class="n">prompt</span><span class="o">=</span><span class="n">pre_prompt</span> <span class="o">+</span> <span class="n">question</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">A:&quot;</span><span class="p">,</span>
+  <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+  <span class="n">max_tokens</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
+  <span class="n">top_p</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+  <span class="n">frequency_penalty</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+  <span class="n">presence_penalty</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+  <span class="n">stop</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Prompt it to chat with you as friendly AI</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pre_prompt</span> <span class="o">=</span> <span class="s2">&quot;The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Human: Hello, who are you?</span>
+<span class="s2">AI: I am an AI created by OpenAI. How can I help you today?</span>
+<span class="s2">Human: I&#39;d like to cancel my subscription.</span>
+<span class="s2">AI:</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+  <span class="n">model</span><span class="o">=</span><span class="s2">&quot;text-davinci-003&quot;</span><span class="p">,</span>
+  <span class="n">prompt</span><span class="o">=</span><span class="n">pre_prompt</span> <span class="o">+</span> <span class="n">prompt</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">A:&quot;</span><span class="p">,</span>
+  <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+  <span class="n">max_tokens</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
+  <span class="n">top_p</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+  <span class="n">frequency_penalty</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+  <span class="n">presence_penalty</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+  <span class="n">stop</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="openai-chatgpt">
+<h3><span class="section-number">8.2.3. </span>OpenAI ChatGPT<a class="headerlink" href="#openai-chatgpt" title="Permalink to this headline">#</a></h3>
+<p>This is the API for ChatGPT, and we can more directly ask questions or have a conversation with it without much prompt tuning.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">completion</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">ChatCompletion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+  <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-3.5-turbo&quot;</span><span class="p">,</span>
+  <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello! Can you tell me a really funny joke to light my day up?&quot;</span><span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">completion</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="chat-with-pdf">
+<h2><span class="section-number">8.3. </span>Chat with PDF<a class="headerlink" href="#chat-with-pdf" title="Permalink to this headline">#</a></h2>
+<p>The idea is like this</p>
+<ol class="simple">
+<li><p>First, divide the paper / doc into many chunks.</p></li>
+<li><p>Embed each chunk into a vector via OpenAI GPT embedding</p></li>
+<li><p>Store these vectors in a database (<code class="docutils literal notranslate"><span class="pre">chromedb</span></code>)</p></li>
+<li><p>When a question comes, embed it and retrieve the most similar text chunks.</p></li>
+<li><p>Send these chunks and the questions to ChatGPT API, and let it answer the question.</p></li>
+</ol>
+<p>This is a complex pipeline, so <code class="docutils literal notranslate"><span class="pre">langchain</span></code> works as the glue that connect every parts.</p>
+<p><img alt="Chat with PDF" src="https://raw.githubusercontent.com/Animadversio/TransformerFromScratch/main/media/ChatPDF_Schematics.png" /></p>
+<p><strong>Required libraries</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">openai</span></code> provides API of openai GPT models</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">langchain</span></code> a recent framework that chain together the GPT models to build applications.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pypdf</span></code> pdf parser in python.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">chromadb</span></code> a vector database that manage the embedding vectors and handle the info retrieval.</p></li>
+</ul>
+<section id="tool-chaining-with-langchain">
+<h3><span class="section-number">8.3.1. </span>Tool Chaining with LangChain<a class="headerlink" href="#tool-chaining-with-langchain" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.document_loaders</span> <span class="kn">import</span> <span class="n">PyPDFLoader</span> <span class="c1"># for loading the pdf</span>
+<span class="kn">from</span> <span class="nn">langchain.embeddings</span> <span class="kn">import</span> <span class="n">OpenAIEmbeddings</span> <span class="c1"># for creating embeddings</span>
+<span class="kn">from</span> <span class="nn">langchain.vectorstores</span> <span class="kn">import</span> <span class="n">Chroma</span> <span class="c1"># for the vectorization part</span>
+<span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">ChatVectorDBChain</span> <span class="c1"># for chatting with the pdf</span>
+<span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">ConversationalRetrievalChain</span>
+<span class="kn">from</span> <span class="nn">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span> <span class="c1"># the LLM model we&#39;ll use (CHatGPT)</span>
+<span class="kn">from</span> <span class="nn">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="parse-and-split-the-pdf">
+<h3><span class="section-number">8.3.2. </span>Parse and Split the PDF<a class="headerlink" href="#parse-and-split-the-pdf" title="Permalink to this headline">#</a></h3>
+<p>Download the pdf and parse it through python PDF reader</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="k">def</span> <span class="nf">download_pdf</span><span class="p">(</span><span class="n">arxiv_id</span><span class="p">,</span> <span class="n">save_root</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://arxiv.org/pdf/</span><span class="si">{</span><span class="n">arxiv_id</span><span class="si">}</span><span class="s2">.pdf&quot;</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">True</span><span class="p">,)</span>
+    <span class="nb">open</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">save_root</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">arxiv_id</span><span class="si">}</span><span class="s2">.pdf&quot;</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">arxiv_id</span> <span class="o">=</span> <span class="s2">&quot;1706.03762&quot;</span><span class="c1">#&quot;2304.02643&quot;</span>
+<span class="c1"># This is the Segment Everything paper from Meta https://arxiv.org/abs/2304.02643,</span>
+<span class="c1"># change to sth you are curious about!</span>
+
+<span class="n">download_pdf</span><span class="p">(</span><span class="n">arxiv_id</span><span class="p">)</span>
+<span class="n">pdf_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">arxiv_id</span><span class="si">}</span><span class="s2">.pdf&quot;</span>
+<span class="n">loader</span> <span class="o">=</span> <span class="n">PyPDFLoader</span><span class="p">(</span><span class="n">pdf_path</span><span class="p">)</span>
+<span class="n">pages</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_and_split</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s look at what lies within the pages</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">pages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">metadata</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">page_content</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;source&#39;: &#39;1706.03762.pdf&#39;, &#39;page&#39;: 0}
+Attention Is All You Need
+Ashish Vaswani
+Google Brain
+avaswani@google.comNoam Shazeer
+Google Brain
+noam@google.comNiki Parmar
+Google Research
+nikip@google.comJakob Uszkoreit
+Google Research
+usz@google.com
+Llion Jones
+Google Research
+llion@google.comAidan N. Gomezy
+University of Toronto
+aidan@cs.toronto.eduŁukasz Kaiser
+Google Brain
+lukaszkaiser@google.com
+Illia Polosukhinz
+illia.polosukhin@gmail.com
+Abstract
+The dominant sequence transduction models are based on complex recurrent or
+convolutional neural networks that include an encoder and a decoder. The best
+performing models also connect the encoder and decoder through an attention
+mechanism. We propose a new simple network architecture, the Transformer,
+based solely on attention mechanisms, dispensing with recurrence and convolutions
+entirely. Experiments on two machine translation tasks show these models to
+be superior in quality while being more parallelizable and requiring signiﬁcantly
+less time to train. Our model achieves 28.4 BLEU on the WMT 2014 English-
+to-German translation task, improving over the existing best results, including
+ensembles, by over 2 BLEU. On the WMT 2014 English-to-French translation task,
+our model establishes a new single-model state-of-the-art BLEU score of 41.8 after
+training for 3.5 days on eight GPUs, a small fraction of the training costs of the
+best models from the literature. We show that the Transformer generalizes well to
+other tasks by applying it successfully to English constituency parsing both with
+large and limited training data.
+1 Introduction
+Recurrent neural networks, long short-term memory [ 13] and gated recurrent [ 7] neural networks
+in particular, have been ﬁrmly established as state of the art approaches in sequence modeling and
+Equal contribution. Listing order is random. Jakob proposed replacing RNNs with self-attention and started
+the effort to evaluate this idea. Ashish, with Illia, designed and implemented the ﬁrst Transformer models and
+has been crucially involved in every aspect of this work. Noam proposed scaled dot-product attention, multi-head
+attention and the parameter-free position representation and became the other person involved in nearly every
+detail. Niki designed, implemented, tuned and evaluated countless model variants in our original codebase and
+tensor2tensor. Llion also experimented with novel model variants, was responsible for our initial codebase, and
+efﬁcient inference and visualizations. Lukasz and Aidan spent countless long days designing various parts of and
+implementing tensor2tensor, replacing our earlier codebase, greatly improving results and massively accelerating
+our research.
+yWork performed while at Google Brain.
+zWork performed while at Google Research.
+31st Conference on Neural Information Processing Systems (NIPS 2017), Long Beach, CA, USA.arXiv:1706.03762v5  [cs.CL]  6 Dec 2017
+</pre></div>
+</div>
+</div>
+</div>
+<p>For other document types that are loadable via <code class="docutils literal notranslate"><span class="pre">langchain</span></code>, see <a class="reference external" href="https://python.langchain.com/en/latest/modules/indexes/document_loaders.html">https://python.langchain.com/en/latest/modules/indexes/document_loaders.html</a></p>
+<p>Including</p>
+<ul class="simple">
+<li><p>Notion</p></li>
+<li><p>Markdown</p></li>
+<li><p>Word</p></li>
+<li><p>PowerPoint</p></li>
+<li><p>epubs</p></li>
+<li><p>WhatsAPP</p></li>
+<li><p>Telegram</p></li>
+</ul>
+</section>
+<section id="embedding-database">
+<h3><span class="section-number">8.3.3. </span>Embedding Database<a class="headerlink" href="#embedding-database" title="Permalink to this headline">#</a></h3>
+<p>Create embedding (not computed yet, just a place holder), and then save them in a database.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Chroma</span></code> is the database lib to collect the embeddings and retrieve content with vector similarity.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">embeddings</span> <span class="o">=</span> <span class="n">OpenAIEmbeddings</span><span class="p">()</span> <span class="c1"># GPT3-Ada-Embedding</span>
+<span class="n">vectordb</span> <span class="o">=</span> <span class="n">Chroma</span><span class="o">.</span><span class="n">from_documents</span><span class="p">(</span><span class="n">pages</span><span class="p">,</span> <span class="n">embedding</span><span class="o">=</span><span class="n">embeddings</span><span class="p">,</span>
+              <span class="n">persist_directory</span><span class="o">=</span><span class="n">pdf_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.pdf&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="p">)</span>
+<span class="n">vectordb</span><span class="o">.</span><span class="n">persist</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:chromadb:Using embedded DuckDB with persistence: data will be stored in: 1706.03762
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="retrieval-chain">
+<h3><span class="section-number">8.3.4. </span>Retrieval Chain<a class="headerlink" href="#retrieval-chain" title="Permalink to this headline">#</a></h3>
+<p>Create a conversation retrieval chain</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pdf_qa</span> <span class="o">=</span> <span class="n">ConversationalRetrievalChain</span><span class="o">.</span><span class="n">from_llm</span><span class="p">(</span>
+      <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;gpt-3.5-turbo&quot;</span><span class="p">),</span> <span class="c1"># ChatGPT API</span>
+              <span class="n">vectordb</span><span class="o">.</span><span class="n">as_retriever</span><span class="p">(),</span>
+              <span class="n">return_source_documents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+              <span class="n">max_tokens_limit</span><span class="o">=</span><span class="mi">4097</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="saving-function">
+<h3><span class="section-number">8.3.5. </span>Saving function<a class="headerlink" href="#saving-function" title="Permalink to this headline">#</a></h3>
+<p>This is the utility function to append new questions and answers to a <code class="docutils literal notranslate"><span class="pre">md</span></code> and <code class="docutils literal notranslate"><span class="pre">pkl</span></code> file. So it’s easier to look at chat histroy post hoc.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">save_qa_history</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">qa_path</span><span class="p">,):</span>
+    <span class="n">uid</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">qa_path</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;QA</span><span class="si">{</span><span class="n">uid</span><span class="si">:</span><span class="s2">05d</span><span class="si">}</span><span class="s2">.pkl&quot;</span><span class="p">)):</span>
+        <span class="n">uid</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">pkl</span><span class="o">.</span><span class="n">dump</span><span class="p">((</span><span class="n">query</span><span class="p">,</span> <span class="n">result</span><span class="p">),</span> <span class="nb">open</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">qa_path</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;QA</span><span class="si">{</span><span class="n">uid</span><span class="si">:</span><span class="s2">05d</span><span class="si">}</span><span class="s2">.pkl&quot;</span><span class="p">),</span> <span class="s2">&quot;wb&quot;</span><span class="p">))</span>
+
+    <span class="n">pkl_path</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">qa_path</span><span class="p">,</span> <span class="s2">&quot;chat_history.pkl&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">pkl_path</span><span class="p">):</span>
+        <span class="n">chat_history</span> <span class="o">=</span> <span class="n">pkl</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">pkl_path</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">chat_history</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">chat_history</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">query</span><span class="p">,</span> <span class="n">result</span><span class="p">))</span>
+    <span class="n">pkl</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">chat_history</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">pkl_path</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">))</span>
+
+    <span class="c1"># print to a markdown file with formatting for reading</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">qa_path</span><span class="p">,</span> <span class="s2">&quot;QA.md&quot;</span><span class="p">),</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">**Question:**</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">**Answer:**</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;answer&quot;</span><span class="p">])</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">References:</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;source_documents&quot;</span><span class="p">]:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;&gt; &quot;</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">page_content</span><span class="p">[:</span><span class="mi">250</span><span class="p">])</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;-------------------------</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="demo-q-a">
+<h3><span class="section-number">8.3.6. </span>Demo: Q&amp;A<a class="headerlink" href="#demo-q-a" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">qa_path</span> <span class="o">=</span> <span class="n">pdf_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.pdf&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_qa_history&quot;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">qa_path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;what are the limitations of this architecture?&quot;</span>
+<span class="c1"># query = &quot;How is this method related to previous segmentation methods e.g. Mask RCNN&quot;</span>
+<span class="c1"># More questions?</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">pdf_qa</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">query</span><span class="p">,</span> <span class="s2">&quot;chat_history&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Answer:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;answer&quot;</span><span class="p">],</span> <span class="mi">80</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">References&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;source_documents&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">page_content</span><span class="p">[:</span><span class="mi">100</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">save_qa_history</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">qa_path</span><span class="p">,)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Answer:
+While the Transformer has shown to be effective in various natural language
+processing tasks, it still has some limitations. One of the main limitations is
+that it requires significant computational resources for training, which can
+make it challenging to train on large datasets. Additionally, it may not perform
+as well as recurrent models on tasks that require modeling of long-term
+dependencies in the input sequence. Finally, the attention mechanism used in the
+Transformer can be sensitive to the order of the input sequence, which can be a
+problem in tasks where the order of the input is important.
+
+References
+Table 3: Variations on the Transformer architecture. Unlisted values are identical to those of the b
+
+
+constraints and is signiﬁcantly longer than the input. Furthermore, RNN sequence-to-sequence
+models 
+
+
+Input-Input Layer5
+The
+Law
+will
+never
+be
+perfect
+,
+but
+its
+application
+should
+be
+just
+-
+this
+is
+what
+
+
+transduction problems such as language modeling and machine translation [ 35,2,5]. Numerous
+efforts 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "penjc/llmbook",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./operation"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../finetuning/finetuning-for-text-classification.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">7. </span>Finetuning for Text Classification</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../assignments/README.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Self-paced assignments</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By 彭健程<br/>
+  
+      &copy; Copyright 2024.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

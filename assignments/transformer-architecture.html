@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>8.3. Complete the transformer architecture &#8212; Large Language Models</title>
+    <title>9.3. Complete the transformer architecture &#8212; Large Language Models</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -61,7 +61,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon_llm.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="8. Self-paced assignments" href="README.html" />
+    <link rel="prev" title="9. Self-paced assignments" href="README.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -171,13 +171,25 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
+  Operation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../operation/chatwithPDF.html">
+   8. OpenAI API &amp; LangChain Chat with PDFs
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
   Assignments
  </span>
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="README.html">
-   8. Self-paced assignments
+   9. Self-paced assignments
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -187,7 +199,7 @@ const thebe_selector_output = ".output, .cell_output"
   <ul class="current">
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     8.3. Complete the transformer architecture
+     9.3. Complete the transformer architecture
     </a>
    </li>
   </ul>
@@ -453,32 +465,32 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#transformer-model">
-   8.3.1. Transformer Model
+   9.3.1. Transformer Model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#embedding-layer">
-   8.3.2. Embedding Layer
+   9.3.2. Embedding Layer
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#attention-layer">
-   8.3.3. Attention Layer
+   9.3.3. Attention Layer
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#feedforward-layer">
-   8.3.4. Feedforward Layer
+   9.3.4. Feedforward Layer
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#residual-connection-and-layer-normalization">
-   8.3.5. Residual Connection and Layer Normalization
+   9.3.5. Residual Connection and Layer Normalization
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#encoder-and-decoder-structure">
-   8.3.6. Encoder and Decoder Structure
+   9.3.6. Encoder and Decoder Structure
   </a>
  </li>
 </ul>
@@ -502,32 +514,32 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#transformer-model">
-   8.3.1. Transformer Model
+   9.3.1. Transformer Model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#embedding-layer">
-   8.3.2. Embedding Layer
+   9.3.2. Embedding Layer
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#attention-layer">
-   8.3.3. Attention Layer
+   9.3.3. Attention Layer
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#feedforward-layer">
-   8.3.4. Feedforward Layer
+   9.3.4. Feedforward Layer
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#residual-connection-and-layer-normalization">
-   8.3.5. Residual Connection and Layer Normalization
+   9.3.5. Residual Connection and Layer Normalization
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#encoder-and-decoder-structure">
-   8.3.6. Encoder and Decoder Structure
+   9.3.6. Encoder and Decoder Structure
   </a>
  </li>
 </ul>
@@ -541,11 +553,11 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="complete-the-transformer-architecture">
-<h1><span class="section-number">8.3. </span>Complete the transformer architecture<a class="headerlink" href="#complete-the-transformer-architecture" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">9.3. </span>Complete the transformer architecture<a class="headerlink" href="#complete-the-transformer-architecture" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set up the env</span>
-
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>ipytest
 <span class="kn">import</span> <span class="nn">pytest</span>
 <span class="kn">import</span> <span class="nn">ipytest</span>
 <span class="kn">import</span> <span class="nn">unittest</span>
@@ -556,7 +568,7 @@ title="Print to PDF"
 </div>
 </div>
 <section id="transformer-model">
-<h2><span class="section-number">8.3.1. </span>Transformer Model<a class="headerlink" href="#transformer-model" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">9.3.1. </span>Transformer Model<a class="headerlink" href="#transformer-model" title="Permalink to this headline">#</a></h2>
 <p>The encoder-decoder architecture based on the Transformer structure is illustrated in figure below. The left and right sides correspond to the encoder and decoder structures, respectively. They consist of several basic Transformer blocks (represented by the gray boxes in the figure), stacked N times. Each component comprises multiple Transformer blocks, which are stacked N times.</p>
 <p>Here’s an overview of the key components and processes involved in the semantic abstraction process from input to output:</p>
 <p>Encoder:</p>
@@ -574,13 +586,13 @@ Overall, the encoder-decoder architecture based on the Transformer structure all
 <figure class="align-default" id="id1">
 <img alt="https://media.geeksforgeeks.org/wp-content/uploads/20230531140926/Transformer-python-(1).png" src="https://media.geeksforgeeks.org/wp-content/uploads/20230531140926/Transformer-python-(1).png" />
 <figcaption>
-<p><span class="caption-number">Fig. 8.1 </span><span class="caption-text">Transformer-based encoder and decoder Architecture</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 9.1 </span><span class="caption-text">Transformer-based encoder and decoder Architecture</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Next, we’ll discuss the specific functionalities and implementation methods of each module in detail.</p>
 </section>
 <section id="embedding-layer">
-<h2><span class="section-number">8.3.2. </span>Embedding Layer<a class="headerlink" href="#embedding-layer" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">9.3.2. </span>Embedding Layer<a class="headerlink" href="#embedding-layer" title="Permalink to this headline">#</a></h2>
 <p>The Embedding Layer in the Transformer model is responsible for converting discrete token indices into continuous vector representations. Each token index is mapped to a high-dimensional vector, which is learned during the training process. These embeddings capture semantic and syntactic information about the tokens.</p>
 <p>Implementation in PyTorch:</p>
 <div class="cell docutils container">
@@ -656,7 +668,7 @@ Note that we’re using PyTorch’s Variable and autograd to ensure that the pos
 Finally, the PositionalEncoder class can be used within a larger PyTorch model to incorporate positional information into word embeddings.</p>
 </section>
 <section id="attention-layer">
-<h2><span class="section-number">8.3.3. </span>Attention Layer<a class="headerlink" href="#attention-layer" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">9.3.3. </span>Attention Layer<a class="headerlink" href="#attention-layer" title="Permalink to this headline">#</a></h2>
 <p>The Attention Layer in the Transformer model enables the model to focus on different parts of the input sequence when processing each token. It computes attention scores between each pair of tokens in the input sequence and generates a context vector for each token based on the importance of other tokens. This mechanism allows the model to capture long-range dependencies in the input sequence effectively.</p>
 <p>Implementation in PyTorch:</p>
 <div class="cell docutils container">
@@ -739,7 +751,7 @@ class TestMultiHeadAttention(unittest.TestCase):
 The forward method performs linear operations to divide inputs into multiple heads, computes attention scores, and aggregates the outputs of multiple heads.</p>
 </section>
 <section id="feedforward-layer">
-<h2><span class="section-number">8.3.4. </span>Feedforward Layer<a class="headerlink" href="#feedforward-layer" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">9.3.4. </span>Feedforward Layer<a class="headerlink" href="#feedforward-layer" title="Permalink to this headline">#</a></h2>
 <p>The Position-wise Feedforward Layer in the Transformer model applies a simple feedforward neural network independently to each position in the sequence. It consists of two linear transformations with a non-linear activation function (commonly ReLU) applied in between. This layer helps capture complex interactions between different dimensions of the input embeddings.</p>
 <p>Implementation in PyTorch:</p>
 <div class="cell docutils container">
@@ -791,7 +803,7 @@ class TestFeedForward(unittest.TestCase):
 The forward method applies ReLU activation to the output of the first linear transformation, followed by dropout, and then performs the second linear transformation to produce the final output.</p>
 </section>
 <section id="residual-connection-and-layer-normalization">
-<h2><span class="section-number">8.3.5. </span>Residual Connection and Layer Normalization<a class="headerlink" href="#residual-connection-and-layer-normalization" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">9.3.5. </span>Residual Connection and Layer Normalization<a class="headerlink" href="#residual-connection-and-layer-normalization" title="Permalink to this headline">#</a></h2>
 <p>Residual Connection:
 The Residual Connection, also known as skip connection, is a technique used in deep neural networks to mitigate the vanishing gradient problem and facilitate the flow of information through the network. In the context of the Transformer model, residual connections are added around each sub-layer (such as attention and feedforward layers) before applying layer normalization. This allows the model to learn residual representations and thus ease the optimization process.</p>
 <p>Layer Normalization:
@@ -846,7 +858,7 @@ class TestNormLayer(unittest.TestCase):
 The forward method computes the layer normalization using the given input tensor x.</p>
 </section>
 <section id="encoder-and-decoder-structure">
-<h2><span class="section-number">8.3.6. </span>Encoder and Decoder Structure<a class="headerlink" href="#encoder-and-decoder-structure" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">9.3.6. </span>Encoder and Decoder Structure<a class="headerlink" href="#encoder-and-decoder-structure" title="Permalink to this headline">#</a></h2>
 <p>Encoder Structure:
 The Encoder in the Transformer model consists of multiple stacked Encoder layers. Each Encoder layer typically contains a Multi-Head Attention sub-layer followed by a FeedForward sub-layer, each with Residual Connection and Layer Normalization.</p>
 <p>Decoder Structure:
@@ -1198,7 +1210,7 @@ These classes follow the architecture described in the text, including the use o
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">8. </span>Self-paced assignments</p>
+            <p class="prev-next-title"><span class="section-number">9. </span>Self-paced assignments</p>
         </div>
     </a>
 </div>
