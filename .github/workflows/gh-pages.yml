@@ -28,7 +28,7 @@ jobs:
         run: |
           cd llmbook
           jupyter-book clean -a .  
-          jupyter-book build --all -W --keep-going .   
+          jupyter-book build --keep-going .   
 
       # Upload the book's HTML as an artifact
       - name: Upload artifact
