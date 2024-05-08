@@ -53,6 +53,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
     <script>mermaid.initialize({startOnLoad:true});</script>
     <script src="https://cdn.jsdelivr.net/gh/bonartm/quizdown-js@latest/public/build/quizdown.js"></script>
@@ -166,6 +168,11 @@ const thebe_selector_output = ".output, .cell_output"
    7. Finetuning for Text Classification
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="finetuning/qlora-llm-instruct-fine-tuning-flan-t5-large.html">
+   8. Fine-Tuning Lora
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -175,7 +182,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="operation/chatwithPDF.html">
-   8. OpenAI API &amp; LangChain Chat with PDFs
+   9. OpenAI API &amp; LangChain Chat with PDFs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="operation/ranked-predictions-with-bert.html">
+   10. Ranked Predictions
   </a>
  </li>
 </ul>
@@ -185,22 +197,20 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1">
   <a class="reference internal" href="assignments/README.html">
-   9. Self-paced assignments
+   11. Self-paced assignments
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="assignments/transformer-architecture.html">
-     9.3. Complete the transformer architecture
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignments/transformer-architecture.html">
+   12. Complete the transformer architecture
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="assignments/llama3-finetune.html">
+   13. Fine-tuning Meta’s Llama 3 (8B) on your own data
+  </a>
  </li>
 </ul>
 

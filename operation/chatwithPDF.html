@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>8. OpenAI API &amp; LangChain Chat with PDFs &#8212; Large Language Models</title>
+    <title>9. OpenAI API &amp; LangChain Chat with PDFs &#8212; Large Language Models</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,6 +54,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
     <script>mermaid.initialize({startOnLoad:true});</script>
     <script src="https://cdn.jsdelivr.net/gh/bonartm/quizdown-js@latest/public/build/quizdown.js"></script>
@@ -61,8 +63,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon_llm.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="9. Self-paced assignments" href="../assignments/README.html" />
-    <link rel="prev" title="7. Finetuning for Text Classification" href="../finetuning/finetuning-for-text-classification.html" />
+    <link rel="next" title="10. Ranked Predictions" href="ranked-predictions-with-bert.html" />
+    <link rel="prev" title="8. Fine-Tuning Lora" href="../finetuning/qlora-llm-instruct-fine-tuning-flan-t5-large.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -169,6 +171,11 @@ const thebe_selector_output = ".output, .cell_output"
    7. Finetuning for Text Classification
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../finetuning/qlora-llm-instruct-fine-tuning-flan-t5-large.html">
+   8. Fine-Tuning Lora
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -178,7 +185,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   8. OpenAI API &amp; LangChain Chat with PDFs
+   9. OpenAI API &amp; LangChain Chat with PDFs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ranked-predictions-with-bert.html">
+   10. Ranked Predictions
   </a>
  </li>
 </ul>
@@ -188,22 +200,20 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1">
   <a class="reference internal" href="../assignments/README.html">
-   9. Self-paced assignments
+   11. Self-paced assignments
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../assignments/transformer-architecture.html">
-     9.3. Complete the transformer architecture
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../assignments/transformer-architecture.html">
+   12. Complete the transformer architecture
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../assignments/llama3-finetune.html">
+   13. Fine-tuning Meta’s Llama 3 (8B) on your own data
+  </a>
  </li>
 </ul>
 
@@ -466,12 +476,12 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#set-up">
-   8.1. Set up
+   9.1. Set up
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#openai-api-key">
-     8.1.1.
+     9.1.1.
      <code class="docutils literal notranslate">
       <span class="pre">
        OpenAI_API_KEY
@@ -481,66 +491,66 @@ title="Print to PDF"
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#install-and-import-libraries">
-     8.1.2. Install and Import Libraries
+     9.1.2. Install and Import Libraries
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#openai-llm-apis">
-   8.2. OpenAI LLM APIs
+   9.2. OpenAI LLM APIs
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#openai-text-embedding">
-     8.2.1. OpenAI text embedding
+     9.2.1. OpenAI text embedding
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#openai-text-completion">
-     8.2.2. OpenAI text completion
+     9.2.2. OpenAI text completion
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#openai-chatgpt">
-     8.2.3. OpenAI ChatGPT
+     9.2.3. OpenAI ChatGPT
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#chat-with-pdf">
-   8.3. Chat with PDF
+   9.3. Chat with PDF
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#tool-chaining-with-langchain">
-     8.3.1. Tool Chaining with LangChain
+     9.3.1. Tool Chaining with LangChain
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#parse-and-split-the-pdf">
-     8.3.2. Parse and Split the PDF
+     9.3.2. Parse and Split the PDF
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#embedding-database">
-     8.3.3. Embedding Database
+     9.3.3. Embedding Database
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#retrieval-chain">
-     8.3.4. Retrieval Chain
+     9.3.4. Retrieval Chain
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#saving-function">
-     8.3.5. Saving function
+     9.3.5. Saving function
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#demo-q-a">
-     8.3.6. Demo: Q&amp;A
+     9.3.6. Demo: Q&amp;A
     </a>
    </li>
   </ul>
@@ -566,12 +576,12 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#set-up">
-   8.1. Set up
+   9.1. Set up
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#openai-api-key">
-     8.1.1.
+     9.1.1.
      <code class="docutils literal notranslate">
       <span class="pre">
        OpenAI_API_KEY
@@ -581,66 +591,66 @@ title="Print to PDF"
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#install-and-import-libraries">
-     8.1.2. Install and Import Libraries
+     9.1.2. Install and Import Libraries
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#openai-llm-apis">
-   8.2. OpenAI LLM APIs
+   9.2. OpenAI LLM APIs
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#openai-text-embedding">
-     8.2.1. OpenAI text embedding
+     9.2.1. OpenAI text embedding
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#openai-text-completion">
-     8.2.2. OpenAI text completion
+     9.2.2. OpenAI text completion
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#openai-chatgpt">
-     8.2.3. OpenAI ChatGPT
+     9.2.3. OpenAI ChatGPT
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#chat-with-pdf">
-   8.3. Chat with PDF
+   9.3. Chat with PDF
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#tool-chaining-with-langchain">
-     8.3.1. Tool Chaining with LangChain
+     9.3.1. Tool Chaining with LangChain
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#parse-and-split-the-pdf">
-     8.3.2. Parse and Split the PDF
+     9.3.2. Parse and Split the PDF
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#embedding-database">
-     8.3.3. Embedding Database
+     9.3.3. Embedding Database
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#retrieval-chain">
-     8.3.4. Retrieval Chain
+     9.3.4. Retrieval Chain
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#saving-function">
-     8.3.5. Saving function
+     9.3.5. Saving function
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#demo-q-a">
-     8.3.6. Demo: Q&amp;A
+     9.3.6. Demo: Q&amp;A
     </a>
    </li>
   </ul>
@@ -656,12 +666,12 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="openai-api-langchain-chat-with-pdfs">
-<h1><span class="section-number">8. </span>OpenAI API &amp; LangChain Chat with PDFs<a class="headerlink" href="#openai-api-langchain-chat-with-pdfs" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">9. </span>OpenAI API &amp; LangChain Chat with PDFs<a class="headerlink" href="#openai-api-langchain-chat-with-pdfs" title="Permalink to this headline">#</a></h1>
 <p>In this tutorial I’d like to introduce you to the API to the LLMs, and in the end, we will build something useful for ourselves, a conversation agent that we can chat with about a certain paper.</p>
 <section id="set-up">
-<h2><span class="section-number">8.1. </span>Set up<a class="headerlink" href="#set-up" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">9.1. </span>Set up<a class="headerlink" href="#set-up" title="Permalink to this headline">#</a></h2>
 <section id="openai-api-key">
-<h3><span class="section-number">8.1.1. </span><code class="docutils literal notranslate"><span class="pre">OpenAI_API_KEY</span></code><a class="headerlink" href="#openai-api-key" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.1.1. </span><code class="docutils literal notranslate"><span class="pre">OpenAI_API_KEY</span></code><a class="headerlink" href="#openai-api-key" title="Permalink to this headline">#</a></h3>
 <p>We also need the API key from Openai to get access to their models.</p>
 <p><a class="reference external" href="https://platform.openai.com/account/api-keys">https://platform.openai.com/account/api-keys</a></p>
 <div class="cell docutils container">
@@ -687,7 +697,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="install-and-import-libraries">
-<h3><span class="section-number">8.1.2. </span>Install and Import Libraries<a class="headerlink" href="#install-and-import-libraries" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.1.2. </span>Install and Import Libraries<a class="headerlink" href="#install-and-import-libraries" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">openai</span>
@@ -701,7 +711,7 @@ title="Print to PDF"
 </section>
 </section>
 <section id="openai-llm-apis">
-<h2><span class="section-number">8.2. </span>OpenAI LLM APIs<a class="headerlink" href="#openai-llm-apis" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">9.2. </span>OpenAI LLM APIs<a class="headerlink" href="#openai-llm-apis" title="Permalink to this headline">#</a></h2>
 <p>Useful links for checking price and cost</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://openai.com/pricing">https://openai.com/pricing</a></p></li>
@@ -719,7 +729,7 @@ title="Print to PDF"
 </div>
 </div>
 <section id="openai-text-embedding">
-<h3><span class="section-number">8.2.1. </span>OpenAI text embedding<a class="headerlink" href="#openai-text-embedding" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.2.1. </span>OpenAI text embedding<a class="headerlink" href="#openai-text-embedding" title="Permalink to this headline">#</a></h3>
 <p>OpenAI provides API to embed chunk of texts into a single vector. This vector embedding can be used to retrieve these text chunks.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -735,7 +745,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="openai-text-completion">
-<h3><span class="section-number">8.2.2. </span>OpenAI text completion<a class="headerlink" href="#openai-text-completion" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.2.2. </span>OpenAI text completion<a class="headerlink" href="#openai-text-completion" title="Permalink to this headline">#</a></h3>
 <p>This is the API for GPT3 models, so we can send prompts to them and let it complete the text. Note that, the task is just to complete the text, so it may not answer your question. To really do so, <strong>Prompt Engineering</strong> is important.</p>
 <p>See official examples in <a class="reference external" href="https://platform.openai.com/examples/default-chat">https://platform.openai.com/examples/default-chat</a></p>
 <p>Generally, for these prompts</p>
@@ -804,7 +814,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="openai-chatgpt">
-<h3><span class="section-number">8.2.3. </span>OpenAI ChatGPT<a class="headerlink" href="#openai-chatgpt" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.2.3. </span>OpenAI ChatGPT<a class="headerlink" href="#openai-chatgpt" title="Permalink to this headline">#</a></h3>
 <p>This is the API for ChatGPT, and we can more directly ask questions or have a conversation with it without much prompt tuning.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -823,7 +833,7 @@ title="Print to PDF"
 </section>
 </section>
 <section id="chat-with-pdf">
-<h2><span class="section-number">8.3. </span>Chat with PDF<a class="headerlink" href="#chat-with-pdf" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">9.3. </span>Chat with PDF<a class="headerlink" href="#chat-with-pdf" title="Permalink to this headline">#</a></h2>
 <p>The idea is like this</p>
 <ol class="simple">
 <li><p>First, divide the paper / doc into many chunks.</p></li>
@@ -842,7 +852,7 @@ title="Print to PDF"
 <li><p><code class="docutils literal notranslate"><span class="pre">chromadb</span></code> a vector database that manage the embedding vectors and handle the info retrieval.</p></li>
 </ul>
 <section id="tool-chaining-with-langchain">
-<h3><span class="section-number">8.3.1. </span>Tool Chaining with LangChain<a class="headerlink" href="#tool-chaining-with-langchain" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.3.1. </span>Tool Chaining with LangChain<a class="headerlink" href="#tool-chaining-with-langchain" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.document_loaders</span> <span class="kn">import</span> <span class="n">PyPDFLoader</span> <span class="c1"># for loading the pdf</span>
@@ -858,7 +868,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="parse-and-split-the-pdf">
-<h3><span class="section-number">8.3.2. </span>Parse and Split the PDF<a class="headerlink" href="#parse-and-split-the-pdf" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.3.2. </span>Parse and Split the PDF<a class="headerlink" href="#parse-and-split-the-pdf" title="Permalink to this headline">#</a></h3>
 <p>Download the pdf and parse it through python PDF reader</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -962,7 +972,7 @@ zWork performed while at Google Research.
 </ul>
 </section>
 <section id="embedding-database">
-<h3><span class="section-number">8.3.3. </span>Embedding Database<a class="headerlink" href="#embedding-database" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.3.3. </span>Embedding Database<a class="headerlink" href="#embedding-database" title="Permalink to this headline">#</a></h3>
 <p>Create embedding (not computed yet, just a place holder), and then save them in a database.</p>
 <p><code class="docutils literal notranslate"><span class="pre">Chroma</span></code> is the database lib to collect the embeddings and retrieve content with vector similarity.</p>
 <div class="cell docutils container">
@@ -982,7 +992,7 @@ zWork performed while at Google Research.
 </div>
 </section>
 <section id="retrieval-chain">
-<h3><span class="section-number">8.3.4. </span>Retrieval Chain<a class="headerlink" href="#retrieval-chain" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.3.4. </span>Retrieval Chain<a class="headerlink" href="#retrieval-chain" title="Permalink to this headline">#</a></h3>
 <p>Create a conversation retrieval chain</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -997,7 +1007,7 @@ zWork performed while at Google Research.
 </div>
 </section>
 <section id="saving-function">
-<h3><span class="section-number">8.3.5. </span>Saving function<a class="headerlink" href="#saving-function" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.3.5. </span>Saving function<a class="headerlink" href="#saving-function" title="Permalink to this headline">#</a></h3>
 <p>This is the utility function to append new questions and answers to a <code class="docutils literal notranslate"><span class="pre">md</span></code> and <code class="docutils literal notranslate"><span class="pre">pkl</span></code> file. So it’s easier to look at chat histroy post hoc.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1033,7 +1043,7 @@ zWork performed while at Google Research.
 </div>
 </section>
 <section id="demo-q-a">
-<h3><span class="section-number">8.3.6. </span>Demo: Q&amp;A<a class="headerlink" href="#demo-q-a" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.3.6. </span>Demo: Q&amp;A<a class="headerlink" href="#demo-q-a" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">qa_path</span> <span class="o">=</span> <span class="n">pdf_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.pdf&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_qa_history&quot;</span>
@@ -1143,17 +1153,17 @@ efforts
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../finetuning/finetuning-for-text-classification.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../finetuning/qlora-llm-instruct-fine-tuning-flan-t5-large.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">7. </span>Finetuning for Text Classification</p>
+            <p class="prev-next-title"><span class="section-number">8. </span>Fine-Tuning Lora</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../assignments/README.html" title="next page">
+    <a class='right-next' id="next-link" href="ranked-predictions-with-bert.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">9. </span>Self-paced assignments</p>
+        <p class="prev-next-title"><span class="section-number">10. </span>Ranked Predictions</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
