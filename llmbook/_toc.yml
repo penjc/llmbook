@@ -20,10 +20,14 @@ parts:
   numbered: True
   chapters:
     - file: finetuning/finetuning-for-text-classification
+- caption: Operation
+  numbered: True
+  chapters:
+    - file: operation/chatwithPDF
 - caption: Assignments
   numbered: True
-  maxdepth: 1
   chapters:
   - file: assignments/README
     sections:
     - file: assignments/transformer-architecture
+
