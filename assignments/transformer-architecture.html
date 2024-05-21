@@ -574,6 +574,18 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">unittest</span>
 
 <span class="n">ipytest</span><span class="o">.</span><span class="n">autoconfig</span><span class="p">()</span>
+
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>jupyter_ai
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>jupyter_ai_magics
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>openai
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>langchain_openai
+<span class="o">%</span><span class="k">load_ext</span> jupyter_ai
+<span class="o">%</span><span class="k">load_ext</span> jupyter_ai_magics
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">openai</span>
+<span class="kn">import</span> <span class="nn">langchain_openai</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;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&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -582,7 +594,6 @@ title="Print to PDF"
 <h2><span class="section-number">12.1. </span>Transformer Model<a class="headerlink" href="#transformer-model" title="Permalink to this headline">#</a></h2>
 <p>The encoder-decoder architecture based on the Transformer structure is illustrated in figure below. The left and right sides correspond to the encoder and decoder structures, respectively. They consist of several basic Transformer blocks (represented by the gray boxes in the figure), stacked N times. Each component comprises multiple Transformer blocks, which are stacked N times.</p>
 <p>Here’s an overview of the key components and processes involved in the semantic abstraction process from input to output:</p>
-<p>Encoder:</p>
 <p>The encoder takes an input sequence {xi}ti=1, where each xi represents the representation of a word in the text sequence.
 It consists of stacked Transformer blocks. Each block includes:
 Attention Layer: Utilizes multi-head attention mechanisms to capture dependencies between words in the input sequence, facilitating the modeling of long-range dependencies without traditional recurrent structures.
