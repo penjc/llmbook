@@ -610,13 +610,13 @@ tiktoken version: 0.5.1
 </div>
 </div>
 <p>In this chapter, we implement a GPT-like LLM architecture; the next chapter will focus on training this LLM</p>
-<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240409_034604.png" width="500px"><section id="coding-an-llm-architecture">
+<section id="coding-an-llm-architecture">
 <h2><span class="section-number">5.1. </span>Coding an LLM architecture<a class="headerlink" href="#coding-an-llm-architecture" title="Permalink to this headline">#</a></h2>
 <p>Models like GPT and Llama generate words sequentially and are based on the decoder part of the original transformer architecture
 Therefore, these LLMs are often referred to as “decoder-like” LLMs
 Compared to conventional deep learning models, LLMs are larger, mainly due to their vast number of parameters, not the amount of code
 We’ll see that many elements are repeated in an LLM’s architecture</p>
-<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240409_034618.png" width="400px"><p>In this chapter, we consider embedding and model sizes akin to a small GPT-2 model
+<p>In this chapter, we consider embedding and model sizes akin to a small GPT-2 model
 We’ll specifically code the architecture of the smallest GPT-2 model (124 million parameters), as outlined in Radford et al.’s <a class="reference external" href="https://d4mucfpksywv.cloudfront.net/better-language-models/language_models_are_unsupervised_multitask_learners.pdf">Language Models are Unsupervised Multitask Learners</a> (note that the initial report lists it as 117M parameters, but this was later corrected in the model weight repository)</p>
 <p>Configuration details for the 124 million parameter GPT-2 model include:</p>
 <div class="cell docutils container">
@@ -642,7 +642,7 @@ We’ll specifically code the architecture of the smallest GPT-2 model (124 mill
 <code class="docutils literal notranslate"><span class="pre">&quot;n_layers&quot;</span></code> is the number of transformer blocks within the model, which we’ll implement in upcoming sections
 <code class="docutils literal notranslate"><span class="pre">&quot;drop_rate&quot;</span></code> is the dropout mechanism’s intensity, discussed in Chapter 3; 0.1 means dropping 10% of hidden units during training to mitigate overfitting
 <code class="docutils literal notranslate"><span class="pre">&quot;qkv_bias&quot;</span></code> decides if the <code class="docutils literal notranslate"><span class="pre">Linear</span></code> layers in the multi-head attention mechanism (from Chapter 3) should include a bias vector when computing query (Q), key (K), and value (V) tensors; we’ll disable this option, which is standard practice in modern LLMs; however, we’ll revisit this later when loading pretrained GPT-2 weights from OpenAI into our reimplementation in Chapter 6</p>
-<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240409_034632.png" width="500px"><div class="cell docutils container">
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
@@ -699,7 +699,7 @@ We’ll specifically code the architecture of the smallest GPT-2 model (124 mill
 </div>
 </div>
 </div>
-<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240409_034650.png" width="500px"><div class="cell docutils container">
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tiktoken</span>
 
@@ -757,7 +757,7 @@ tensor([[[-1.2034,  0.3201, -0.7130,  ..., -1.5548, -0.2390, -0.4667],
 <p>Layer normalization, also known as LayerNorm (<a class="reference external" href="https://arxiv.org/abs/1607.06450">Ba et al. 2016</a>), centers the activations of a neural network layer around a mean of 0 and normalizes their variance to 1
 This stabilizes training and enables faster convergence to effective weights
 Layer normalization is applied both before and after the multi-head attention module within the transformer block, which we will implement later; it’s also applied before the final output layer</p>
-<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240409_034706.png" width="400px"><p>Let’s see how layer normalization works by passing a small input sample through a simple neural network layer:</p>
+<p>Let’s see how layer normalization works by passing a small input sample through a simple neural network layer:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
@@ -802,7 +802,7 @@ Variance:
 </div>
 </div>
 <p>The normalization is applied to each of the two inputs (rows) independently; using dim=-1 applies the calculation across the last dimension (in this case, the feature dimension) instead of the row dimension</p>
-<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240409_034719.png" width="400px"><p>Subtracting the mean and dividing by the square-root of the variance (standard deviation) centers the inputs to have a mean of 0 and a variance of 1 across the column (feature) dimension:</p>
+<p>Subtracting the mean and dividing by the square-root of the variance (standard deviation) centers the inputs to have a mean of 0 and a variance of 1 across the column (feature) dimension:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">out_norm</span> <span class="o">=</span> <span class="p">(</span><span class="n">out</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
@@ -910,7 +910,7 @@ Variance:
 </div>
 </div>
 </div>
-<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240409_034736.png" width="400px"></section>
+</section>
 <section id="implementing-a-feed-forward-network-with-gelu-activations">
 <h2><span class="section-number">5.3. </span>Implementing a feed forward network with GELU activations<a class="headerlink" href="#implementing-a-feed-forward-network-with-gelu-activations" title="Permalink to this headline">#</a></h2>
 <p>In this section, we implement a small neural network submodule that is used as part of the transformer block in LLMs
@@ -961,7 +961,7 @@ In practice, it’s common to implement a computationally cheaper approximation:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/implementing-a-GPT-model_40_0.png" src="../_images/implementing-a-GPT-model_40_0.png" />
+<img alt="../_images/implementing-a-GPT-model_32_0.png" src="../_images/implementing-a-GPT-model_32_0.png" />
 </div>
 </div>
 <p>As we can see, ReLU is a piecewise linear function that outputs the input directly if it is positive; otherwise, it outputs zero
@@ -1014,7 +1014,7 @@ GELU is a smooth, non-linear function that approximates ReLU but with a non-zero
 </div>
 </div>
 </div>
-<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240409_034813.png" width="400px"><img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240409_034827.png" width="400px"></section>
+</section>
 <section id="adding-shortcut-connections">
 <h2><span class="section-number">5.4. </span>Adding shortcut connections<a class="headerlink" href="#adding-shortcut-connections" title="Permalink to this headline">#</a></h2>
 <p>Next, let’s talk about the concept behind shortcut connections, also called skip or residual connections
@@ -1022,7 +1022,7 @@ Originally, shortcut connections were proposed in deep networks for computer vis
 A shortcut connection creates an alternative shorter path for the gradient to flow through the network
 This is achieved by adding the output of one layer to the output of a later layer, usually skipping one or more layers in between
 Let’s illustrate this idea with a small example network:</p>
-<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240409_034841.png" width="400px"><p>In code, it looks like this:</p>
+<p>In code, it looks like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ExampleDeepNeuralNetwork</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
@@ -1455,11 +1455,11 @@ Lastly, we can compute the memory requirements of the model as follows, which ca
 <section id="generating-text">
 <h2><span class="section-number">5.7. </span>Generating text<a class="headerlink" href="#generating-text" title="Permalink to this headline">#</a></h2>
 <p>LLMs like the GPT model we implemented above are used to generate one word at a time</p>
-<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240409_035139.png" width="400px"><p>The following <code class="docutils literal notranslate"><span class="pre">generate_text_simple</span></code> function implements greedy decoding, which is a simple and fast method to generate text
+<p>The following <code class="docutils literal notranslate"><span class="pre">generate_text_simple</span></code> function implements greedy decoding, which is a simple and fast method to generate text
 In greedy decoding, at each step, the model chooses the word (or token) with the highest probability as its next output (the highest logit corresponds to the highest probability, so we technically wouldn’t even have to compute the softmax function explicitly)
 In the next chapter, we will implement a more advanced <code class="docutils literal notranslate"><span class="pre">generate_text</span></code> function
 The figure below depicts how the GPT model, given an input context, generates the next word token</p>
-<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240409_035151.png" width="600px"><div class="cell docutils container">
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_text_simple</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">max_new_tokens</span><span class="p">,</span> <span class="n">context_size</span><span class="p">):</span>
     <span class="c1"># idx is (batch, n_tokens) array of indices in the current context</span>
@@ -1493,7 +1493,7 @@ The figure below depicts how the GPT model, given an input context, generates th
 </div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">generate_text_simple</span></code> above implements an iterative process, where it creates one token at a time</p>
-<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240409_035205.png" width="600px"><p>Let’s prepare an input example:</p>
+<p>Let’s prepare an input example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">logits</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>

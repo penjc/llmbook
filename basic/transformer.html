@@ -905,7 +905,7 @@ PE_{(pos,i)} = \begin{cases}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/transformer_13_0.svg" src="../_images/transformer_13_0.svg" /></div>
+<img alt="../_images/transformer_12_0.svg" src="../_images/transformer_12_0.svg" /></div>
 </div>
 <p>You can clearly see the sine and cosine waves with different wavelengths that encode the position in the hidden dimensions. Specifically, we can look at the sine/cosine wave for each hidden dimension separately, to get a better intuition of the pattern. Below we visualize the positional encoding for the hidden dimensions <span class="math notranslate nohighlight">\(1\)</span>, <span class="math notranslate nohighlight">\(2\)</span>, <span class="math notranslate nohighlight">\(3\)</span> and <span class="math notranslate nohighlight">\(4\)</span>.</p>
 <div class="cell docutils container">
@@ -929,7 +929,7 @@ PE_{(pos,i)} = \begin{cases}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/transformer_15_0.svg" src="../_images/transformer_15_0.svg" /></div>
+<img alt="../_images/transformer_14_0.svg" src="../_images/transformer_14_0.svg" /></div>
 </div>
 <p>As we can see, the patterns between the hidden dimension <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(2\)</span> only differ in the starting angle. The wavelength is <span class="math notranslate nohighlight">\(2\pi\)</span>, hence the repetition after position <span class="math notranslate nohighlight">\(6\)</span>. The hidden dimensions <span class="math notranslate nohighlight">\(2\)</span> and <span class="math notranslate nohighlight">\(3\)</span> have about twice the wavelength.</p>
 </section>
@@ -983,7 +983,7 @@ PE_{(pos,i)} = \begin{cases}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/transformer_19_0.svg" src="../_images/transformer_19_0.svg" /></div>
+<img alt="../_images/transformer_18_0.svg" src="../_images/transformer_18_0.svg" /></div>
 </div>
 <p>In the first 100 iterations, we increase the learning rate factor from 0 to 1, whereas for all later iterations, we decay it using the cosine wave. Pre-implementations of this scheduler can be found in the popular NLP Transformer library <a class="reference external" href="https://huggingface.co/transformers/main_classes/optimizer_schedules.html?highlight=cosine#transformers.get_cosine_schedule_with_warmup">huggingface</a>.</p>
 </section>
@@ -1378,7 +1378,7 @@ Test accuracy: 100.00%
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/transformer_45_0.svg" src="../_images/transformer_45_0.svg" /></div>
+<img alt="../_images/transformer_44_0.svg" src="../_images/transformer_44_0.svg" /></div>
 </div>
 <p>The model has learned to attend to the token that is on the flipped index of itself. Hence, it actually does what we intended it to do. We see that it however also pays some attention to values close to the flipped index. This is because the model doesn’t need the perfect, hard attention to solve this problem, but is fine with this approximate, noisy attention map. The close-by indices are caused by the similarity of the positional encoding, which we also intended with the positional encoding.</p>
 </section>
@@ -1627,7 +1627,7 @@ Test:  torch.Size([10000, 512])
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/transformer_62_0.svg" src="../_images/transformer_62_0.svg" /></div>
+<img alt="../_images/transformer_61_0.svg" src="../_images/transformer_61_0.svg" /></div>
 </div>
 <p>We can already see that for some sets the task might be easier than for others. Difficulties can especially arise if the anomaly is in a different, but yet visually similar class (e.g. train vs bus, flour vs worm, etc.).</p>
 <p>After having prepared the data, we can look closer at the model. Here, we have a classification of the whole set. For the prediction to be permutation-equivariant, we will output one logit for each image. Over these logits, we apply a softmax and train the anomaly image to have the highest score/probability. This is a bit different than a standard classification layer as the softmax is applied over images, not over output classes in the classical sense. However, if we swap two images in their position, we effectively swap their position in the output softmax. Hence, the prediction is equivariant with respect to the input. We implement this idea below in the subclass of the Transformer Lightning module.</p>
@@ -1798,10 +1798,10 @@ Permuted preds
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/transformer_76_0.svg" src="../_images/transformer_76_0.svg" /><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prediction: 9
+<img alt="../_images/transformer_75_0.svg" src="../_images/transformer_75_0.svg" /><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prediction: 9
 </pre></div>
 </div>
-<img alt="../_images/transformer_76_2.svg" src="../_images/transformer_76_2.svg" /></div>
+<img alt="../_images/transformer_75_2.svg" src="../_images/transformer_75_2.svg" /></div>
 </div>
 <p>Depending on the random seed, you might see a slightly different input set. For the version on the website, we compare 9 tree images with a volcano. We see that multiple heads, for instance, Layer 2 Head 1, Layer 2 Head 3, and Layer 3 Head 1 focus on the last image. Additionally, the heads in Layer 4 all seem to ignore the last image and assign a very low attention probability to it. This shows that the model has indeed recognized that the image doesn’t fit the setting, and hence predicted it to be the anomaly. Layer 3 Head 2-4 seems to take a slightly weighted average of all images. That might indicate that the model extracts the “average” information of all images, to compare it to the image features itself.</p>
 <p>Let’s try to find where the model actually makes a mistake. We can do this by identifying the sets where the model predicts something else than 9, as in the dataset, we ensured that the anomaly is always at the last position in the set.</p>
@@ -1829,10 +1829,10 @@ Permuted preds
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/transformer_80_0.svg" src="../_images/transformer_80_0.svg" /><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prediction: 2
+<img alt="../_images/transformer_79_0.svg" src="../_images/transformer_79_0.svg" /><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prediction: 2
 </pre></div>
 </div>
-<img alt="../_images/transformer_80_2.svg" src="../_images/transformer_80_2.svg" /><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Probabilities:
+<img alt="../_images/transformer_79_2.svg" src="../_images/transformer_79_2.svg" /><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Probabilities:
 Image 0: 0.06%
 Image 1: 1.63%
 Image 2: 89.63%

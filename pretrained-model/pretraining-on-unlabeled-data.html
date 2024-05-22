@@ -663,7 +663,7 @@ tensorflow version: 2.15.0
 <p>In this chapter, we implement the training loop and code for basic model evaluation to pretrain an LLM
 At the end of this chapter, we also load openly available pretrained weights from OpenAI into our model</p>
 <img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240409_035227.png" width=500px><p>The topics covered in this chapter are shown below</p>
-<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240409_035244.png" width=400px><section id="evaluating-generative-text-models">
+<section id="evaluating-generative-text-models">
 <h2><span class="section-number">6.1. </span>Evaluating generative text models<a class="headerlink" href="#evaluating-generative-text-models" title="Permalink to this headline">#</a></h2>
 <p>We start this section with a brief recap of initializing a GPT model using the code from the previous chapter
 Then, we discuss basic evaluation metrics for LLMs
@@ -967,7 +967,7 @@ However, please feel free to increase the <code class="docutils literal notransl
 We will also load a model with a 1024 <code class="docutils literal notranslate"><span class="pre">ctx_len</span></code> later from pretrained weights</p>
 <p>Next, we use the <code class="docutils literal notranslate"><span class="pre">generate_text_simple</span></code> function from the previous chapter to generate text
 In addition, we define two convenience functions, <code class="docutils literal notranslate"><span class="pre">text_to_token_ids</span></code> and <code class="docutils literal notranslate"><span class="pre">token_ids_to_text</span></code>, for converting between token and text representations that we use throughout this chapter</p>
-<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240409_035303.png" width=500px><div class="cell docutils container">
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tiktoken</span>
 
@@ -1042,7 +1042,7 @@ Applying the softmax function, we can turn the logits tensor into a tensor of th
 </div>
 </div>
 <p>The figure below, using a very small vocabulary for illustration purposes, outlines how we convert the probability scores back into text, which we discussed at the end of the previous chapter</p>
-<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240409_035318.png" width=500px><p>As discussed in the previous chapter, we can apply the <code class="docutils literal notranslate"><span class="pre">argmax</span></code> function to convert the probability scores into predicted token IDs
+<p>As discussed in the previous chapter, we can apply the <code class="docutils literal notranslate"><span class="pre">argmax</span></code> function to convert the probability scores into predicted token IDs
 The softmax function above produced a 50,257-dimensional vector for each token; the <code class="docutils literal notranslate"><span class="pre">argmax</span></code> function returns the position of the highest probability score in this vector, which is the predicted token ID for the given token</p>
 <p>Since we have 2 input batches with 3 tokens each, we obtain 2 by 3 predicted token IDs:</p>
 <div class="cell docutils container">
@@ -1082,7 +1082,7 @@ Outputs batch 1:  Armed heNetflix
 </div>
 <p>That’s because the model wasn’t trained yet
 To train the model, we need to know how far it is away from the correct predictions (targets)</p>
-<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240409_035318.png" width=500px><p>The token probabilities corresponding to the target indices are as follows:</p>
+<p>The token probabilities corresponding to the target indices are as follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_idx</span> <span class="o">=</span> <span class="mi">0</span>
@@ -1151,7 +1151,7 @@ The value negative of -10.7722, i.e., 10.7722, is also called cross entropy loss
 </div>
 </div>
 <p>PyTorch already implements a <code class="docutils literal notranslate"><span class="pre">cross_entropy</span></code> function that carries out the previous steps</p>
-<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240409_035318.png" width=400px><p>Before we apply the cross entropy function, let’s check the shape of the logits and targets</p>
+<p>Before we apply the cross entropy function, let’s check the shape of the logits and targets</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Logits have shape (batch_size, num_tokens, vocab_size)</span>
@@ -1464,12 +1464,12 @@ Validation loss: 10.98110580444336
 </div>
 </div>
 </div>
-<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240409_035428.png" width=400px></section>
+</section>
 </section>
 <section id="training-an-llm">
 <h2><span class="section-number">6.2. </span>Training an LLM<a class="headerlink" href="#training-an-llm" title="Permalink to this headline">#</a></h2>
 <p>In this section, we finally implement the code for training the LLM ( We focus on a simple training function )</p>
-<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240409_035445.png" width=300px><div class="cell docutils container">
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_model_simple</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">val_loader</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">num_epochs</span><span class="p">,</span>
                        <span class="n">eval_freq</span><span class="p">,</span> <span class="n">eval_iter</span><span class="p">,</span> <span class="n">start_context</span><span class="p">):</span>
@@ -1611,7 +1611,7 @@ Every effort moves you?&quot;  &quot;Yes--quite insensible to the irony. She wan
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/pretraining-on-unlabeled-data_80_0.png" src="../_images/pretraining-on-unlabeled-data_80_0.png" />
+<img alt="../_images/pretraining-on-unlabeled-data_73_0.png" src="../_images/pretraining-on-unlabeled-data_73_0.png" />
 </div>
 </div>
 <p>Looking at the results above, we can see that the model starts out generating incomprehensible strings of words, whereas towards the end, it’s able to produce grammatically more or less correct sentences
@@ -1621,7 +1621,7 @@ Later, we will cover decoding strategies that can mitigate this memorization by 
 Note that the overfitting here occurs because we have a very, very small training set, and we iterate over it so many times
 The LLM training here primarily serves educational purposes; we mainly want to see that the model can learn to produce coherent text
 Instead of spending weeks or months on training this model on vast amounts of expensive hardware, we load pretrained weights later</p>
-<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240409_035500.png" width=350px></section>
+</section>
 <section id="decoding-strategies-to-control-randomness">
 <h2><span class="section-number">6.3. </span>Decoding strategies to control randomness<a class="headerlink" href="#decoding-strategies-to-control-randomness" title="Permalink to this headline">#</a></h2>
 <p>Inference is relatively cheap with a relatively small LLM as the GPT model we trained above, so there’s no need to use a GPU for it in case you used a GPU for training it above
@@ -1782,7 +1782,7 @@ Temperatures smaller than 1 will result in more confident (sharper or more peaky
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/pretraining-on-unlabeled-data_96_0.png" src="../_images/pretraining-on-unlabeled-data_96_0.png" />
+<img alt="../_images/pretraining-on-unlabeled-data_88_0.png" src="../_images/pretraining-on-unlabeled-data_88_0.png" />
 </div>
 </div>
 <p>We can see that the rescaling via temperature 0.1 results in a sharper distribution, approaching <code class="docutils literal notranslate"><span class="pre">torch.argmax</span></code>, such that the most likely word is almost always selected:</p>
@@ -1831,7 +1831,7 @@ Temperatures smaller than 1 will result in more confident (sharper or more peaky
 <section id="top-k-sampling">
 <h3><span class="section-number">6.3.2. </span>Top-k sampling<a class="headerlink" href="#top-k-sampling" title="Permalink to this headline">#</a></h3>
 <p>To be able to use higher temperatures to increase output diversity and to reduce the probability of nonsensical sentences, we can restrict the sampled tokens to the top-k most likely tokens:</p>
-<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240409_035516.png" width=500px><p>In code, we can implement this as follows:</p>
+<p>In code, we can implement this as follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">top_k</span> <span class="o">=</span> <span class="mi">3</span>
@@ -1954,7 +1954,7 @@ Let’s use these two concepts to modify the <code class="docutils literal notra
 <section id="loading-and-saving-model-weights-in-pytorch">
 <h2><span class="section-number">6.4. </span>Loading and saving model weights in PyTorch<a class="headerlink" href="#loading-and-saving-model-weights-in-pytorch" title="Permalink to this headline">#</a></h2>
 <p>Training LLMs is computationally expensive, so it’s crucial to be able to save and load LLM weights</p>
-<img src="https://static-1300131294.cos.ap-shanghai.myqcloud.com/images/llm/clipboard_20240409_035531.png" width=400px><p>The recommended way in PyTorch is to save the model weights, the so-called <code class="docutils literal notranslate"><span class="pre">state_dict</span></code> via by applying the <code class="docutils literal notranslate"><span class="pre">torch.save</span></code> function to the  <code class="docutils literal notranslate"><span class="pre">.state_dict()</span></code> method:</p>
+<p>The recommended way in PyTorch is to save the model weights, the so-called <code class="docutils literal notranslate"><span class="pre">state_dict</span></code> via by applying the <code class="docutils literal notranslate"><span class="pre">torch.save</span></code> function to the  <code class="docutils literal notranslate"><span class="pre">.state_dict()</span></code> method:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="s2">&quot;model.pth&quot;</span><span class="p">)</span>
