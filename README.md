@@ -1,31 +1,41 @@
-# Algorithmic Adventures
+# Large Language Models (LLMs)
 
-"Algorithmic Adventures" invites you to embark on a captivating exploration of the world of algorithms.
+Welcome to the **Large Language Models (LLMs)** project! This repository serves as a comprehensive resource for understanding, building, and fine-tuning large language models using state-of-the-art techniques.
 
-## Usage
+## Overview
 
-### Building the book
+Large Language Models are advanced AI systems trained on extensive text data to understand and generate human-like language. They are pivotal in various natural language processing tasks, including text generation, translation, summarization, and more.
 
-If you'd like to develop and/or build the Algorithmic Adventures book, you should:
+This project provides:
 
-1. Clone this repository
-2. Run `pip install -r requirements.txt` (it is recommended you do this within a virtual environment)
-3. (Optional) Edit the books source files located in the `algo-view/` directory
-4. Run `jupyter-book clean algo-view/` to remove any existing builds
-5. Run `jupyter-book build algo-view/`
+- **Educational Content**: Detailed explanations of LLM architectures, training processes, and operational guidelines.
+- **Practical Implementations**: Jupyter notebooks demonstrating the construction and fine-tuning of LLMs.
+- **Assignments**: Self-paced exercises to reinforce understanding and practical skills.
 
-A fully-rendered HTML version of the book will be built in `algo-view/_build/html/`.
+## Getting Started
 
-### Hosting the book
+To explore the content:
 
-Please see the [Jupyter Book documentation](https://jupyterbook.org/publish/web.html) to discover options for deploying a book online using services such as GitHub, GitLab, or Netlify.
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/penjc/llmbook.git
 
-For GitHub and GitLab deployment specifically, the [cookiecutter-jupyter-book](https://github.com/executablebooks/cookiecutter-jupyter-book) includes templates for, and information about, optional continuous integration (CI) workflow files to help easily and automatically deploy books online with GitHub or GitLab. For example, if you chose `github` for the `include_ci` cookiecutter option, your book template was created with a GitHub actions workflow file that, once pushed to GitHub, automatically renders and pushes your book to the `gh-pages` branch of your repo and hosts it on GitHub Pages when a push or pull request is made to the main branch.
+	2.	Install Dependencies:
+Navigate to the project directory and install the required packages:
 
-## Contributors
+pip install -r requirements.txt
 
-We welcome and recognize all contributions. You can see a list of current contributors in the [contributors tab](https://github.com/penjc/algo-view/graphs/contributors).
+It’s recommended to use a virtual environment to manage dependencies.
 
-## Credits
+	3.	Build the Book:
 
-This project is created using the excellent open source [Jupyter Book project](https://jupyterbook.org/) and the [executablebooks/cookiecutter-jupyter-book template](https://github.com/executablebooks/cookiecutter-jupyter-book).
+jupyter-book build llmbook/
+
+The generated HTML files will be located in llmbook/_build/html/.
+
+	4.	View the Book:
+Open llmbook/_build/html/index.html in your web browser to explore the content locally.
+
+Live Version
+
+A live version of the book is available at https://penjc.github.io/llmbook/.
