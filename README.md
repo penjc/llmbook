@@ -27,11 +27,13 @@ Navigate to the project directory and install the required packages:
 pip install -r requirements.txt
 ```
 It’s recommended to use a virtual environment to manage dependencies.
+
 3. **Build the Book**:
 ```
 jupyter-book build llmbook/
 ```
 The generated HTML files will be located in llmbook/_build/html/.
+
 4. **View the Book**:
 
 Open llmbook/_build/html/index.html in your web browser to explore the content locally.
@@ -39,5 +41,3 @@ Open llmbook/_build/html/index.html in your web browser to explore the content l
 ## Live Version
 
 A live version of the book is available at https://penjc.github.io/llmbook/.
-
-
