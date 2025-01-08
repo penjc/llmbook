@@ -797,17 +797,17 @@ title="Print to PDF"
 <h2><span class="section-number">8.2. </span>Environment Setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="k">if</span> <span class="s2">&quot;KAGGLE_KERNEL_RUN_TYPE&quot;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running on Kaggle&quot;</span><span class="p">)</span>
-    <span class="kn">from</span> <span class="nn">kaggle_secrets</span> <span class="kn">import</span> <span class="n">UserSecretsClient</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">kaggle_secrets</span><span class="w"> </span><span class="kn">import</span> <span class="n">UserSecretsClient</span>
     <span class="n">user_secrets</span> <span class="o">=</span> <span class="n">UserSecretsClient</span><span class="p">()</span>
     <span class="n">HUGGINGFACE_API_KEY</span> <span class="o">=</span> <span class="n">user_secrets</span><span class="o">.</span><span class="n">get_secret</span><span class="p">(</span><span class="s2">&quot;SKT_HUGGINGFACE_API_KEY&quot;</span><span class="p">)</span>
     <span class="c1"># WANDB_API_KEY = user_secrets.get_secret(&quot;WANDB_API_KEY&quot;)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">dotenv</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dotenv</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
     <span class="n">load_dotenv</span><span class="p">()</span>
     <span class="n">HUGGINGFACE_API_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;SKT_HUGGINGFACE_API_KEY&#39;</span><span class="p">)</span>
     <span class="c1"># WANDB_API_KEY = os.getenv(&quot;WANDB_API_KEY&quot;)</span>
@@ -847,15 +847,15 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span><span class="p">,</span> <span class="n">Dataset</span>
-<span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">torch.optim</span> <span class="kn">import</span> <span class="n">AdamW</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">tqdm.auto</span> <span class="kn">import</span> <span class="n">tqdm</span>
-<span class="kn">import</span> <span class="nn">bitsandbytes</span> <span class="k">as</span> <span class="nn">bnb</span>
-<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">get_scheduler</span><span class="p">,</span> <span class="n">BitsAndBytesConfig</span><span class="p">,</span> <span class="n">GenerationConfig</span><span class="p">,</span> <span class="n">AutoModelForSeq2SeqLM</span><span class="p">,</span> <span class="n">DataCollatorForSeq2Seq</span>
-<span class="kn">from</span> <span class="nn">peft</span> <span class="kn">import</span> <span class="n">PeftModel</span><span class="p">,</span> <span class="n">PeftConfig</span><span class="p">,</span> <span class="n">prepare_model_for_kbit_training</span><span class="p">,</span> <span class="n">LoraConfig</span><span class="p">,</span> <span class="n">get_peft_model</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dataset</span><span class="p">,</span> <span class="n">Dataset</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch.optim</span><span class="w"> </span><span class="kn">import</span> <span class="n">AdamW</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm.auto</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bitsandbytes</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">bnb</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">get_scheduler</span><span class="p">,</span> <span class="n">BitsAndBytesConfig</span><span class="p">,</span> <span class="n">GenerationConfig</span><span class="p">,</span> <span class="n">AutoModelForSeq2SeqLM</span><span class="p">,</span> <span class="n">DataCollatorForSeq2Seq</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">peft</span><span class="w"> </span><span class="kn">import</span> <span class="n">PeftModel</span><span class="p">,</span> <span class="n">PeftConfig</span><span class="p">,</span> <span class="n">prepare_model_for_kbit_training</span><span class="p">,</span> <span class="n">LoraConfig</span><span class="p">,</span> <span class="n">get_peft_model</span>
 </pre></div>
 </div>
 </div>
@@ -873,8 +873,8 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">huggingface_hub</span> <span class="kn">import</span> <span class="n">notebook_login</span>
-<span class="kn">from</span> <span class="nn">huggingface_hub</span> <span class="kn">import</span> <span class="n">login</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">huggingface_hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">notebook_login</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">huggingface_hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">login</span>
 <span class="n">login</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="n">HUGGINGFACE_API_KEY</span><span class="p">,</span> <span class="n">write_permission</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1118,7 +1118,7 @@ Hugging Face has introduced a library that integrates PEFT with the transformers
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function to compare model layers</span>
-<span class="k">def</span> <span class="nf">compare_models</span><span class="p">(</span><span class="n">model1</span><span class="p">,</span> <span class="n">model2</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compare_models</span><span class="p">(</span><span class="n">model1</span><span class="p">,</span> <span class="n">model2</span><span class="p">):</span>
     <span class="k">for</span> <span class="p">(</span><span class="n">name1</span><span class="p">,</span> <span class="n">param1</span><span class="p">),</span> <span class="p">(</span><span class="n">name2</span><span class="p">,</span> <span class="n">param2</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">model1</span><span class="o">.</span><span class="n">named_parameters</span><span class="p">(),</span> <span class="n">model2</span><span class="o">.</span><span class="n">named_parameters</span><span class="p">()):</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">param1</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">param2</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">name1</span> <span class="p">,</span> <span class="s2">&quot;  |  &quot;</span> <span class="p">,</span> <span class="n">name2</span> <span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -1132,7 +1132,7 @@ Hugging Face has introduced a library that integrates PEFT with the transformers
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">copy</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
 
 <span class="k">if</span> <span class="n">peft_combine</span><span class="p">:</span>
 <span class="c1">#     peft_model_id = &quot;shirsh10mall/First_LLM_Project&quot;</span>
@@ -1179,7 +1179,7 @@ Hugging Face has introduced a library that integrates PEFT with the transformers
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">check_lm_head_same</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">old_head</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">check_lm_head_same</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">old_head</span><span class="p">):</span>
     <span class="n">new_head</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">lm_head</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()[</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span>
     <span class="n">old_head</span> <span class="o">=</span> <span class="n">old_head</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">torch</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">new_head</span><span class="p">,</span> <span class="n">old_head</span><span class="p">):</span>
@@ -1200,7 +1200,7 @@ Hugging Face has introduced a library that integrates PEFT with the transformers
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_base_and_lora_model</span><span class="p">(</span><span class="n">peft_model</span><span class="p">,</span> <span class="n">full_model_config</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_base_and_lora_model</span><span class="p">(</span><span class="n">peft_model</span><span class="p">,</span> <span class="n">full_model_config</span><span class="p">):</span>
     <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">empty_cache</span><span class="p">()</span>
     <span class="n">full_model_config</span> <span class="o">=</span> <span class="n">peft_model</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">config</span>
     
@@ -1229,7 +1229,7 @@ Hugging Face has introduced a library that integrates PEFT with the transformers
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function to compare model layers</span>
-<span class="k">def</span> <span class="nf">compare_models</span><span class="p">(</span><span class="n">model1</span><span class="p">,</span> <span class="n">model2</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compare_models</span><span class="p">(</span><span class="n">model1</span><span class="p">,</span> <span class="n">model2</span><span class="p">):</span>
     <span class="k">for</span> <span class="p">(</span><span class="n">name1</span><span class="p">,</span> <span class="n">param1</span><span class="p">),</span> <span class="p">(</span><span class="n">name2</span><span class="p">,</span> <span class="n">param2</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">model1</span><span class="o">.</span><span class="n">named_parameters</span><span class="p">(),</span> <span class="n">model2</span><span class="o">.</span><span class="n">named_parameters</span><span class="p">()):</span>
         <span class="k">if</span> <span class="s2">&quot;lora_A&quot;</span> <span class="ow">in</span> <span class="n">name1</span> <span class="ow">or</span> <span class="s2">&quot;lora_B&quot;</span> <span class="ow">in</span> <span class="n">name1</span><span class="p">:</span>
             <span class="k">continue</span>
@@ -1270,7 +1270,7 @@ Hugging Face has introduced a library that integrates PEFT with the transformers
 <span class="nb">print</span><span class="p">(</span><span class="n">tokenized_open_orca_data</span><span class="o">.</span><span class="n">column_names</span><span class="p">)</span>
 
 <span class="c1"># creating dataloader not for Trainer</span>
-<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch.utils.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLoader</span>
 <span class="n">data_collator</span> <span class="o">=</span> <span class="n">DataCollatorForSeq2Seq</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label_pad_token_id</span><span class="o">=-</span><span class="mi">100</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">)</span>
 
 <span class="c1"># train dataloader</span>
@@ -1289,7 +1289,7 @@ Hugging Face has introduced a library that integrates PEFT with the transformers
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For encoder-decoder based model (AutoModelForSeq2SeqLM)</span>
 
 <span class="c1"># function to tokenize the input and response</span>
-<span class="k">def</span> <span class="nf">input_tokenizer</span><span class="p">(</span><span class="n">examples</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">input_tokenizer</span><span class="p">(</span><span class="n">examples</span><span class="p">):</span>
     
     <span class="n">prompts</span> <span class="o">=</span> <span class="n">examples</span><span class="p">[</span><span class="s1">&#39;system_prompt&#39;</span><span class="p">]</span>
     <span class="n">questions</span> <span class="o">=</span> <span class="n">examples</span><span class="p">[</span><span class="s1">&#39;question&#39;</span><span class="p">]</span>
@@ -1317,7 +1317,7 @@ Hugging Face has introduced a library that integrates PEFT with the transformers
 <span class="nb">print</span><span class="p">(</span><span class="n">tokenized_open_orca_data</span><span class="o">.</span><span class="n">column_names</span><span class="p">)</span>
 
 <span class="c1"># creating dataloader not for Trainer</span>
-<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch.utils.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLoader</span>
 <span class="n">data_collator</span> <span class="o">=</span> <span class="n">DataCollatorForSeq2Seq</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">label_pad_token_id</span><span class="o">=-</span><span class="mi">100</span><span class="p">,</span><span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">)</span>
 
 <span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">16</span>
@@ -1336,7 +1336,7 @@ Hugging Face has introduced a library that integrates PEFT with the transformers
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For autoregressive transformer decoder (AutoModelForCausalLM)</span>
 <span class="n">tokenizer</span><span class="o">.</span><span class="n">pad_token</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">eos_token</span>
 
-<span class="k">def</span> <span class="nf">input_tokenizer</span><span class="p">(</span><span class="n">examples</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">input_tokenizer</span><span class="p">(</span><span class="n">examples</span><span class="p">):</span>
     
     <span class="n">prompts</span> <span class="o">=</span> <span class="n">examples</span><span class="p">[</span><span class="s1">&#39;system_prompt&#39;</span><span class="p">]</span>
     <span class="n">questions</span> <span class="o">=</span> <span class="n">examples</span><span class="p">[</span><span class="s1">&#39;question&#39;</span><span class="p">]</span>
@@ -1370,7 +1370,7 @@ Hugging Face has introduced a library that integrates PEFT with the transformers
 
 
 <span class="c1"># creating dataloader not for Trainer</span>
-<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch.utils.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLoader</span>
 <span class="n">data_collator</span> <span class="o">=</span> <span class="n">DataCollatorWithPadding</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">)</span>
 
 <span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">4</span>
@@ -1419,7 +1419,7 @@ True
 <p>The code calculates and prints the number of trainable parameters, the total number of parameters, and the percentage of trainable parameters in the given model. In the provided example, there are 35,258,368 trainable parameters out of a total of 496,102,400 parameters, representing 7.11% of the total parameters.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">print_trainable_parameters</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">print_trainable_parameters</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Prints the number of trainable parameters in the model.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1475,7 +1475,7 @@ torch.uint8 289406976 0.5833613705557562
 <h3><span class="section-number">8.15.1. </span>Trainer Style<a class="headerlink" href="#trainer-style" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">TrainingArguments</span><span class="p">,</span> <span class="n">Trainer</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">TrainingArguments</span><span class="p">,</span> <span class="n">Trainer</span>
 
 <span class="n">training_args</span> <span class="o">=</span> <span class="n">TrainingArguments</span><span class="p">(</span>
     <span class="n">per_device_train_batch_size</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
@@ -1550,7 +1550,7 @@ torch.uint8 289406976 0.5833613705557562
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch.optim.lr_scheduler</span> <span class="kn">import</span> <span class="n">ExponentialLR</span><span class="p">,</span> <span class="n">ReduceLROnPlateau</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">torch.optim.lr_scheduler</span><span class="w"> </span><span class="kn">import</span> <span class="n">ExponentialLR</span><span class="p">,</span> <span class="n">ReduceLROnPlateau</span>
 
 <span class="n">steps_per_epoch</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_dataloader</span><span class="p">)</span>
 <span class="n">num_training_steps</span> <span class="o">=</span> <span class="n">num_epochs</span> <span class="o">*</span> <span class="n">steps_per_epoch</span>
@@ -1647,7 +1647,7 @@ Epoch:  0   |  Loss:  1.2402301286267745
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="n">history_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">history</span><span class="p">)</span>
 <span class="n">history_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;history_df.csv&quot;</span><span class="p">)</span>
 <span class="n">history_df</span>
@@ -1784,8 +1784,8 @@ Epoch:  0   |  Loss:  1.2402301286267745
 <p>The code uses the Plotly library to create two line plots: one showing the loss vs. steps and the other showing the learning rate vs. steps. Each data point is represented as a marker colored based on a category. The categories are mapped to colors, such as red, blue, green, orange, and purple. The plots are displayed with appropriate titles and axis labels using the <code class="docutils literal notranslate"><span class="pre">fig.show()</span></code> function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
-<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">plotly.express</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
 
 <span class="n">category_color_map</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="s2">&quot;purple&quot;</span><span class="p">}</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
@@ -1852,7 +1852,7 @@ Epoch:  0   |  Loss:  1.2402301286267745
 <h2><span class="section-number">8.17. </span>Prediction<a class="headerlink" href="#prediction" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">analyse_zero_shot_model</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">indx</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">peft</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">analyse_zero_shot_model</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">indx</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">peft</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     
     <span class="n">prompt</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">indx</span><span class="p">][</span><span class="s2">&quot;system_prompt&quot;</span><span class="p">]</span>
 
@@ -1914,7 +1914,7 @@ Since the production premiered in 1842, it has undergone changes, modifications,
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="n">number_exmaples_for_inference</span><span class="o">=</span><span class="mi">10</span>
 <span class="k">for</span> <span class="n">yo</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_exmaples_for_inference</span><span class="p">):</span>
     <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n_samples</span><span class="p">)</span>
@@ -2211,11 +2211,11 @@ Fine-tuned Model&#39;s Response:
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>-q<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
 
-<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
     
  
 
-    <span class="kn">import</span> <span class="nn">wandb</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">wandb</span>
 
 <span class="c1"># !wandb login &quot;4fbc2078f424c5c7372adb0068180031ae034ba2&quot;</span>
 <span class="c1"># !pip install -q accelerate </span>
@@ -2228,32 +2228,32 @@ Fine-tuned Model&#39;s Response:
 
 
 
-<span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span><span class="p">,</span> <span class="n">Dataset</span>
-<span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">torch.optim</span> <span class="kn">import</span> <span class="n">AdamW</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">tqdm.auto</span> <span class="kn">import</span> <span class="n">tqdm</span>
-<span class="kn">from</span> <span class="nn">accelerate</span> <span class="kn">import</span> <span class="n">Accelerator</span><span class="p">,</span> <span class="n">notebook_launcher</span>
-<span class="kn">import</span> <span class="nn">bitsandbytes</span> <span class="k">as</span> <span class="nn">bnb</span>
-<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">get_scheduler</span><span class="p">,</span> <span class="n">BitsAndBytesConfig</span><span class="p">,</span> <span class="n">GenerationConfig</span>
-<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span>  <span class="n">AutoModelForSeq2SeqLM</span><span class="p">,</span> <span class="n">DataCollatorForSeq2Seq</span>
-<span class="kn">from</span> <span class="nn">peft</span> <span class="kn">import</span> <span class="n">PeftModel</span><span class="p">,</span> <span class="n">PeftConfig</span>
-<span class="kn">from</span> <span class="nn">peft</span> <span class="kn">import</span> <span class="n">prepare_model_for_kbit_training</span>
-<span class="kn">from</span> <span class="nn">peft</span> <span class="kn">import</span> <span class="n">LoraConfig</span><span class="p">,</span> <span class="n">get_peft_model</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dataset</span><span class="p">,</span> <span class="n">Dataset</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch.optim</span><span class="w"> </span><span class="kn">import</span> <span class="n">AdamW</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm.auto</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">accelerate</span><span class="w"> </span><span class="kn">import</span> <span class="n">Accelerator</span><span class="p">,</span> <span class="n">notebook_launcher</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bitsandbytes</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">bnb</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">get_scheduler</span><span class="p">,</span> <span class="n">BitsAndBytesConfig</span><span class="p">,</span> <span class="n">GenerationConfig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span>  <span class="n">AutoModelForSeq2SeqLM</span><span class="p">,</span> <span class="n">DataCollatorForSeq2Seq</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">peft</span><span class="w"> </span><span class="kn">import</span> <span class="n">PeftModel</span><span class="p">,</span> <span class="n">PeftConfig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">peft</span><span class="w"> </span><span class="kn">import</span> <span class="n">prepare_model_for_kbit_training</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">peft</span><span class="w"> </span><span class="kn">import</span> <span class="n">LoraConfig</span><span class="p">,</span> <span class="n">get_peft_model</span>
 
 
 
-<span class="k">class</span> <span class="nc">Dataset_Preprocessing</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Dataset_Preprocessing</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">tokenizer</span>
         
-    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
         
     
-    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
         
         
         <span class="n">input_ques_prompt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s2">&quot;system_prompt&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s2">&quot;question&quot;</span><span class="p">]</span>
@@ -2269,7 +2269,7 @@ Fine-tuned Model&#39;s Response:
 
 
     
-<span class="k">def</span> <span class="nf">get_dataloaders</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">64</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_dataloaders</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">64</span><span class="p">):</span>
     
     
     <span class="s2">&quot;Builds a set of dataloaders with a batch_size&quot;</span>
@@ -2325,7 +2325,7 @@ Fine-tuned Model&#39;s Response:
 
     
     
-<span class="k">def</span> <span class="nf">training_loop</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">mixed_precision</span><span class="o">=</span><span class="s2">&quot;bf16&quot;</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span> <span class="n">epochs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">64</span><span class="p">,</span> <span class="n">checkpoint</span> <span class="o">=</span> <span class="s2">&quot;google/flan-t5-large&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">training_loop</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">mixed_precision</span><span class="o">=</span><span class="s2">&quot;bf16&quot;</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span> <span class="n">epochs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">64</span><span class="p">,</span> <span class="n">checkpoint</span> <span class="o">=</span> <span class="s2">&quot;google/flan-t5-large&quot;</span><span class="p">):</span>
     <span class="n">set_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
     <span class="c1"># Initialize accelerator</span>
     <span class="n">accelerator</span> <span class="o">=</span> <span class="n">Accelerator</span><span class="p">(</span><span class="n">mixed_precision</span><span class="o">=</span><span class="n">mixed_precision</span><span class="p">)</span>
@@ -2402,16 +2402,16 @@ Fine-tuned Model&#39;s Response:
 <h3><span class="section-number">8.18.3. </span>Multi GPU<a class="headerlink" href="#multi-gpu" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Dataset_Preprocessing</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">_init_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Dataset_Preprocessing</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_init_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">tokenizer</span>
         
-    <span class="k">def</span> <span class="nf">_len_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_len_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
         
     
-    <span class="k">def</span> <span class="nf">_getitem_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_getitem_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
         
         
         <span class="n">input_ques_prompt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s2">&quot;system_prompt&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s2">&quot;question&quot;</span><span class="p">]</span>
@@ -2430,7 +2430,7 @@ Fine-tuned Model&#39;s Response:
 
     
     
-<span class="k">def</span> <span class="nf">get_dataloaders</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">64</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_dataloaders</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">64</span><span class="p">):</span>
     
     
     <span class="s2">&quot;Builds a set of dataloaders with a batch_size&quot;</span>
@@ -2469,7 +2469,7 @@ Fine-tuned Model&#39;s Response:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">training_loop</span><span class="p">(</span><span class="n">mixed_precision</span><span class="o">=</span><span class="s2">&quot;fp16&quot;</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span> <span class="n">epochs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">64</span><span class="p">,</span> <span class="n">checkpoint</span> <span class="o">=</span> <span class="s2">&quot;google/flan-t5-large&quot;</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">training_loop</span><span class="p">(</span><span class="n">mixed_precision</span><span class="o">=</span><span class="s2">&quot;fp16&quot;</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span> <span class="n">epochs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">64</span><span class="p">,</span> <span class="n">checkpoint</span> <span class="o">=</span> <span class="s2">&quot;google/flan-t5-large&quot;</span><span class="p">):</span>
     <span class="n">set_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
     <span class="c1"># Initialize accelerator</span>
     <span class="n">accelerator</span> <span class="o">=</span> <span class="n">Accelerator</span><span class="p">(</span><span class="n">mixed_precision</span><span class="o">=</span><span class="n">mixed_precision</span><span class="p">)</span>
@@ -2540,7 +2540,7 @@ Fine-tuned Model&#39;s Response:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">accelerate</span> <span class="kn">import</span> <span class="n">notebook_launcher</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">accelerate</span><span class="w"> </span><span class="kn">import</span> <span class="n">notebook_launcher</span>
 
 <span class="c1"># args = (&quot;fp16&quot;, 42, 64)</span>
 <span class="n">notebook_launcher</span><span class="p">(</span><span class="n">training_loop</span><span class="p">,</span> <span class="n">num_processes</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>

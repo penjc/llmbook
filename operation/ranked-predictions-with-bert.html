@@ -482,7 +482,7 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s import the public training set and take a look</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
 <span class="n">train_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/kaggle/input/kaggle-llm-science-exam/train.csv&#39;</span><span class="p">)</span>
 <span class="n">train_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -581,7 +581,7 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For convenience we&#39;ll turn our pandas Dataframe into a Dataset</span>
-<span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dataset</span>
 <span class="n">train_ds</span> <span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">from_pandas</span><span class="p">(</span><span class="n">train_df</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -589,7 +589,7 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoTokenizer</span>
 
 <span class="c1"># The path of the model checkpoint we want to use</span>
 <span class="n">model_dir</span> <span class="o">=</span> <span class="s1">&#39;/kaggle/input/huggingface-bert/bert-base-cased&#39;</span>
@@ -607,7 +607,7 @@ title="Print to PDF"
 <span class="n">option_to_index</span> <span class="o">=</span> <span class="p">{</span><span class="n">option</span><span class="p">:</span> <span class="n">index</span> <span class="k">for</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">indices</span><span class="p">)}</span>
 <span class="n">index_to_option</span> <span class="o">=</span> <span class="p">{</span><span class="n">index</span><span class="p">:</span> <span class="n">option</span> <span class="k">for</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">indices</span><span class="p">)}</span>
 
-<span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="n">example</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">preprocess</span><span class="p">(</span><span class="n">example</span><span class="p">):</span>
     <span class="c1"># The AutoModelForMultipleChoice class expects a set of question/answer pairs</span>
     <span class="c1"># so we&#39;ll copy our question 5 times before tokenizing</span>
     <span class="n">first_sentence</span> <span class="o">=</span> <span class="p">[</span><span class="n">example</span><span class="p">[</span><span class="s1">&#39;prompt&#39;</span><span class="p">]]</span> <span class="o">*</span> <span class="mi">5</span>
@@ -636,19 +636,19 @@ title="Print to PDF"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Following datacollator (adapted from https://huggingface.co/docs/transformers/tasks/multiple_choice)</span>
 <span class="c1"># will dynamically pad our questions at batch-time so we don&#39;t have to make every question the length</span>
 <span class="c1"># of our longest question.</span>
-<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
-<span class="kn">from</span> <span class="nn">transformers.tokenization_utils_base</span> <span class="kn">import</span> <span class="n">PreTrainedTokenizerBase</span><span class="p">,</span> <span class="n">PaddingStrategy</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
-<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">transformers.tokenization_utils_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">PreTrainedTokenizerBase</span><span class="p">,</span> <span class="n">PaddingStrategy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
 
 <span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">DataCollatorForMultipleChoice</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">DataCollatorForMultipleChoice</span><span class="p">:</span>
     <span class="n">tokenizer</span><span class="p">:</span> <span class="n">PreTrainedTokenizerBase</span>
     <span class="n">padding</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">PaddingStrategy</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">max_length</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">pad_to_multiple_of</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="p">):</span>
         <span class="n">label_name</span> <span class="o">=</span> <span class="s2">&quot;label&quot;</span> <span class="k">if</span> <span class="s1">&#39;label&#39;</span> <span class="ow">in</span> <span class="n">features</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;labels&#39;</span>
         <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">feature</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">label_name</span><span class="p">)</span> <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">features</span><span class="p">]</span>
         <span class="n">batch_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
@@ -676,7 +676,7 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now we&#39;ll instatiate the model that we&#39;ll finetune on our public dataset, then use to</span>
 <span class="c1"># make prediction on the private dataset.</span>
-<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoModelForMultipleChoice</span><span class="p">,</span> <span class="n">TrainingArguments</span><span class="p">,</span> <span class="n">Trainer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoModelForMultipleChoice</span><span class="p">,</span> <span class="n">TrainingArguments</span><span class="p">,</span> <span class="n">Trainer</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForMultipleChoice</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_dir</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -787,8 +787,8 @@ You&#39;re using a BertTokenizerFast tokenizer. Please note that with a fast tok
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The following function gets the indices of the highest scoring answers for each row</span>
 <span class="c1"># and converts them back to our answer format (A, B, C, D, E)</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="k">def</span> <span class="nf">predictions_to_map_output</span><span class="p">(</span><span class="n">predictions</span><span class="p">):</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">predictions_to_map_output</span><span class="p">(</span><span class="n">predictions</span><span class="p">):</span>
     <span class="n">sorted_answer_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="o">-</span><span class="n">predictions</span><span class="p">)</span>
     <span class="n">top_answer_indices</span> <span class="o">=</span> <span class="n">sorted_answer_indices</span><span class="p">[:,:</span><span class="mi">3</span><span class="p">]</span> <span class="c1"># Get the first three answers in each row</span>
     <span class="n">top_answers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">index_to_option</span><span class="o">.</span><span class="n">get</span><span class="p">)(</span><span class="n">top_answer_indices</span><span class="p">)</span>

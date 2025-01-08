@@ -747,18 +747,18 @@ title="Print to PDF"
 <h3><span class="section-number">4.1.1. </span>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">transformers</span>
-<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">GPT2Tokenizer</span><span class="p">,</span> <span class="n">GPT2Model</span><span class="p">,</span> <span class="n">GPT2Config</span><span class="p">,</span> <span class="n">GPT2LMHeadModel</span><span class="p">,</span> <span class="n">DataCollatorForLanguageModeling</span>
-<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span><span class="p">,</span> <span class="n">BertModel</span><span class="p">,</span> <span class="n">BertConfig</span><span class="p">,</span> <span class="n">BertTokenizer</span><span class="p">,</span> <span class="n">BertLMHeadModel</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">transformers</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">GPT2Tokenizer</span><span class="p">,</span> <span class="n">GPT2Model</span><span class="p">,</span> <span class="n">GPT2Config</span><span class="p">,</span> <span class="n">GPT2LMHeadModel</span><span class="p">,</span> <span class="n">DataCollatorForLanguageModeling</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">pipeline</span><span class="p">,</span> <span class="n">BertModel</span><span class="p">,</span> <span class="n">BertConfig</span><span class="p">,</span> <span class="n">BertTokenizer</span><span class="p">,</span> <span class="n">BertLMHeadModel</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
-<span class="k">def</span> <span class="nf">recursive_print</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">deepest</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">recursive_print</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">deepest</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Simulating print(module) for torch.nn.Modules</span>
 <span class="sd">        but with depth control. Print to the `deepest` level. `deepest=0` means no print</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1230,8 +1230,8 @@ means a verb phrase can be substituted by a transitive verb (TV) + a conjunction
 <p>Now, see what these rules can generate using <strong>probabilistic generative grammar</strong>, i.e. recursively applying the substitution rules to an initial token <span class="math notranslate nohighlight">\(S\)</span> to elaborate it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
-<span class="k">def</span> <span class="nf">generate_sentences</span><span class="p">(</span><span class="n">rules</span><span class="p">,</span> <span class="n">word_map</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_sentences</span><span class="p">(</span><span class="n">rules</span><span class="p">,</span> <span class="n">word_map</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; A sentence generator with probabilistic generative grammar. &quot;&quot;&quot;</span>
     <span class="n">initial_token</span> <span class="o">=</span> <span class="s2">&quot;S&quot;</span>
     <span class="n">sentence</span> <span class="o">=</span> <span class="p">[</span><span class="n">initial_token</span><span class="p">]</span>
@@ -1308,32 +1308,32 @@ a cat that slept smelled that the zebra smelled the giraffe that ran
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tokenize_sentence</span><span class="p">(</span><span class="n">sentence</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">tokenize_sentence</span><span class="p">(</span><span class="n">sentence</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Tokenize a sentence into a list of words. &quot;&quot;&quot;</span>
     <span class="n">word_seq</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">word_seq</span>
 
 
-<span class="k">def</span> <span class="nf">encode_sentence</span><span class="p">(</span><span class="n">sentence</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">encode_sentence</span><span class="p">(</span><span class="n">sentence</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Encode a sentence into a list of indices. &quot;&quot;&quot;</span>
     <span class="n">word_seq</span> <span class="o">=</span> <span class="n">tokenize_sentence</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
     <span class="n">inds</span> <span class="o">=</span> <span class="n">encode2indices</span><span class="p">(</span><span class="n">word_seq</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">inds</span>
 
 
-<span class="k">def</span> <span class="nf">encode2indices</span><span class="p">(</span><span class="n">word_seq</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">encode2indices</span><span class="p">(</span><span class="n">word_seq</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Encode a list of words into a list of indices. &quot;&quot;&quot;</span>
     <span class="n">inds</span> <span class="o">=</span> <span class="p">[</span><span class="n">dictionary</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">word_seq</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">inds</span>
 
 
-<span class="k">def</span> <span class="nf">decode2words</span><span class="p">(</span><span class="n">indices</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">decode2words</span><span class="p">(</span><span class="n">indices</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Decode a list of indices into a list of words. &quot;&quot;&quot;</span>
     <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">inverse_dictionary</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">words</span>
 
 
-<span class="k">def</span> <span class="nf">decode2sentence</span><span class="p">(</span><span class="n">indices</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">decode2sentence</span><span class="p">(</span><span class="n">indices</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Decode a list of indices into a sentence. &quot;&quot;&quot;</span>
     <span class="n">words</span> <span class="o">=</span> <span class="n">decode2words</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
     <span class="n">sentence</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
@@ -1360,10 +1360,10 @@ a cat that slept smelled that the zebra smelled the giraffe that ran
 <p>Since we don’t have a fixed dataset, but a generative model of language, we can simply generate new sentences on the fly and fed it to our transformer. (this is usually not the case)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">torch.nn.utils.rnn</span> <span class="kn">import</span> <span class="n">pad_sequence</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch.nn.utils.rnn</span><span class="w"> </span><span class="kn">import</span> <span class="n">pad_sequence</span>
 
-<span class="k">def</span> <span class="nf">batch_sampler</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">max_len</span><span class="o">=</span><span class="mi">128</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">batch_sampler</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">max_len</span><span class="o">=</span><span class="mi">128</span><span class="p">):</span>
     <span class="n">batch</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span>
         <span class="n">word_seq</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">generate_sentences</span><span class="p">(</span><span class="n">rules</span><span class="p">,</span> <span class="n">word_map</span><span class="p">)</span>
@@ -1431,9 +1431,9 @@ the horse smelled that a bear saw a square smart horse [End]
 <h3><span class="section-number">4.2.5. </span>Train a transformer on this language<a class="headerlink" href="#train-a-transformer-on-this-language" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">torch.optim</span> <span class="kn">import</span> <span class="n">AdamW</span>
-<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">GPT2Model</span><span class="p">,</span> <span class="n">GPT2Tokenizer</span><span class="p">,</span> <span class="n">GPT2LMHeadModel</span><span class="p">,</span> <span class="n">GPT2Config</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch.optim</span><span class="w"> </span><span class="kn">import</span> <span class="n">AdamW</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">GPT2Model</span><span class="p">,</span> <span class="n">GPT2Tokenizer</span><span class="p">,</span> <span class="n">GPT2LMHeadModel</span><span class="p">,</span> <span class="n">GPT2Config</span>
 </pre></div>
 </div>
 </div>
@@ -1690,10 +1690,10 @@ the dog that sat saw that a fat fat sheep smelled that the thin square cow swam 
 <h3><span class="section-number">4.2.7. </span>Does our transformer “understand” part-of-speech?<a class="headerlink" href="#does-our-transformer-understand-part-of-speech" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
-<span class="kn">from</span> <span class="nn">sklearn.manifold</span> <span class="kn">import</span> <span class="n">TSNE</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.manifold</span><span class="w"> </span><span class="kn">import</span> <span class="n">TSNE</span>
 </pre></div>
 </div>
 </div>

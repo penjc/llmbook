@@ -687,8 +687,8 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">openai</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">openai</span>
 <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="c1"># Openai API</span>
 <span class="n">openai</span><span class="o">.</span><span class="n">api_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">]</span>
 </pre></div>
@@ -700,10 +700,10 @@ title="Print to PDF"
 <h3><span class="section-number">9.1.2. </span>Install and Import Libraries<a class="headerlink" href="#install-and-import-libraries" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">openai</span>
-<span class="kn">import</span> <span class="nn">textwrap</span>
-<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
-<span class="kn">import</span> <span class="nn">pickle</span> <span class="k">as</span> <span class="nn">pkl</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">openai</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">textwrap</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">join</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pkl</span>
 </pre></div>
 </div>
 </div>
@@ -855,13 +855,13 @@ title="Print to PDF"
 <h3><span class="section-number">9.3.1. </span>Tool Chaining with LangChain<a class="headerlink" href="#tool-chaining-with-langchain" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.document_loaders</span> <span class="kn">import</span> <span class="n">PyPDFLoader</span> <span class="c1"># for loading the pdf</span>
-<span class="kn">from</span> <span class="nn">langchain.embeddings</span> <span class="kn">import</span> <span class="n">OpenAIEmbeddings</span> <span class="c1"># for creating embeddings</span>
-<span class="kn">from</span> <span class="nn">langchain.vectorstores</span> <span class="kn">import</span> <span class="n">Chroma</span> <span class="c1"># for the vectorization part</span>
-<span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">ChatVectorDBChain</span> <span class="c1"># for chatting with the pdf</span>
-<span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">ConversationalRetrievalChain</span>
-<span class="kn">from</span> <span class="nn">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span> <span class="c1"># the LLM model we&#39;ll use (CHatGPT)</span>
-<span class="kn">from</span> <span class="nn">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langchain.document_loaders</span><span class="w"> </span><span class="kn">import</span> <span class="n">PyPDFLoader</span> <span class="c1"># for loading the pdf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain.embeddings</span><span class="w"> </span><span class="kn">import</span> <span class="n">OpenAIEmbeddings</span> <span class="c1"># for creating embeddings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain.vectorstores</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chroma</span> <span class="c1"># for the vectorization part</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain.chains</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatVectorDBChain</span> <span class="c1"># for chatting with the pdf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain.chains</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConversationalRetrievalChain</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain.llms</span><span class="w"> </span><span class="kn">import</span> <span class="n">OpenAI</span> <span class="c1"># the LLM model we&#39;ll use (CHatGPT)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain.chat_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatOpenAI</span>
 </pre></div>
 </div>
 </div>
@@ -872,8 +872,8 @@ title="Print to PDF"
 <p>Download the pdf and parse it through python PDF reader</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
-<span class="k">def</span> <span class="nf">download_pdf</span><span class="p">(</span><span class="n">arxiv_id</span><span class="p">,</span> <span class="n">save_root</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">download_pdf</span><span class="p">(</span><span class="n">arxiv_id</span><span class="p">,</span> <span class="n">save_root</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
     <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://arxiv.org/pdf/</span><span class="si">{</span><span class="n">arxiv_id</span><span class="si">}</span><span class="s2">.pdf&quot;</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">True</span><span class="p">,)</span>
     <span class="nb">open</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">save_root</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">arxiv_id</span><span class="si">}</span><span class="s2">.pdf&quot;</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
@@ -1011,7 +1011,7 @@ zWork performed while at Google Research.
 <p>This is the utility function to append new questions and answers to a <code class="docutils literal notranslate"><span class="pre">md</span></code> and <code class="docutils literal notranslate"><span class="pre">pkl</span></code> file. So it’s easier to look at chat histroy post hoc.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">save_qa_history</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">qa_path</span><span class="p">,):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">save_qa_history</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">qa_path</span><span class="p">,):</span>
     <span class="n">uid</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">while</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">qa_path</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;QA</span><span class="si">{</span><span class="n">uid</span><span class="si">:</span><span class="s2">05d</span><span class="si">}</span><span class="s2">.pkl&quot;</span><span class="p">)):</span>
         <span class="n">uid</span> <span class="o">+=</span> <span class="mi">1</span>
